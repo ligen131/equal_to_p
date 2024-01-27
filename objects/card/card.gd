@@ -6,6 +6,7 @@ signal put
 signal back_to_origin_global_position
 
 var is_dragging = false
+var have_deal_on_mouse_release = true
 var origin_global_position: Vector2
 var last_global_position: Vector2
 var is_card_entered = 0
@@ -23,6 +24,7 @@ func _ready():
 
 func _on_mouse_release():
 	#prints(entered_area.name, is_card_entered, entered_area.occupied)
+	have_deal_on_mouse_release = true
 	if is_card_entered > 0 and entered_area and not entered_area.occupied:
 		global_position = entered_area.global_position
 		last_global_position = global_position
@@ -58,6 +60,7 @@ func reset_position():
 		last_occupied_area = null
 		
 func _on_mouse_pressed():
+	have_deal_on_mouse_release = false
 	last_global_position = global_position
 	is_dragging = true
 	is_card_entered = 0
@@ -77,7 +80,10 @@ func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
 
 func _process(delta: float) -> void:
 	#prints(name, global_position)
+	if not have_deal_on_mouse_release and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		_on_mouse_release()
 	if is_dragging:
+		have_deal_on_mouse_release = false
 		global_position = get_global_mouse_position()
 
 func on_card_entered(area: Block) -> void:
