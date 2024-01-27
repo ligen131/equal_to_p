@@ -41,8 +41,8 @@ func dec_card_count():
 	
 
 func draw_card():
-	#if card_count <= 0:
-		#return
+	if card_count <= 0:
+		return
 	dec_card_count()
 	new_card_node = Card.instantiate()
 	new_card_node.set_word($Word.get_word())
@@ -60,12 +60,12 @@ func _on_card_back(card: Card):
 	#print("card_count = ", card_count)
 
 func _on_area_entered(area: Card):
-	#prints("Entered", self, name)
+	#prints("Entered", name)
 	if area.get_word() == $Word.get_word():
 		area.on_card_base_entered(position)
 
 func _on_area_exited(area: Card):
-	#prints("Exited", self, name)
+	#prints("Exited", name)
 	if area.get_word() == $Word.get_word():
 		area.on_card_base_exited()
 	
