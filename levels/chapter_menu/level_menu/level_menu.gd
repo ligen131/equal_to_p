@@ -20,7 +20,7 @@ func init(chap_id : int, lvl_num : int) -> void:
 	
 	if lvl_num == -1:
 		lvl_num = len(BaseLevel.instantiate().DATA[chap_id])
-		
+	
 	$Title.set_text("Ch." + str(chap_id + 1) + "  " + CHAP_NAMES[chap_id])
 	
 	chapter_id = chap_id
@@ -34,6 +34,7 @@ func init(chap_id : int, lvl_num : int) -> void:
 		add_child(button)
 
 func _ready():
+	$BackButton/icon.play("return")
 	#print(BaseLevel.instantiate().DATA[chapter_id])
 	#var level_num : int = len(BaseLevel.instantiate().DATA[chapter_id])
 	#print(level_num)
@@ -53,6 +54,10 @@ func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:
 	get_tree().root.add_child(base_level)
 	queue_free()
 
+func _input(event: InputEvent):
+	if event is InputEventKey:
+		if event.keycode == KEY_ESCAPE and event.pressed:
+			_on_back_button_pressed()
 
 func _on_back_button_pressed():
 	var ChapterMenu = load("res://levels/chapter_menu/chapter_menu.tscn")
