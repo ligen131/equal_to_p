@@ -1,5 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dovqnx8salkyp"]
+[gd_scene load_steps=3 format=3 uid="uid://dovqnx8salkyp"]
 
 [ext_resource type="PackedScene" uid="uid://cother2aiigge" path="res://levels/base_level/base_level.tscn" id="1_pi7md"]
+[ext_resource type="PackedScene" uid="uid://cl3vyq67tmtav" path="res://objects/word/word.tscn" id="2_seq1m"]
 
 [node name="BaseLevel" instance=ExtResource("1_pi7md")]
+
+[node name="Word" parent="." index="0" instance=ExtResource("2_seq1m")]
+position = Vector2(380, 312)
+scale = Vector2(9.37125, 9.37125)

@@ -1,3 +1,8 @@
-[gd_scene format=3 uid="uid://dxoygac0mmaou"]
+[gd_scene load_steps=3 format=3 uid="uid://cl3vyq67tmtav"]
 
-[node name="Word" type="Label"]
+[ext_resource type="Texture2D" uid="uid://bb3ab3fipgqs5" path="res://objects/word/P1.png" id="1_gmxg1"]
+[ext_resource type="Script" path="res://objects/word/word.gd" id="2_dw6fj"]
+
+[node name="Word" type="Sprite2D"]
+texture = ExtResource("1_gmxg1")
+script = ExtResource("2_dw6fj")
