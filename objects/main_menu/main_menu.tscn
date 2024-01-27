@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c07co5p46apu7"]
+[gd_scene load_steps=27 format=3 uid="uid://c07co5p46apu7"]
 
 [ext_resource type="Texture2D" uid="uid://ceeypoydffke" path="res://objects/main_menu/background/main_menu1.png" id="1_yr1dc"]
 [ext_resource type="Texture2D" uid="uid://7gpyu0xntcot" path="res://objects/main_menu/background/main_menu2.png" id="2_fhihs"]
@@ -11,11 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://csciwny3id80p" path="res://objects/main_menu/background/main_menu9.png" id="9_v2d5d"]
 [ext_resource type="Texture2D" uid="uid://doj3api7yqkwa" path="res://objects/main_menu/background/main_menu10.png" id="10_6ukle"]
 [ext_resource type="Texture2D" uid="uid://cb8hwijy6lslu" path="res://objects/main_menu/background/main_menu11.png" id="11_j1jkd"]
-[ext_resource type="Texture2D" uid="uid://bf1rm32qprbpu" path="res://objects/main_menu/background/main_menu12.png" id="12_50bmh"]
 [ext_resource type="Texture2D" uid="uid://bretm2cyiirtb" path="res://objects/main_menu/background/main_menu13.png" id="13_5snq7"]
 [ext_resource type="Script" path="res://objects/main_menu/main_menu.gd" id="14_npy3s"]
 [ext_resource type="Texture2D" uid="uid://bqm3lgo8c8nfb" path="res://objects/main_menu/background/main_menu14.png" id="14_tufeb"]
 [ext_resource type="Texture2D" uid="uid://bw8xulwxqnhbc" path="res://objects/main_menu/background/main_menu15.png" id="15_qjtad"]
+[ext_resource type="Texture2D" uid="uid://cmcc5xrpkrd0f" path="res://objects/card/card_highlighted.png" id="16_5m8f1"]
+[ext_resource type="Texture2D" uid="uid://83p3glm3htsp" path="res://objects/word/sprites/start1.png" id="16_skwdr"]
+[ext_resource type="Texture2D" uid="uid://64ivn20qcjoy" path="res://objects/word/sprites/start2.png" id="17_mrqss"]
+[ext_resource type="Texture2D" uid="uid://cbwkjh7uudgr5" path="res://objects/word/sprites/start3.png" id="18_qh4cp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b4517"]
 animations = [{
@@ -56,9 +59,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("12_50bmh")
-}, {
-"duration": 1.0,
 "texture": ExtResource("13_5snq7")
 }, {
 "duration": 1.0,
@@ -71,7 +71,39 @@ animations = [{
 "texture": ExtResource("11_j1jkd")
 }],
 "loop": true,
-"name": &"wait_for_start",
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_htdlk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6khk3"]
+texture = ExtResource("16_5m8f1")
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m8edv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gegaq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_146ea"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c72mh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_skwdr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_mrqss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_qh4cp")
+}],
+"loop": true,
+"name": &"default",
 "speed": 5.0
 }]
 
@@ -82,10 +114,19 @@ centered = false
 script = ExtResource("14_npy3s")
 
 [node name="start_button" type="Button" parent="."]
-offset_left = 88.8
-offset_top = 76.8
-offset_right = 104.8
-offset_bottom = 92.8
+offset_left = 89.0
+offset_top = 77.0
+offset_right = 113.0
+offset_bottom = 102.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_htdlk")
+theme_override_styles/hover = SubResource("StyleBoxTexture_6khk3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_m8edv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gegaq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_146ea")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="start_button"]
+sprite_frames = SubResource("SpriteFrames_c72mh")
+centered = false
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
