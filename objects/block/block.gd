@@ -2,7 +2,12 @@ extends Area2D
 
 class_name Block
 
-var occupied = false
+
+signal word_set(quest_pos: int, word: String)
+
+
+var occupied := false
+var quest_pos := -1
 
 func _on_area_entered(area: Card):
 	#prints("Entered", self, name)
@@ -16,6 +21,7 @@ func _on_area_exited(area: Card):
 
 func set_word(e: String) -> void:
 	$Word.set_word(e)
+	emit_signal("word_set", quest_pos, e)
 
 func get_word() -> String:
 	return $Word.get_word()
