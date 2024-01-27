@@ -2,7 +2,7 @@ extends Node
 
 
 const Block := preload("res://objects/block/block.tscn")
-const CardBase := preload("res://objects/card_base/card_base.tscn")
+const CardBase := preload("res://objects/card/card.tscn")
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
 const SEP := 30
