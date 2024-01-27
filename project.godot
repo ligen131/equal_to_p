@@ -15,6 +15,14 @@ run/main_scene="res://levels/test_level/test_level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
+window/stretch/scale=4.0
+window/stretch/scale_mode="integer"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

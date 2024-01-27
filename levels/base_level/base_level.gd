@@ -1,7 +1,7 @@
 extends Node
 
 
-const Space := preload("res://objects/space/space.tscn")
+const Block := preload("res://objects/block/block.tscn")
 const CardBase := preload("res://objects/card_base/card_base.tscn")
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
@@ -37,13 +37,15 @@ func init(lvl_id: int) -> void:
 	var pos : int
 	pos = WIDTH / 2 - SEP * len(question) / 2 + 12
 	for ch in question:
-		var new_space := Space.instantiate()
+		var new_block := Block.instantiate()
 
-		new_space.set_word(ch)
-		new_space.set_position(Vector2(pos, HEIGHT / 2))
+		new_block.set_word(ch)
+		if not ch == "." and not ch == "_":
+			new_block.occupied = true
+		new_block.set_position(Vector2(pos, HEIGHT / 2))
 		pos += SEP
 		
-		$Spaces.add_child(new_space)
+		$Blocks.add_child(new_block)
 	
 	
 	
