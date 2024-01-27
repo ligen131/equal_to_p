@@ -1,15 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://cother2aiigge"]
+[gd_scene load_steps=4 format=3 uid="uid://cother2aiigge"]
 
 [ext_resource type="Script" path="res://levels/base_level/base_level.gd" id="1_diojb"]
 [ext_resource type="PackedScene" uid="uid://xom5kpqs1rue" path="res://objects/calculator/calculator.tscn" id="1_tpuy7"]
+[ext_resource type="AudioStream" path="res://levels/base_level/level_clear.wav" id="3_ou3kh"]
 
 [node name="BaseLevel" type="Node"]
 script = ExtResource("1_diojb")
 
 [node name="Calculator" parent="." instance=ExtResource("1_tpuy7")]
 
-[node name="Blocks" type="Node" parent="."]
+[node name="Cards" type="Node" parent="."]
 
 [node name="CardBases" type="Node" parent="."]
 
-[node name="Cards" type="Node" parent="."]
+[node name="Blocks" type="Node" parent="."]
+
+[node name="SFXs" type="Node" parent="."]
+
+[node name="LevelClear" type="AudioStreamPlayer2D" parent="SFXs"]
+stream = ExtResource("3_ou3kh")
+
+[node name="HUDs" type="Node" parent="."]
+
+[node name="Button" type="Button" parent="HUDs"]
+offset_right = 8.0
+offset_bottom = 8.0

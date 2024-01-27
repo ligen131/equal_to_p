@@ -1,12 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckjmjwywh78fe"]
+[gd_scene load_steps=6 format=3 uid="uid://ckjmjwywh78fe"]
 
 [ext_resource type="Script" path="res://objects/block/block.gd" id="1_11h57"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="2_pjs40"]
+[ext_resource type="Texture2D" uid="uid://dvj7bjepxeks0" path="res://objects/block/pit.png" id="3_ye3hk"]
+[ext_resource type="Texture2D" uid="uid://cb71r50jw2a3i" path="res://objects/block/goal_frame2.png" id="4_v6rgm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3if4e"]
-size = Vector2(24, 24)
-
-[sub_resource type="QuadMesh" id="QuadMesh_nrt0w"]
 size = Vector2(24, 24)
 
 [node name="Block" type="Area2D"]
@@ -15,12 +14,15 @@ script = ExtResource("1_11h57")
 [node name="Word" parent="." instance=ExtResource("2_pjs40")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 2
 shape = SubResource("RectangleShape2D_3if4e")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-visible = false
-z_index = -5
-mesh = SubResource("QuadMesh_nrt0w")
+[node name="PitSprite" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("3_ye3hk")
+
+[node name="GoalFrameSprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_v6rgm")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
