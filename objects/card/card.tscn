@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b223s12rqgt4h"]
+
+[ext_resource type="Script" path="res://objects/card/card.gd" id="1_0bviv"]
+[ext_resource type="PackedScene" uid="uid://cl3vyq67tmtav" path="res://objects/word/word.tscn" id="1_ns36n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu6l6"]
+size = Vector2(64, 64)
+
+[node name="Card" type="Area2D"]
+script = ExtResource("1_0bviv")
+
+[node name="Word" parent="." instance=ExtResource("1_ns36n")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gu6l6")

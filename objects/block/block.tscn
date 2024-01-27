@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckjmjwywh78fe"]
+
+[ext_resource type="Script" path="res://objects/block/block.gd" id="1_11h57"]
+[ext_resource type="Texture2D" uid="uid://u7iwt4hyuw48" path="res://icon.svg" id="2_henln"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3if4e"]
+size = Vector2(64, 64)
+
+[node name="Block" type="Area2D"]
+script = ExtResource("1_11h57")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3if4e")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-1, -1)
+texture = ExtResource("2_henln")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

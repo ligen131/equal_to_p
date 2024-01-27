@@ -14,3 +14,7 @@ config/name="ggj2024"
 run/main_scene="res://levels/test_level/test_level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
