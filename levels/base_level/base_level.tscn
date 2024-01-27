@@ -8,8 +8,8 @@ script = ExtResource("1_diojb")
 
 [node name="Calculator" parent="." instance=ExtResource("1_tpuy7")]
 
-[node name="Cards" type="Node" parent="."]
+[node name="Blocks" type="Node" parent="."]
 
 [node name="CardBases" type="Node" parent="."]
 
-[node name="Blocks" type="Node" parent="."]
+[node name="Cards" type="Node" parent="."]

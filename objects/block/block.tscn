@@ -18,6 +18,7 @@ script = ExtResource("1_11h57")
 shape = SubResource("RectangleShape2D_3if4e")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+visible = false
 z_index = -5
 mesh = SubResource("QuadMesh_nrt0w")
 
