@@ -21,14 +21,24 @@ const DATA := [
 		["True", "[] {} {} [] 1", "= + P 1"],
 		["Swap", "Q + [] = {} + []", "P P P P Q Q Q Q"],
 		["Always True", "[] [] {} = {} [] []", "11++PPdd"],
-		["Not Really Challenging", "1 [] [] [] {} [] [] [] {} [] {} [] []", "= = + + + + + + 1 1 P q b R"]
+		["Not Really Challenging", "1 [] [] [] {} [] [] [] {} [] {} [] []", "== ++++++ 11 P q b R"]
 	],
 	[
 		["Laughing", "1 {} {} = []", "XDD"],
-		["Reset", "0 [] [] {} []", "XD10"],
-		["Not Necessary", "[] {} {} {} {} []", "QQQQQQDDXX="],
+		["Reset", "0 [] [] {} []", "XD=0"],
+		["Not Necessary", "[] {} {} {} {} []", "QQQQQQ DDXX="],
 		["Golden Experience", "{} {} {} {} {} {} {} {} {} {} {}", "PP DD qq dd bb XXX ="],
 	],
+	[
+		["He Goes First", "[] [] + [] = ( [] {} {} ) [] []", "PP QQ RR X +"],
+		["Still, He Goes First", "[] + [] [] = [] [] ( [] {} {} )", "PP QQ RR X +"],
+		["It's My Turn", "P ([] [] []) = {} [] [] [] []", "PP QQ RR ++"],
+		["[EX] Really Challenging", "[] [] [] [] [] {} {} [] [] [] [] {} {} + [] []", "PPP QQ DD (()) ++ = X"]
+	],
+	[
+		["Why?", "[] [] {} = {} [] {} = []", "PP qq ++ 1"],
+		["Where is the Equation?", "[] [] {} {} [] + [] [] {} {} []", "(())==01PP"],
+	]
 ]
 
 
