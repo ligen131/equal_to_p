@@ -8,6 +8,7 @@ const WIDTH := 1920 / 4
 const SEP := 30
 
 
+
 const DATA := [
 	[
 		["=P", "P {} {}", "= P"],
@@ -28,16 +29,6 @@ const DATA := [
 		["Not Necessary", "[] {} {} {} {} []", "QQQQQQDDXX="],
 		["Golden Experience", "{} {} {} {} {} {} {} {} {} {} {}", "PP DD qq dd bb XXX ="],
 	],
-	[
-		["He Goes First", "[] [] + [] = ( [] {} {} ) [] []", "PP QQ RR X +"],
-		["Still, He Goes First", "[] + [] [] = [] [] ( [] {} {} )", ],
-		["It's My Turn", "P ([] [] []) = {} [] [] [] []", "PP QQ RR ++"],
-		["[EX] Really Challenging", "[] [] [] [] [] {} {} [] [] [] [] {} {} + [] []", "PPP QQ DD (()) ++ ="]
-	],
-	[
-		["Why?", "[] [] {} = {} [] {} = []", "PP qq ++ 1"],
-		["Where is the Equation?", "[] [] {} {} [] + [] [] {} {} []", "(())==01PP"],
-	]
 ]
 
 
