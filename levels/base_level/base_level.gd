@@ -2,12 +2,11 @@ extends Node
 
 
 const Block := preload("res://objects/block/block.tscn")
-const CardBase := preload("res://objects/card_base/card_base.tscn")
+const CardBase := preload("res://objects/card/card.tscn")
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
 const SEP := 30
 
-@export var level_id := -1
 
 
 const DATA := [
@@ -33,6 +32,7 @@ const DATA := [
 ]
 
 
+
 func count(choices: String) -> Dictionary:
 	var res := {}
 	for x in choices:
@@ -42,9 +42,10 @@ func count(choices: String) -> Dictionary:
 	return res
 
 
-func init(lvl_id: int) -> void:
-	var question = DATA[lvl_id][2].replace(" ", "").replace("X", "*")
-	var choices = count(DATA[lvl_id][3].replace(" ", "").replace("X", "*"))
+func init(chap_id: int, lvl_id: int) -> void:
+	var lvl_name = DATA[chap_id][lvl_id][0]
+	var question = DATA[chap_id][lvl_id][1].replace(" ", "").replace("X", "*")
+	var choices = count(DATA[chap_id][lvl_id][2].replace(" ", "").replace("X", "*"))
 	
 	question = question.replace("[]", ".")
 	question = question.replace("{}", "_")
