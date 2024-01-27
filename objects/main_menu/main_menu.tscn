@@ -52,9 +52,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("10_6ukle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_j1jkd")
 }],
 "loop": false,
-"name": &"default",
+"name": &"init",
 "speed": 5.0
 }, {
 "frames": [{
@@ -71,7 +74,7 @@ animations = [{
 "texture": ExtResource("11_j1jkd")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"wait_for_start",
 "speed": 5.0
 }]
 
@@ -110,6 +113,7 @@ animations = [{
 [node name="MainMenu" type="AnimatedSprite2D"]
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_b4517")
+animation = &"init"
 centered = false
 script = ExtResource("14_npy3s")
 

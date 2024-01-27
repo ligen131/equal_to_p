@@ -87,6 +87,8 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	
 	table_cloth.size.x = sep * len(question) + 16
 	table_cloth.size.y = 48
+	table_cloth.get_child(0).size.x = sep * len(question) + 16
+	table_cloth.get_child(0).size.y = 48
 	table_cloth.position.x = WIDTH / 2 - sep * len(question) / 2 - 12
 	table_cloth.position.y = HEIGHT / 2 - 24
 	$HUDs.add_child(table_cloth)
@@ -139,6 +141,13 @@ func _process(_delta):
 	pass
 
 
+func stage_clear() -> void:
+	$SFXs/LevelClear.play()
+	for card_base: CardBase in $CardBases.get_children():
+		card_base.call("start_fade")
+	$HUDs/TableCloth/GoldenCloth.set_visible(true)
+
+
 func _on_card_put() -> void:
 	for block : Block in $Blocks.get_children():
 		if not block.occupied:
@@ -168,7 +177,7 @@ func _on_card_put() -> void:
 			for block: Block in $Blocks.get_children():
 				block.call("shake")
 		else:
-			$SFXs/LevelClear.play()
+			stage_clear()
 			
 
 

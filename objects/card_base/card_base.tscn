@@ -67,5 +67,9 @@ sprite_frames = SubResource("SpriteFrames_bhb3x")
 stream = ExtResource("7_0c7kt")
 volume_db = 8.54
 
+[node name="FadeTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

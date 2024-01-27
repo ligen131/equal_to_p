@@ -1,11 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://doirpa1bwbjhr"]
+[gd_scene load_steps=4 format=3 uid="uid://doirpa1bwbjhr"]
 
 [ext_resource type="Script" path="res://levels/chapter_menu/level_menu/level_menu.gd" id="1_sd65g"]
 [ext_resource type="PackedScene" uid="uid://bepyyenjtc0p3" path="res://levels/chapter_menu/level_menu/level_button/level_button.tscn" id="2_saprs"]
+[ext_resource type="FontFile" uid="uid://1000owdyvwfg" path="res://fonts/unifont-15.1.04.otf" id="3_jlnpm"]
 
 [node name="LevelMenu" type="Node2D"]
 script = ExtResource("1_sd65g")
 
 [node name="BackButton" parent="." instance=ExtResource("2_saprs")]
+
+[node name="Title" type="Label" parent="."]
+offset_top = 8.0
+offset_right = 480.0
+offset_bottom = 31.0
+theme_override_fonts/font = ExtResource("3_jlnpm")
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="3_js2i2"]
 
 [node name="StyledButton" instance=ExtResource("1_4bgxw")]
-offset_right = 42.0
-offset_bottom = 42.0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource("1_wwqfn")
 
 [node name="Word" parent="." index="0" instance=ExtResource("3_js2i2")]

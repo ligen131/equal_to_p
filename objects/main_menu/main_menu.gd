@@ -4,7 +4,7 @@ var ChapterMenu = preload("res://levels/chapter_menu/chapter_menu.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	play()
+	play("init")
 	pass # Replace with function body.
 
 

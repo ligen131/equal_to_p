@@ -31,9 +31,19 @@ val: Q/0/1
 Q		1	1	1	1	1
 """
 
+"""
+左/右	*	<	(	)	Q
+*		/	/	0	/	0
+<		/	0	0	/	0
+(		/	/	0	/	0
+)		0	0	1	0	1
+Q		0	0	1	0	1
+"""
+
 const IS_PAIR_VALID := [[0, 0, 1, 0, 1], [0, 1, 1, 0, 1], [0, 0, 1, 0, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
 
 enum {OP, COMP, BRAC_L, BRAC_R, VAL}
+
 
 func get_char_type(ch: String) -> int:
 	if ch == "*" or ch == "+":
@@ -47,6 +57,9 @@ func get_char_type(ch: String) -> int:
 	else:
 		return VAL
 
+func has_implict_prod(string: String) -> bool:
+	return get_char_type(string[0]) in [BRAC_R, VAL] and get_char_type(string[1]) in [BRAC_L, VAL]
+	
 func get_priority(ch: String) -> int:
 	if ch == "*":
 		return 4
@@ -66,8 +79,18 @@ func get_priority(ch: String) -> int:
 func infix_to_suffix(expr: String) -> String:
 	var opt_stack: Array = []
 	var res := ""
+	var pre_ch := "@"
 	
 	for ch in expr:
+		if pre_ch != "@" and has_implict_prod(pre_ch + ch):
+			if not opt_stack.is_empty() and (get_char_type("*") != COMP or get_char_type(opt_stack.back()) != COMP):
+				while not opt_stack.is_empty() and get_priority("*") <= get_priority(opt_stack.back()):
+					res += opt_stack.back()
+					opt_stack.pop_back()
+			opt_stack.push_back("*")
+			
+			
+			
 		print("ch=", ch, " stk=", opt_stack, " res=", res)
 		if get_char_type(ch) == VAL:
 			res += ch
@@ -84,6 +107,7 @@ func infix_to_suffix(expr: String) -> String:
 					res += opt_stack.back()
 					opt_stack.pop_back()
 			opt_stack.push_back(ch)
+		pre_ch = ch
 			
 	while not opt_stack.is_empty():
 		res += opt_stack.back()
@@ -184,6 +208,7 @@ func check_always_true(expr: String) -> Dictionary:
 	
 	# 中缀转后缀
 	expr = infix_to_suffix(expr)
+	print(expr)
 	
 	for ch in expr:
 		if is_alpha(ch) and not var_names.has(ch):
@@ -229,7 +254,8 @@ func check(expr: String, req_pos: Array) -> Array:
 
 
 func _ready():
-	assert(check("(1=P)+(0=P)", []) == ["OK", 200], "9")
+	check("q*Pq*bd*b=D", [])
+	#assert(check("(1=P)+(0=P)", []) == ["OK", 200], "9")
 	#assert(check("Q+P=P+Q", [3, 4]) == ["OK", 200], "1")
 	#assert(check("Q+P=P+Q", [4]) == ["OK", 200], "2")
 	#assert(check("P+Q=Q+P", [3, 4]) == ["SMILE_UNSATISFIED", 3], "3")
