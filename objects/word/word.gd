@@ -3,12 +3,12 @@ extends AnimatedSprite2D
 
 @export var text_id := 0
 
+
+const STEP := 20
 const LETTER_NAME = ["", "=", "P", "b", "D", 
 "I1", "I2", "I3", "I4", "I5", 
-"R", "Q", "", "", "",
-"", "", "", "", "", 
-"*", "+", "", "", "",
-""]
+"R", "Q", "d", "q", "(",
+"*", "+", "<", ">", ")"]
 
 
 ## 内建，不要用。
@@ -27,8 +27,10 @@ func set_text_id(value: int) -> void:
 	if not sprite_frames.has_animation(str(text_id)):
 		sprite_frames.add_animation(str(text_id))
 		for i in range(3):
-			sprite_frames.add_frame(str(text_id), load("res://objects/word/sprites/sprite" + str(i * 25 + text_id) + ".png"))
+			sprite_frames.add_frame(str(text_id), load("res://objects/word/sprites/sprite" + str(i * STEP + text_id) + ".png"))
 	animation = str(text_id)
+	
+	
 
 ## 更改字母为 text。
 func set_word(text: String) -> void:
@@ -39,7 +41,7 @@ func set_word(text: String) -> void:
 
 ## 获得当前字母。
 func get_word() -> String:
-	return LETTER_NAME[text_id]
+	return LETTER_NAME[text_id - 1]
 
 
 func _ready():
