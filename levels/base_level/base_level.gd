@@ -10,11 +10,26 @@ const SEP := 30
 @export var level_id := -1
 
 
-const DATA := [["1-1", "=P", "P {} {}", "= P"],
-["1-2", "P", "P [] {}", "= P P"],
-["1-3", "=D", "D {} {}", "= D P"],
-["1-4", "<=>", "{} {} []", "d d = P P D D"],
-["2-1", "", "Q + [] = {} + []", "P P P P Q Q Q Q"],
+const DATA := [
+	[
+		["=P", "P {} {}", "= P"],
+		["P", "P [] {}", "= P P"],
+		["=D", "D {} {}", "= D P"],
+		["Reverse", "{} {} []", "d d = P P D D"]
+	],
+	[
+		["False", "[] [] 0 {} {}", "= + P P"],
+		["True", "[] {} {} [] 1", "= + P 1"],
+		["Swap", "Q + [] = {} + []", "P P P P Q Q Q Q"],
+		["Always True", "[] [] {} = {} [] []", "11++PPdd"],
+		["Not Really Challenging", "1 [] [] [] {} [] [] [] {} [] {} [] []", "= = + + + + + + 1 1 P q b R"]
+	],
+	[
+		["Laughing", "1 {} {} = []", "XDD"],
+		["Reset", "0 [] [] {} []", "XD10"],
+		["Not Necessary", "[] {} {} {} {} []", "QQQQQQDDXX="],
+		["Golden Experience", "{} {} {} {} {} {} {} {} {} {} {}", "PP DD qq dd bb XXX ="],
+	],
 ]
 
 
@@ -63,8 +78,7 @@ func init(lvl_id: int) -> void:
 
 
 func _ready():
-	if level_id != -1:
-		init(level_id)
+	pass
 
 func _process(_delta):
 	pass
