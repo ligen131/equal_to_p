@@ -14,6 +14,7 @@ func _ready():
 	last_position = position
 
 func _on_mouse_release():
+	#prints(entered_area.name, is_area_entered, entered_area.occupied)
 	if is_area_entered > 0 and not entered_area.occupied:
 		position = entered_area.position
 		last_position = position
@@ -27,17 +28,27 @@ func _on_mouse_release():
 	is_dragging = false
 	is_area_entered = 0
 
+func reset_position():
+	position = origin_position
+	last_position = origin_position
+	#print(last_entered_area)
+	if last_entered_area:
+		last_entered_area.occupied = false
+		last_entered_area = null
+
 func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 			last_position = position
 			is_dragging = true
+			is_area_entered = 0
 		elif not event.is_pressed() and is_dragging:
 			_on_mouse_release()
+			
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
+			reset_position()
 
 func _process(delta: float) -> void:
-	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		_on_mouse_release()
 	if is_dragging:
 		global_position = get_global_mouse_position()
 
