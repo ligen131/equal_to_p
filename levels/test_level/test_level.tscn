@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dovqnx8salkyp"]
+[gd_scene load_steps=4 format=3 uid="uid://dovqnx8salkyp"]
 
 [ext_resource type="PackedScene" uid="uid://cother2aiigge" path="res://levels/base_level/base_level.tscn" id="1_pi7md"]
-[ext_resource type="PackedScene" uid="uid://cl3vyq67tmtav" path="res://objects/word/word.tscn" id="2_seq1m"]
+[ext_resource type="PackedScene" uid="uid://b223s12rqgt4h" path="res://objects/card/card.tscn" id="3_7ollh"]
+[ext_resource type="PackedScene" uid="uid://babd8t1osepux" path="res://objects/space/space.tscn" id="4_53fye"]
 
 [node name="BaseLevel" instance=ExtResource("1_pi7md")]
 
-[node name="Word" parent="." index="0" instance=ExtResource("2_seq1m")]
-position = Vector2(413.72, 274.72)
-scale = Vector2(1.2725, 1.2725)
+[node name="Space" parent="." index="0" instance=ExtResource("4_53fye")]
+position = Vector2(806, 162)
+
+[node name="Card" parent="." index="1" instance=ExtResource("3_7ollh")]
+position = Vector2(552, 421)
