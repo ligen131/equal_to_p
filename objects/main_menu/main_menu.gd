@@ -5,14 +5,13 @@ var ChapterMenu = preload("res://levels/chapter_menu/chapter_menu.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	play("init")
+	$start_button/AnimatedSprite2D.play()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
-
 
 func _on_animation_finished():
 	play("wait_for_start")
