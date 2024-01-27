@@ -16,9 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://bqm3lgo8c8nfb" path="res://objects/main_menu/background/main_menu14.png" id="14_tufeb"]
 [ext_resource type="Texture2D" uid="uid://bw8xulwxqnhbc" path="res://objects/main_menu/background/main_menu15.png" id="15_qjtad"]
 [ext_resource type="Texture2D" uid="uid://cmcc5xrpkrd0f" path="res://objects/card/card_highlighted.png" id="16_5m8f1"]
-[ext_resource type="Texture2D" uid="uid://83p3glm3htsp" path="res://objects/word/sprites/start1.png" id="16_skwdr"]
-[ext_resource type="Texture2D" uid="uid://64ivn20qcjoy" path="res://objects/word/sprites/start2.png" id="17_mrqss"]
-[ext_resource type="Texture2D" uid="uid://cbwkjh7uudgr5" path="res://objects/word/sprites/start3.png" id="18_qh4cp"]
+[ext_resource type="Texture2D" uid="uid://83p3glm3htsp" path="res://objects/styled_button/start1.png" id="16_skwdr"]
+[ext_resource type="Texture2D" uid="uid://64ivn20qcjoy" path="res://objects/styled_button/start2.png" id="17_mrqss"]
+[ext_resource type="Texture2D" uid="uid://cbwkjh7uudgr5" path="res://objects/styled_button/start3.png" id="18_qh4cp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b4517"]
 animations = [{
