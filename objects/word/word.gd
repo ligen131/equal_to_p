@@ -5,7 +5,7 @@ extends AnimatedSprite2D
 
 
 const STEP := 30
-const LETTER_NAME = ["", "=", "P", "b", "D", 
+const LETTER_NAME = ["_", "=", "P", "b", "D", 
 "I1", "I2", "I3", "I4", "I5", 
 "R", "Q", "d", "q", "(",
 "*", "+", "<", ">", ")",

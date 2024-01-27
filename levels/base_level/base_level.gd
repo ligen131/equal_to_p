@@ -77,7 +77,6 @@ func init(chap_id: int, lvl_id: int) -> void:
 			new_block.set_block_type("CONST")
 		else:
 			new_block.set_word("_")
-			new_block.word_set.connect(_on_block_word_set)
 			if ch == "_":
 				req_pos.append(i)
 				new_block.set_block_type("GOLDEN")
@@ -89,6 +88,7 @@ func init(chap_id: int, lvl_id: int) -> void:
 		$Blocks.add_child(new_block)
 	
 	expr = question
+	print(expr)
 	
 	
 	pos = WIDTH / 2 - SEP * len(choices) / 2 + 12
@@ -112,9 +112,12 @@ func _process(_delta):
 	pass
 
 
-func _on_card_put(quest_pos: int, word: String) -> void:
-	prints("# word set: ", quest_pos, word)
-	expr[quest_pos] = word
+func _on_card_put() -> void:
+	for block : Block in $Blocks.get_children():
+		prints(block.quest_pos, expr, len(expr))
+		expr[block.quest_pos] = block.get_word()
+		
+	prints("# expr: ", expr)
 	
 	if expr.count("_") == 0:
 		var info = $Calculator.check(expr, req_pos)
