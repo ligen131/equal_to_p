@@ -75,15 +75,15 @@ func set_word(e: String) -> void:
 func _on_card_put():
 	emit_signal("card_put")
 
-
-
-
-
-func start_fade() -> void:
+func set_victory() -> void:
+	# start_fade
 	fade_flag = true
 	$FadeTimer.start()
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Label.set_visible(false)
+	
+	for card: Card in $Cards.get_children():
+		card.is_victory = true
 
 func _process(delta) -> void:
 	if fade_flag:

@@ -144,7 +144,8 @@ func _process(_delta):
 func stage_clear() -> void:
 	$SFXs/LevelClear.play()
 	for card_base: CardBase in $CardBases.get_children():
-		card_base.call("start_fade")
+		card_base.call("set_victory")
+		
 	$HUDs/TableCloth/GoldenCloth.set_visible(true)
 
 

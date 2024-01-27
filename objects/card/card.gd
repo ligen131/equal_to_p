@@ -15,6 +15,8 @@ var last_occupied_area: Block
 var is_card_base_entered = 0
 var entered_card_base_global_position: Vector2
 
+var is_victory = false
+
 func _ready():
 	origin_global_position = global_position
 	last_global_position = global_position
@@ -64,7 +66,7 @@ func _on_mouse_pressed():
 
 func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
 	#prints(self, event)
-	if event is InputEventMouseButton:
+	if not is_victory and event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 			_on_mouse_pressed()
 		elif not event.is_pressed() and is_dragging:
