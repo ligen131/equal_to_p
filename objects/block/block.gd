@@ -35,6 +35,8 @@ func set_word(e: String) -> void:
 func set_block_type(value: String) -> void:
 	if value == "GOLDEN":
 		$GoalFrameSprite.set_visible(true)
+		$GoalFrameSprite.set_texture(load("res://objects/block/goal_frame" + str(int(sqrt(randi_range(1, 16)))) + ".png"))
+		
 		$PitSprite.set_visible(true)
 	elif value == "PIT":
 		$GoalFrameSprite.set_visible(false)

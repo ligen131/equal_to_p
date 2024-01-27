@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cb71r50jw2a3i" path="res://objects/block/goal_frame2.png" id="4_v6rgm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3if4e"]
-size = Vector2(24, 24)
+size = Vector2(16, 16)
 
 [node name="Block" type="Area2D"]
 script = ExtResource("1_11h57")
@@ -14,8 +14,9 @@ script = ExtResource("1_11h57")
 [node name="Word" parent="." instance=ExtResource("2_pjs40")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = 2
+z_index = 50
 shape = SubResource("RectangleShape2D_3if4e")
+debug_color = Color(0.968627, 0, 0.470588, 0.419608)
 
 [node name="PitSprite" type="Sprite2D" parent="."]
 z_index = -1
