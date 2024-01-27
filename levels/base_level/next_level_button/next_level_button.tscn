@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1mp3ld6wsrwo"]
+
+[ext_resource type="PackedScene" uid="uid://bepyyenjtc0p3" path="res://levels/chapter_menu/level_menu/level_button/level_button.tscn" id="1_sa21d"]
+[ext_resource type="Script" path="res://levels/base_level/next_level_button/next_level_button.gd" id="2_yogj1"]
+
+[node name="NextLevelButton" instance=ExtResource("1_sa21d")]
+script = ExtResource("2_yogj1")
+
+[node name="FadeTimer" type="Timer" parent="." index="2"]
+wait_time = 0.3
+one_shot = true
