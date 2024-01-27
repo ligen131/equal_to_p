@@ -32,12 +32,12 @@ func _on_mouse_release():
 		prints("card", $Word.get_word(), "put at", entered_area.name, "at global_position", global_position, "when origin global_position at", origin_global_position)
 	else:
 		global_position = last_global_position
-		
-	if is_card_base_entered > 0:
-		global_position = entered_card_base_global_position
-		
+	
 	if global_position == origin_global_position:
 		emit_signal("back_to_origin_global_position")
+		
+	if is_card_base_entered > 0:
+		reset_position()
 		
 	is_dragging = false
 	is_card_entered = 0
@@ -46,7 +46,8 @@ func _on_mouse_release():
 func reset_position():
 	global_position = origin_global_position
 	var err := emit_signal("back_to_origin_global_position")
-	#print("err code = ", err)
+	if err != 0:
+		printerr(err)
 	last_global_position = origin_global_position
 	#print(last_occupied_area)
 	if last_occupied_area:
