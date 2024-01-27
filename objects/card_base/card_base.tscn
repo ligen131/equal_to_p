@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://d35prv6j48a2y"]
+
+[ext_resource type="Script" path="res://objects/card_base/card_base.gd" id="1_k5qn1"]
+[ext_resource type="Texture2D" uid="uid://u7iwt4hyuw48" path="res://icon.svg" id="1_sonvw"]
+[ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="2_jvsp3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cmwb"]
+size = Vector2(32, 32)
+
+[node name="CardBase" type="Area2D"]
+script = ExtResource("1_k5qn1")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-3.8147e-06, -3.8147e-06)
+scale = Vector2(0.234375, 0.234375)
+texture = ExtResource("1_sonvw")
+
+[node name="Word" parent="." instance=ExtResource("2_jvsp3")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -20.0
+offset_top = 16.0
+offset_right = 20.0
+offset_bottom = 39.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2cmwb")
+
+[node name="Cards" type="Node2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

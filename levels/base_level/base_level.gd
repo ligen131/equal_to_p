@@ -2,7 +2,7 @@ extends Node
 
 
 const Block := preload("res://objects/block/block.tscn")
-const CardBase := preload("res://objects/card/card.tscn")
+const CardBase := preload("res://objects/card_base/card_base.tscn")
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
 const SEP := 30
@@ -71,6 +71,11 @@ func init(chap_id: int, lvl_id: int) -> void:
 		var new_card_base := CardBase.instantiate()
 
 		new_card_base.set_word(ch)
+		
+		# TODO: 调用备选卡牌计数 + 1
+		# new_card_base.add_card_count()
+		
+		
 		#new_card_base.set_count(choices[ch])
 		new_card_base.set_position(Vector2(pos, HEIGHT * 7 / 8))
 		pos += SEP
