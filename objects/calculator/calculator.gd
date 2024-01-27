@@ -1,3 +1,7 @@
+## 用于判定表达式 `expr` 是否满足通关要求的脚本。
+## 一般情况下只需要使用 `Array check(expr: String, req_pos: Array)` 即可，其他不需要使用。
+
+
 extends Node
 
 
@@ -208,11 +212,16 @@ func check(expr: String, req_pos: Array) -> Array:
 	return ["OK", 200]
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	assert(check("Q+P=P+Q", [3, 4]) == ["OK", 200], "1")
+	assert(check("Q+P=P+Q", [4]) == ["OK", 200], "2")
+	assert(check("P+Q=Q+P", [3, 4]) == ["SMILE_UNSATISFIED", 3], "3")
+	
+	assert(check("1+R=P+1+q=b+1", [4, 8, 10]) == ["OK", 200], "5")
+	
+	assert(check("1+P=(0+)", [3]) == ["INVALID", 6], "4")
+	
+	assert(check("P+Q=P", [3]) == ["NOT_ALWAYS_TRUE", {"P": false, "Q": true}], "6")
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
