@@ -34,7 +34,7 @@ const DATA := [
 	],
 	[
 		["He Goes First", "[] [] + [] = ( [] {} {} ) [] []", "PP QQ RR X +"],
-		["Still, He Goes First", "[] + [] [] = [] [] ( [] {} {} )", ""], # TODO
+		["Still, He Goes First", "[] + [] [] = [] [] ( [] {} {} )", "PP QQ RR X +"],
 		["It's My Turn", "P ([] [] []) = {} [] [] [] []", "PP QQ RR ++"],
 		["[EX] Really Challenging", "[] [] [] [] [] {} {} [] [] [] [] {} {} + [] []", "PPP QQ DD (()) ++ ="]
 	],
