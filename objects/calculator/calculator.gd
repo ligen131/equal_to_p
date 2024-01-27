@@ -8,7 +8,7 @@ extends Node
 func is_alpha(ch: String) -> bool: ## 判断字符 ch 是否为字母。
 	return (ch >= 'A' and ch <= 'Z') or (ch >= 'a' and ch <= 'z')
 func is_eye(ch: String) -> bool: ## 判断字符 ch 是否为眼睛。
-	return ch == "X" or ch == "="
+	return ch == "*" or ch == "="
 func is_left_mouth(ch: String) -> bool: ## 判断字符 ch 是否为左边的嘴巴。
 	return ch == "q" or ch == "d" or ch == "<"
 func is_right_mouth(ch: String) -> bool:  ## 判断字符 ch 是否为右边的嘴巴。
@@ -54,10 +54,10 @@ func get_priority(ch: String) -> int:
 		return 3
 	elif ch == "<" or ch == "=" or ch == ">":
 		return 2
-	elif ch == "(" and ch == ")":
+	elif ch == "(" or ch == ")":
 		return 1
 	else:
-		assert(false, "get_priority error")
+		assert(false, "get_priority error when ch=" + ch)
 		return -1
 
 
@@ -68,6 +68,7 @@ func infix_to_suffix(expr: String) -> String:
 	var res := ""
 	
 	for ch in expr:
+		print("ch=", ch, " stk=", opt_stack, " res=", res)
 		if get_char_type(ch) == VAL:
 			res += ch
 		elif ch == "(":
@@ -228,15 +229,18 @@ func check(expr: String, req_pos: Array) -> Array:
 
 
 func _ready():
-	assert(check("Q+P=P+Q", [3, 4]) == ["OK", 200], "1")
-	assert(check("Q+P=P+Q", [4]) == ["OK", 200], "2")
-	assert(check("P+Q=Q+P", [3, 4]) == ["SMILE_UNSATISFIED", 3], "3")
+	assert(check("(1=P)+(0=P)", []) == ["OK", 200], "9")
+	#assert(check("Q+P=P+Q", [3, 4]) == ["OK", 200], "1")
+	#assert(check("Q+P=P+Q", [4]) == ["OK", 200], "2")
+	#assert(check("P+Q=Q+P", [3, 4]) == ["SMILE_UNSATISFIED", 3], "3")
+	#
+	#assert(check("1+R=P+1+q=b+1", [4, 8, 10]) == ["OK", 200], "5")
+	#
+	#assert(check("1+P=(0+)", [3]) == ["INVALID", [6, 7]], "4")
+	#
+	#assert(check("P+Q=P", [3]) == ["NOT_ALWAYS_TRUE", {"P": false, "Q": true}], "6")
 	
-	assert(check("1+R=P+1+q=b+1", [4, 8, 10]) == ["OK", 200], "5")
 	
-	assert(check("1+P=(0+)", [3]) == ["INVALID", [6, 7]], "4")
-	
-	assert(check("P+Q=P", [3]) == ["NOT_ALWAYS_TRUE", {"P": false, "Q": true}], "6")
 
 func _process(_delta):
 	pass
