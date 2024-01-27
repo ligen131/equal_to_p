@@ -27,7 +27,7 @@ func init(chapter_id: int, level_id : int, pos : Vector2, type : int) -> void :
 
 	var txt
 	if type == 0:
-		txt = str(chapter_id + 1)
+		txt = "I" + str(chapter_id + 1)
 	else:
 		txt = str(level_id + 1)
 	set_word(txt)
