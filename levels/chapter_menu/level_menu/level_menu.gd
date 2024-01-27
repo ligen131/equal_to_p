@@ -2,6 +2,10 @@ extends Node2D
 
 
 
+const CHAP_NAMES = ["=P", "Add", "Multiply", "()", "Equal?"]
+
+
+
 const LevelButton := preload("res://levels/chapter_menu/level_menu/level_button/level_button.tscn")
 const BaseLevel := preload("res://levels/base_level/base_level.tscn")
 
@@ -16,7 +20,8 @@ func init(chap_id : int, lvl_num : int) -> void:
 	
 	if lvl_num == -1:
 		lvl_num = len(BaseLevel.instantiate().DATA[chap_id])
-		
+	
+	$Title.set_text("Ch." + str(chap_id + 1) + "  " + CHAP_NAMES[chap_id])
 	
 	chapter_id = chap_id
 	for level_id in range(0, lvl_num):
@@ -29,6 +34,7 @@ func init(chap_id : int, lvl_num : int) -> void:
 		add_child(button)
 
 func _ready():
+	$BackButton.set_word("<")
 	#print(BaseLevel.instantiate().DATA[chapter_id])
 	#var level_num : int = len(BaseLevel.instantiate().DATA[chapter_id])
 	#print(level_num)

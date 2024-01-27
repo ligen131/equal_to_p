@@ -1,28 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://drl1xe103umpi"]
+[gd_scene load_steps=6 format=3 uid="uid://drl1xe103umpi"]
 
-[ext_resource type="Texture2D" uid="uid://b5d2rfms7vyfi" path="res://objects/card_base/card_base1.png" id="1_rsfr7"]
-[ext_resource type="Texture2D" uid="uid://cs7vfmsrhpomj" path="res://objects/card_base/card_base_highlighted.png" id="2_hwjbt"]
-[ext_resource type="Texture2D" uid="uid://bkjbrw1ppac5q" path="res://objects/card_base/card_base_disabled.png" id="3_eoagx"]
+[ext_resource type="Texture2D" uid="uid://cfbqh1k0etr6g" path="res://objects/card/card1.png" id="1_l6dpy"]
+[ext_resource type="Texture2D" uid="uid://cmcc5xrpkrd0f" path="res://objects/card/card_highlighted.png" id="2_j1sqk"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0r0ru"]
-texture = ExtResource("1_rsfr7")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c0uot"]
+texture = ExtResource("1_l6dpy")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mqko3"]
-texture = ExtResource("2_hwjbt")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0m6th"]
-texture = ExtResource("3_eoagx")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5rbv7"]
-texture = ExtResource("3_eoagx")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eifmj"]
+texture = ExtResource("2_j1sqk")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tfhr0"]
 
 [node name="StyledButton" type="Button"]
 offset_right = 100.0
 offset_bottom = 100.0
-theme_override_styles/normal = SubResource("StyleBoxTexture_0r0ru")
-theme_override_styles/hover = SubResource("StyleBoxTexture_mqko3")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_0m6th")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_5rbv7")
+theme_override_styles/normal = SubResource("StyleBoxTexture_c0uot")
+theme_override_styles/hover = SubResource("StyleBoxTexture_eifmj")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_eifmj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tfhr0")
