@@ -35,7 +35,7 @@ func set_text_id(value: int) -> void:
 ## 更改字母为 text。
 func set_word(text: String) -> void:
 	if text == "_" or text == ".":
-		set_text_id(13)
+		set_text_id(1)
 	else:
 		set_text_id(get_letter_id(text))
 
