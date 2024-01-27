@@ -37,6 +37,8 @@ func _process(delta):
 func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:
 	var base_level := BaseLevel.instantiate()
 	
+	# print(chap_id, lvl_id)
+	
 	base_level.init(chap_id, lvl_id)
 	get_tree().root.add_child(base_level)
 	queue_free()

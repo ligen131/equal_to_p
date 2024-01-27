@@ -5,7 +5,7 @@ const Block := preload("res://objects/block/block.tscn")
 const CardBase := preload("res://objects/card_base/card_base.tscn")
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
-const SEP := 30
+const SEP := 35
 
 
 var expr := ""
@@ -73,12 +73,16 @@ func init(chap_id: int, lvl_id: int) -> void:
 		new_block.quest_pos = i
 		if ch != "." and ch != "_":
 			new_block.occupied = true
-			new_block.set_word(ch)				
+			new_block.set_word(ch)
+			new_block.set_block_type("CONST")
 		else:
 			new_block.set_word("_")
 			new_block.word_set.connect(_on_block_word_set)
 			if ch == "_":
 				req_pos.append(i)
+				new_block.set_block_type("GOLDEN")
+			else:
+				new_block.set_block_type("PIT")
 		new_block.set_position(Vector2(pos, HEIGHT / 2))
 		pos += SEP
 		
@@ -93,32 +97,32 @@ func init(chap_id: int, lvl_id: int) -> void:
 
 		new_card_base.set_word(ch)
 		
-		# TODO: 调用备选卡牌计数 + 1
-		# new_card_base.add_card_count()
-		
-		
-		new_card_base.set_count(choices[ch])
+		new_card_base.set_card_count(choices[ch])
 		new_card_base.set_position(Vector2(pos, HEIGHT * 7 / 8))
 		pos += SEP
 		
 		$CardBases.add_child(new_card_base)
+		new_card_base.card_put.connect(_on_card_put)
 
 
 func _ready():
-	init(1, 4)
+	pass
 
 func _process(_delta):
 	pass
 
 
-func _on_block_word_set(quest_pos: int, word: String) -> void:
+func _on_card_put(quest_pos: int, word: String) -> void:
+	prints("# word set: ", quest_pos, word)
 	expr[quest_pos] = word
 	
 	if expr.count("_") == 0:
 		var info = $Calculator.check(expr, req_pos)
+		prints("expr:", expr)
+		prints("info:", info)
 		if info[0] == "INVALID":
 			for block: Block in $Blocks.get_children():
-				if block.quest_pos in [info[1], info[1] + 1]:
+				if block.quest_pos in info[1]:
 					block.call("shake")
 		elif info[0] == "SMILE_UNSATISFIED":
 			for block: Block in $Blocks.get_children():

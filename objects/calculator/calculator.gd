@@ -141,12 +141,27 @@ func calculate_value(expr: String, var_values: Dictionary) -> bool:
 	
 ## 判断表达式 expr 是否合法（不检查括号匹配）。
 ##
-## 合法返回 -1，否则返回“与该字符右侧相邻字符相邻不合法”的最小字符下标。
-func check_valid(expr: String) -> int:
+## 合法返回 []，否则返回不合法的下标。
+func check_valid(expr: String) -> Array:
+	if get_char_type(expr[len(expr) - 1]) != BRAC_R and get_char_type(expr[len(expr) - 1]) != VAL:
+		return [len(expr) - 1]
 	for i in range(len(expr) - 1):
 		if not IS_PAIR_VALID[get_char_type(expr[i])][get_char_type(expr[i + 1])]:
-			return i
-	return -1
+			return [i, i + 1]
+	
+	var brac_sum := 0
+	for i in range(len(expr)):
+		if expr[i] == "(":
+			brac_sum += 1
+		elif expr[i] == ")":
+			if brac_sum == 0:
+				return [i]
+			brac_sum -= 1
+	if brac_sum > 0:
+		for i in range(len(expr) - 1, -1, -1):
+			if expr[i] == "(":
+				return [i]
+	return []
 	
 	
 ## 判断表达式 expr 是否满足笑脸要求。
@@ -185,18 +200,18 @@ func check_always_true(expr: String) -> Dictionary:
 ## 测试表达式 expr 是否符合通关要求，并返回相关信息。
 ## 
 ## 返回的是 [msg, additional_info]: [String, *]，
-## 若表达式不合法，返回 ["INVALID", pos]，其中 pos: int 是出错的位置（即 pos, pos+1 相邻不合法）。
+## 若表达式不合法，返回 ["INVALID", pos]，其中 pos: Array 是出错的位置。
 ## 若不满足笑脸要求，返回 ["SMILE_UNSATISFIED", pos]，其中 pos: int 是没有笑脸的位置。
 ## 若表达式不恒为正，返回 ["NOT_ALWAYS_TRUE", var_values]，其中 var_values: Dictionary[String, bool] 是一种使得表达式为假的变量取值。
 ## 否则符合要求，返回 ["OK", 200]。
 
 func check(expr: String, req_pos: Array) -> Array:	
-	var tmp := 0
+	var tmp
 
 	
 	# 判断合法性
 	tmp = check_valid(expr)
-	if tmp != -1:
+	if tmp != []:
 		return ["INVALID", tmp]
 	
 	# 判断笑脸要求
@@ -219,7 +234,7 @@ func _ready():
 	
 	assert(check("1+R=P+1+q=b+1", [4, 8, 10]) == ["OK", 200], "5")
 	
-	assert(check("1+P=(0+)", [3]) == ["INVALID", 6], "4")
+	assert(check("1+P=(0+)", [3]) == ["INVALID", [6, 7]], "4")
 	
 	assert(check("P+Q=P", [3]) == ["NOT_ALWAYS_TRUE", {"P": false, "Q": true}], "6")
 

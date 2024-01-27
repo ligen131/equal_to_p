@@ -14,7 +14,7 @@ const button_heigth : int = 90
 
 func init(chap_num : int) -> void:
 	for chapter_id in range(0, chap_num):
-		print(chapter_id)
+		# print(chapter_id)
 		var level_num : int = len(BaseLevel.instantiate().DATA[chapter_id])
 		var button = LevelButton.instantiate();
 		var x : int = button_width * (chapter_id % 4) + 50
@@ -27,7 +27,7 @@ func init(chap_num : int) -> void:
 func _ready():
 	#print(BaseLevel.instantiate().DATA[chapter_id])
 	var chapter_num : int = len(BaseLevel.instantiate().DATA)
-	print(chapter_num)
+	# print(chapter_num)
 	init(chapter_num)
 
 
@@ -38,6 +38,6 @@ func _process(delta):
 func _is_choose_chapter(chapter_id : int, level_num : int):
 	var level_menu = LevelMenu.instantiate()
 	level_menu.init(chapter_id, level_num)
-	print("here ready to change scene to ", chapter_id)
+	# print("here ready to change scene to ", chapter_id)
 	get_tree().root.add_child(level_menu)
 	queue_free()
