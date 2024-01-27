@@ -35,6 +35,7 @@ vertical_alignment = 1
 
 [node name="LevelClear" type="AudioStreamPlayer2D" parent="SFXs"]
 stream = ExtResource("3_ou3kh")
+volume_db = -26.29
 
 [node name="WrongAnswer" type="AudioStreamPlayer2D" parent="SFXs"]
 stream = ExtResource("4_yxsxp")

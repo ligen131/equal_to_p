@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b223s12rqgt4h"]
+[gd_scene load_steps=10 format=3 uid="uid://b223s12rqgt4h"]
 
 [ext_resource type="Script" path="res://objects/card/card.gd" id="1_0bviv"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="1_ns36n"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c8qjbksyn1bqt" path="res://objects/card/card2.png" id="4_c30j1"]
 [ext_resource type="Texture2D" uid="uid://bevrfq1hhyqwe" path="res://objects/card/card3.png" id="5_w81n3"]
 [ext_resource type="Texture2D" uid="uid://cmcc5xrpkrd0f" path="res://objects/card/card_highlighted.png" id="6_po2i6"]
+[ext_resource type="AudioStream" uid="uid://cj4v8ehypq3sk" path="res://objects/card/put_down.wav" id="7_u4ylf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu6l6"]
 
@@ -48,5 +49,11 @@ shape = SubResource("RectangleShape2D_gu6l6")
 
 [node name="CardBackSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fo0r0")
-animation = &"highlighted"
 autoplay = "default"
+
+[node name="SFXPutDown" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_u4ylf")
+volume_db = 6.558
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
