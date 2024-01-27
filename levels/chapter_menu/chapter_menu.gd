@@ -13,7 +13,6 @@ const button_width : int = 50
 const button_heigth : int = 50
 
 func init() -> void:
-	print("1")
 	var chap_num : int = len(BaseLevel.instantiate().DATA)
 	for chapter_id in range(0, chap_num):
 		# print(chapter_id)

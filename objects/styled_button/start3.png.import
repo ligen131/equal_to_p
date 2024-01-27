@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dijnhgkenbees"
-path="res://.godot/imported/next3.png-b09f340489e4c8fd080596296fc73f35.ctex"
+uid="uid://cbwkjh7uudgr5"
+path="res://.godot/imported/start3.png-79792491a7baa7203efa5d25fc2cac1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/word/sprites/next3.png"
-dest_files=["res://.godot/imported/next3.png-b09f340489e4c8fd080596296fc73f35.ctex"]
+source_file="res://objects/styled_button/start3.png"
+dest_files=["res://.godot/imported/start3.png-79792491a7baa7203efa5d25fc2cac1c.ctex"]
 
 [params]
 

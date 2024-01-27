@@ -136,7 +136,8 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 
 
 func _ready():
-	$HUDs/BackButton.set_word("<")
+	$HUDs/BackButton/icon.play("return")
+	$HUDs/ReplayButton/icon.play("replay")
 
 func _process(_delta):
 	pass
@@ -145,7 +146,8 @@ func _process(_delta):
 func stage_clear() -> void:
 	$SFXs/LevelClear.play()
 	for card_base: CardBase in $CardBases.get_children():
-		card_base.call("start_fade")
+		card_base.call("set_victory")
+		
 	$HUDs/TableCloth/GoldenCloth.set_visible(true)
 	$HUDs/NextLevelButton.start_fade()
 
@@ -180,7 +182,13 @@ func _on_card_put() -> void:
 				block.call("shake")
 		else:
 			stage_clear()
-			
+
+func _input(event: InputEvent):
+	if event is InputEventKey:
+		if event.keycode == KEY_R and event.pressed:
+			_on_replay_button_pressed()
+		if event.keycode == KEY_ESCAPE and event.pressed:
+			_on_back_button_pressed()
 
 
 func _on_back_button_pressed():
@@ -188,7 +196,6 @@ func _on_back_button_pressed():
 	level_menu.init(chap_id, -1)
 	get_tree().root.add_child(level_menu)
 	queue_free()
-
 
 func _on_next_level_button_pressed():
 	var base_level := BaseLevel.instantiate()
@@ -200,3 +207,6 @@ func _on_next_level_button_pressed():
 	get_tree().root.add_child(base_level)
 	queue_free()
 	
+func _on_replay_button_pressed():
+	for card_base: CardBase in $CardBases.get_children():
+		card_base.reset_all_card_position()
