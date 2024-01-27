@@ -2,4 +2,3 @@
 .godot/
 *.tmp
 build
-*.import
