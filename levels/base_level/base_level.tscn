@@ -12,4 +12,4 @@ script = ExtResource("1_diojb")
 
 [node name="CardBases" type="Node" parent="."]
 
-[node name="Spaces" type="Node" parent="."]
+[node name="Blocks" type="Node" parent="."]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://b223s12rqgt4h"]
 
 [ext_resource type="Script" path="res://objects/card/card.gd" id="1_0bviv"]
-[ext_resource type="PackedScene" uid="uid://cl3vyq67tmtav" path="res://objects/word/word.tscn" id="1_ns36n"]
+[ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="1_ns36n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu6l6"]
-size = Vector2(64, 64)
+size = Vector2(24, 24)
 
 [node name="Card" type="Area2D"]
 script = ExtResource("1_0bviv")
