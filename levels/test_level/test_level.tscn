@@ -6,5 +6,5 @@
 [node name="BaseLevel" instance=ExtResource("1_pi7md")]
 
 [node name="Word" parent="." index="0" instance=ExtResource("2_seq1m")]
-position = Vector2(380, 312)
-scale = Vector2(9.37125, 9.37125)
+position = Vector2(413.72, 274.72)
+scale = Vector2(1.2725, 1.2725)
