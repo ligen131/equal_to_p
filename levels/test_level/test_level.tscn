@@ -2,12 +2,24 @@
 
 [ext_resource type="PackedScene" uid="uid://cother2aiigge" path="res://levels/base_level/base_level.tscn" id="1_pi7md"]
 [ext_resource type="PackedScene" uid="uid://b223s12rqgt4h" path="res://objects/card/card.tscn" id="3_7ollh"]
-[ext_resource type="PackedScene" uid="uid://babd8t1osepux" path="res://objects/space/space.tscn" id="4_53fye"]
+[ext_resource type="PackedScene" uid="uid://ckjmjwywh78fe" path="res://objects/block/block.tscn" id="3_w7gya"]
 
 [node name="BaseLevel" instance=ExtResource("1_pi7md")]
 
-[node name="Space" parent="." index="0" instance=ExtResource("4_53fye")]
-position = Vector2(806, 162)
+[node name="Block" parent="." index="0" instance=ExtResource("3_w7gya")]
+position = Vector2(269, 476)
 
-[node name="Card" parent="." index="1" instance=ExtResource("3_7ollh")]
+[node name="Block2" parent="." index="1" instance=ExtResource("3_w7gya")]
+position = Vector2(398, 237)
+
+[node name="Block3" parent="." index="2" instance=ExtResource("3_w7gya")]
+position = Vector2(171, 156)
+
+[node name="Card" parent="." index="3" instance=ExtResource("3_7ollh")]
 position = Vector2(552, 421)
+
+[node name="Card2" parent="." index="4" instance=ExtResource("3_7ollh")]
+position = Vector2(1006, 323)
+
+[node name="Card3" parent="." index="5" instance=ExtResource("3_7ollh")]
+position = Vector2(834, 502)
