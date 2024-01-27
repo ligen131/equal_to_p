@@ -52,6 +52,7 @@ func draw_card():
 	$Cards.add_child(new_card_node)
 	new_card_node.back_to_origin_global_position.connect(_on_card_back.bind(new_card_node))
 	new_card_node.put.connect(_on_card_put)
+
 	new_card_node._on_mouse_pressed()
 	prints("new_card_node", new_card_node.name)
 	
@@ -82,3 +83,4 @@ func set_word(e: String) -> void:
 
 func _on_card_put():
 	emit_signal("card_put")
+
