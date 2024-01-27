@@ -3,6 +3,7 @@ extends Area2D
 class_name Block
 
 var occupied = false
+var occupied_word: String
 
 func _on_area_entered(area: Card):
 	#prints("Entered", self, name)
