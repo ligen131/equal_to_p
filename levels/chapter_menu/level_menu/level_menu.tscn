@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://doirpa1bwbjhr"]
+
+[ext_resource type="Script" path="res://levels/chapter_menu/level_menu/level_menu.gd" id="1_sd65g"]
+
+[node name="LevelMenu" type="Node2D"]
+script = ExtResource("1_sd65g")
