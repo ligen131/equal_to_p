@@ -7,15 +7,39 @@ const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
 const SEP := 30
 
-@export var level_id := -1
 
-
-const DATA := [["1-1", "=P", "P {} {}", "= P"],
-["1-2", "P", "P [] {}", "= P P"],
-["1-3", "=D", "D {} {}", "= D P"],
-["1-4", "<=>", "{} {} []", "d d = P P D D"],
-["2-1", "", "Q + [] = {} + []", "P P P P Q Q Q Q"],
+const DATA := [
+	[
+		["=P", "P {} {}", "= P"],
+		["P", "P [] {}", "= P P"],
+		["=D", "D {} {}", "= D P"],
+		["Reverse", "{} {} []", "d d = P P D D"]
+	],
+	[
+		["False", "[] [] 0 {} {}", "= + P P"],
+		["True", "[] {} {} [] 1", "= + P 1"],
+		["Swap", "Q + [] = {} + []", "P P P P Q Q Q Q"],
+		["Always True", "[] [] {} = {} [] []", "11++PPdd"],
+		["Not Really Challenging", "1 [] [] [] {} [] [] [] {} [] {} [] []", "= = + + + + + + 1 1 P q b R"]
+	],
+	[
+		["Laughing", "1 {} {} = []", "XDD"],
+		["Reset", "0 [] [] {} []", "XD10"],
+		["Not Necessary", "[] {} {} {} {} []", "QQQQQQDDXX="],
+		["Golden Experience", "{} {} {} {} {} {} {} {} {} {} {}", "PP DD qq dd bb XXX ="],
+	],
+	[
+		["He Goes First", "[] [] + [] = ( [] {} {} ) [] []", "PP QQ RR X +"],
+		["Still, He Goes First", "[] + [] [] = [] [] ( [] {} {} )", ],
+		["It's My Turn", "P ([] [] []) = {} [] [] [] []", "PP QQ RR ++"],
+		["[EX] Really Challenging", "[] [] [] [] [] {} {} [] [] [] [] {} {} + [] []", "PPP QQ DD (()) ++ ="]
+	],
+	[
+		["Why?", "[] [] {} = {} [] {} = []", "PP qq ++ 1"],
+		["Where is the Equation?", "[] [] {} {} [] + [] [] {} {} []", "(())==01PP"],
+	]
 ]
+
 
 
 func count(choices: String) -> Dictionary:
@@ -27,9 +51,10 @@ func count(choices: String) -> Dictionary:
 	return res
 
 
-func init(lvl_id: int) -> void:
-	var question = DATA[lvl_id][2].replace(" ", "").replace("X", "*")
-	var choices = count(DATA[lvl_id][3].replace(" ", "").replace("X", "*"))
+func init(chap_id: int, lvl_id: int) -> void:
+	var lvl_name = DATA[chap_id][lvl_id][0]
+	var question = DATA[chap_id][lvl_id][1].replace(" ", "").replace("X", "*")
+	var choices = count(DATA[chap_id][lvl_id][2].replace(" ", "").replace("X", "*"))
 	
 	question = question.replace("[]", ".")
 	question = question.replace("{}", "_")
@@ -63,8 +88,7 @@ func init(lvl_id: int) -> void:
 
 
 func _ready():
-	if level_id != -1:
-		init(level_id)
+	pass
 
 func _process(_delta):
 	pass
