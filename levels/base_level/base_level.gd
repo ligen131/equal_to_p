@@ -135,7 +135,8 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 
 
 func _ready():
-	$HUDs/BackButton.set_word("<")
+	$HUDs/BackButton/icon.play("return")
+	$HUDs/ReplayButton/icon.play("replay")
 
 func _process(_delta):
 	pass
@@ -187,3 +188,8 @@ func _on_back_button_pressed():
 	level_menu.init(chap_id, -1)
 	get_tree().root.add_child(level_menu)
 	queue_free()
+
+
+func _on_replay_button_pressed():
+	print("TO-DO here to handle replay")
+	pass
