@@ -180,7 +180,13 @@ func _on_card_put() -> void:
 				block.call("shake")
 		else:
 			stage_clear()
-			
+
+func _input(event: InputEvent):
+	if event is InputEventKey:
+		if event.keycode == KEY_R and event.pressed:
+			_on_replay_button_pressed()
+		if event.keycode == KEY_ESCAPE and event.pressed:
+			_on_back_button_pressed()
 
 
 func _on_back_button_pressed():
@@ -191,5 +197,5 @@ func _on_back_button_pressed():
 
 
 func _on_replay_button_pressed():
-	print("TO-DO here to handle replay")
-	pass
+	for card_base: CardBase in $CardBases.get_children():
+		card_base.reset_all_card_position()

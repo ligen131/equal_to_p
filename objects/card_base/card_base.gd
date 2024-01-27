@@ -85,6 +85,10 @@ func set_victory() -> void:
 	for card: Card in $Cards.get_children():
 		card.is_victory = true
 
+func reset_all_card_position():
+	for card: Card in $Cards.get_children():
+		card.reset_position()
+
 func _process(delta) -> void:
 	if fade_flag:
 		var offset = $FadeTimer.time_left / $FadeTimer.wait_time

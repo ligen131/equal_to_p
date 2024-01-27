@@ -54,6 +54,10 @@ func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:
 	get_tree().root.add_child(base_level)
 	queue_free()
 
+func _input(event: InputEvent):
+	if event is InputEventKey:
+		if event.keycode == KEY_ESCAPE and event.pressed:
+			_on_back_button_pressed()
 
 func _on_back_button_pressed():
 	var ChapterMenu = load("res://levels/chapter_menu/chapter_menu.tscn")
