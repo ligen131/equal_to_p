@@ -15,37 +15,23 @@ func update_card_count_label():
 func _ready():
 	update_card_count_label()
 
-func add_card_count():
-	card_count += 1
-
-func inc_card_count():
-	card_count += 1
-	update_card_count_label()
-	
+func set_card_count(value):
+	card_count = value
 	if card_count == 2:
-		# TODO: 更改 texture
-		pass
+		$AnimatedSprite2D.animation = "default"
 	elif card_count == 1:
 		# TODO: 更改 texture
-		pass
-	
-	
-func dec_card_count():
-	card_count -= 1
-	update_card_count_label()
-	
-	if card_count == 1:
-		# TODO: 更改 texture
-		pass
+		$AnimatedSprite2D.animation = "default"
 	elif card_count == 0:
-		# TODO: 更改 texture
-		pass
-	
+		$AnimatedSprite2D.animation = "disabled"
+	update_card_count_label()
+
 
 func draw_card():
 	if card_count <= 0:
 		return
-	dec_card_count()
+	set_card_count(card_count - 1)
+	$SFXPickUp.play()
 	new_card_node = Card.instantiate()
 	new_card_node.set_word($Word.get_word())
 	new_card_node.set_position(position)
@@ -54,11 +40,11 @@ func draw_card():
 	new_card_node.put.connect(_on_card_put)
 
 	new_card_node._on_mouse_pressed()
-	prints("new_card_node", new_card_node.name)
+	# prints("new_card_node", new_card_node.name)
 	
 func _on_card_back(card: Card):
-	inc_card_count()
-	prints("new_card_node", card.name, "has been removed")
+	set_card_count(card_count + 1)
+	# prints("new_card_node", card.name, "has been removed")
 	$Cards.remove_child(card)
 	card.queue_free()
 	#print("card_count = ", card_count)

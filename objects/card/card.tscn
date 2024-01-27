@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bevrfq1hhyqwe" path="res://objects/card/card3.png" id="5_w81n3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu6l6"]
-size = Vector2(24, 24)
+size = Vector2(14, 14)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fo0r0"]
 animations = [{
@@ -27,6 +27,7 @@ animations = [{
 }]
 
 [node name="Card" type="Area2D"]
+z_index = 50
 script = ExtResource("1_0bviv")
 
 [node name="Word" parent="." instance=ExtResource("1_ns36n")]
@@ -34,6 +35,7 @@ z_index = 1
 frame_progress = 0.111549
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 15
 shape = SubResource("RectangleShape2D_gu6l6")
 
 [node name="CardBackSprite" type="AnimatedSprite2D" parent="."]
