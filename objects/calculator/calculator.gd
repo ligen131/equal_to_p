@@ -168,6 +168,8 @@ func calculate_value(expr: String, var_values: Dictionary) -> bool:
 ##
 ## 合法返回 []，否则返回不合法的下标。
 func check_valid(expr: String) -> Array:
+	if get_char_type(expr[0]) != BRAC_L and get_char_type(expr[0]) != VAL:
+		return [0]
 	if get_char_type(expr[len(expr) - 1]) != BRAC_R and get_char_type(expr[len(expr) - 1]) != VAL:
 		return [len(expr) - 1]
 	for i in range(len(expr) - 1):
