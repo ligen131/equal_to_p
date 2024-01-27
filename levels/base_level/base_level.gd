@@ -35,7 +35,7 @@ const DATA := [
 		["Laughing", "1 {} {} = []", "XDD"],
 		["Reset", "0 [] [] {} []", "XD=0"],
 		["Not Necessary", "[] {} {} {} {} []", "QQQQQQ DDXX="],
-		["Golden Experience", "{} {} {} {} {} {} {} {} {} {} {}", "PP DD qq dd bb XXX ="],
+		["Golden Experience", "{} {} {} {} {} {} {} {} {} {}", "PP DD qq dd bb XXX ="],
 	],
 	[
 		["He Goes First", "[] [] + [] = ( [] {} {} ) [] []", "PP QQ RR X +"],
@@ -85,15 +85,15 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	else:
 		sep = int((1 - len(question) / 16.0) * SEP * 0.3) + SEP
 	
-	table_cloth.size.x = sep * len(question) + 16
+	table_cloth.size.x = sep * len(question) + 16 + 4
 	table_cloth.size.y = 48
-	table_cloth.get_child(0).size.x = sep * len(question) + 16
+	table_cloth.get_child(0).size.x = sep * len(question) + 16 + 4
 	table_cloth.get_child(0).size.y = 48
-	table_cloth.position.x = WIDTH / 2 - sep * len(question) / 2 - 12
+	table_cloth.position.x = WIDTH / 2 - sep * len(question) / 2 - 7
 	table_cloth.position.y = HEIGHT / 2 - 24
 	$HUDs.add_child(table_cloth)
 		
-	var pos := WIDTH / 2 - sep * len(question) / 2 + 12
+	var pos := WIDTH / 2 - sep * len(question) / 2 + 12 + 7
 	for i in range(len(question)):
 		var ch = question[i]
 		
@@ -120,7 +120,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	print(expr)
 	
 	
-	pos = WIDTH / 2 - CARDS_SEP * len(choices) / 2 + 20
+	pos = WIDTH / 2 - CARDS_SEP * len(choices) / 2 + 16
 	for ch in choices:
 		var new_card_base := CardBase.instantiate()
 
@@ -146,6 +146,7 @@ func stage_clear() -> void:
 	for card_base: CardBase in $CardBases.get_children():
 		card_base.call("start_fade")
 	$HUDs/TableCloth/GoldenCloth.set_visible(true)
+	
 
 
 func _on_card_put() -> void:
