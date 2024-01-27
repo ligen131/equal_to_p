@@ -34,7 +34,7 @@ func init(chap_id : int, lvl_num : int) -> void:
 		add_child(button)
 
 func _ready():
-	$BackButton.set_word("<")
+	$BackButton/icon.play("return")
 	#print(BaseLevel.instantiate().DATA[chapter_id])
 	#var level_num : int = len(BaseLevel.instantiate().DATA[chapter_id])
 	#print(level_num)
