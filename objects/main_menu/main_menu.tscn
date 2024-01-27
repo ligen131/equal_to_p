@@ -81,4 +81,11 @@ sprite_frames = SubResource("SpriteFrames_b4517")
 centered = false
 script = ExtResource("14_npy3s")
 
+[node name="start_button" type="Button" parent="."]
+offset_left = 88.8
+offset_top = 76.8
+offset_right = 104.8
+offset_bottom = 92.8
+
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
+[connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
