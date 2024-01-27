@@ -73,14 +73,20 @@ jobs:
         run: |
           mkdir -v -p build/web
           godot --headless --verbose --export-release "Web" build/web/index.html
+      - name: Install rsync 📚
+        run: |
+          apt-get update && apt-get install -y rsync curl
+      - name: Patch for Cross Origin Isolation and SharedArrayBuffer
+        run: |
+          cd build/web/
+          curl https://raw.githubusercontent.com/josephrocca/clip-image-sorter/92b108dc670d0b56bd6b72963b0e86c4c862412e/enable-threads.js --output enable-threads.js
+          sed -i 's|headers.set("Cross-Origin-Embedder-Policy", "credentialless")|headers.set("Cross-Origin-Embedder-Policy", "require-corp")|g'  enable-threads.js
+          sed -i 's|<script src="index.js"></script>|<script src="enable-threads.js"></script><script src="index.js"></script>|g' index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: web
           path: build/web
-      - name: Install rsync 📚
-        run: |
-          apt-get update && apt-get install -y rsync
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
