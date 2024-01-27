@@ -6,6 +6,8 @@
 
 [node name="BaseLevel" instance=ExtResource("1_pi7md")]
 
+level_id = 4
+
 [node name="Block" parent="." index="0" instance=ExtResource("3_w7gya")]
 position = Vector2(269, 476)
 
@@ -23,3 +25,4 @@ position = Vector2(1006, 323)
 
 [node name="Card3" parent="." index="5" instance=ExtResource("3_7ollh")]
 position = Vector2(834, 502)
+
