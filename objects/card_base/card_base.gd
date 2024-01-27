@@ -4,6 +4,8 @@ class_name CardBase
 
 const Card := preload("res://objects/card/card.tscn")
 
+signal card_put
+
 var card_count = 0
 var new_card_node: Card
 
@@ -34,6 +36,8 @@ func draw_card():
 	new_card_node.set_position(position)
 	$Cards.add_child(new_card_node)
 	new_card_node.back_to_origin_global_position.connect(_on_card_back.bind(new_card_node))
+	new_card_node.put.connect(_on_card_put)
+
 	new_card_node._on_mouse_pressed()
 	# prints("new_card_node", new_card_node.name)
 	
@@ -61,3 +65,7 @@ func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
 
 func set_word(e: String) -> void:
 	$Word.set_word(e)
+
+func _on_card_put():
+	emit_signal("card_put")
+
