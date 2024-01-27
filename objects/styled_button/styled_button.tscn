@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://drl1xe103umpi"]
+[gd_scene load_steps=8 format=3 uid="uid://drl1xe103umpi"]
 
 [ext_resource type="Texture2D" uid="uid://cfbqh1k0etr6g" path="res://objects/card/card1.png" id="1_l6dpy"]
 [ext_resource type="Texture2D" uid="uid://cmcc5xrpkrd0f" path="res://objects/card/card_highlighted.png" id="2_j1sqk"]
+[ext_resource type="Script" path="res://objects/styled_button/styled_button.gd" id="3_rtcig"]
+[ext_resource type="AudioStream" uid="uid://dpwscp4bw7pay" path="res://objects/styled_button/button_down.wav" id="4_no3m1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c0uot"]
 texture = ExtResource("1_l6dpy")
@@ -22,3 +24,10 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_c0uot")
 theme_override_styles/hover = SubResource("StyleBoxTexture_eifmj")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_eifmj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tfhr0")
+script = ExtResource("3_rtcig")
+
+[node name="SFXButtonDown" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_no3m1")
+volume_db = 10.306
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

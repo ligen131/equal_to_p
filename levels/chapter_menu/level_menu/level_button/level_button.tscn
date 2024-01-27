@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://levels/chapter_menu/level_menu/level_button/level_button.gd" id="1_wwqfn"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="3_js2i2"]
 
-[node name="StyledButton" instance=ExtResource("1_4bgxw")]
+[node name="LevelButton" instance=ExtResource("1_4bgxw")]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_wwqfn")
@@ -12,5 +12,3 @@ script = ExtResource("1_wwqfn")
 [node name="Word" parent="." index="0" instance=ExtResource("3_js2i2")]
 position = Vector2(19, 19)
 scale = Vector2(1.5, 1.5)
-
-[connection signal="pressed" from="." to="." method="_on_pressed"]

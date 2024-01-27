@@ -41,6 +41,10 @@ animations = [{
 [node name="CardBase" type="Area2D"]
 script = ExtResource("1_k5qn1")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2cmwb")
+debug_color = Color(0.65098, 0.431373, 0.756863, 0.419608)
+
 [node name="Word" parent="." instance=ExtResource("2_jvsp3")]
 z_index = 1
 frame_progress = 0.953211
@@ -54,9 +58,6 @@ theme_override_fonts/font = ExtResource("3_0qykx")
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_2cmwb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bhb3x")
@@ -73,3 +74,5 @@ one_shot = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

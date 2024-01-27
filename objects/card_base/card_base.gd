@@ -9,6 +9,7 @@ signal card_put
 
 
 var fade_flag := false
+var mouse_on := false
 
 
 var card_count = 0
@@ -22,12 +23,12 @@ func _ready():
 
 func set_card_count(value):
 	card_count = value
-	if card_count == 2:
-		$AnimatedSprite2D.animation = "default"
-	elif card_count == 1:
-		# TODO: 更改 texture
-		$AnimatedSprite2D.animation = "default"
-	elif card_count == 0:
+	if card_count > 0:
+		if mouse_on:
+			$AnimatedSprite2D.animation = "highlighted"
+		else:
+			$AnimatedSprite2D.animation = "default"
+	else:
 		$AnimatedSprite2D.animation = "disabled"
 	update_card_count_label()
 
@@ -95,3 +96,14 @@ func _process(delta) -> void:
 		offset = (1 - pow(offset, 1.5)) * FADE_MOVE_AMOUNT
 		$AnimatedSprite2D.position.y = offset
 		$Word.position.y = offset
+
+
+func _on_mouse_entered():
+	mouse_on = true
+	if $AnimatedSprite2D.animation == "default":
+		$AnimatedSprite2D.animation = "highlighted"
+
+func _on_mouse_exited():
+	mouse_on = false
+	if $AnimatedSprite2D.animation == "highlighted":
+		$AnimatedSprite2D.animation = "default"

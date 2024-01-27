@@ -1,4 +1,4 @@
-extends Button
+extends StyledButton
 
 signal enter_level(chapter_id:int, level_id : int)
 
@@ -36,7 +36,9 @@ func init(chapter_id: int, level_id : int, pos : Vector2, type : int) -> void :
 	button_type = type
 
 func _on_pressed():
-	# print("choose: ",chap_id,"-",lvl_id)
+	print("choose: ",chap_id,"-",lvl_id)
+	print("! ")
+	$SFXButtonDown.play()
 	if button_type == 1:
 		enter_level.emit(chap_id, lvl_id)
 	else:

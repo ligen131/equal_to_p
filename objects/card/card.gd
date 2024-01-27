@@ -34,6 +34,7 @@ func _on_mouse_release():
 		last_occupied_area = entered_area
 		entered_area.occupied_word = $Word.get_word()
 		emit_signal("put")
+		$SFXPutDown.play()
 		# prints("card", $Word.get_word(), "put at", entered_area.name, "at global_position", global_position, "when origin global_position at", origin_global_position)
 	else:
 		global_position = last_global_position
@@ -108,3 +109,12 @@ func set_word(e: String) -> void:
 
 func get_word() -> String:
 	return $Word.get_word()
+
+
+
+
+func _on_mouse_entered():
+	$CardBackSprite.animation = "highlighted"
+
+func _on_mouse_exited():
+	$CardBackSprite.animation = "default"

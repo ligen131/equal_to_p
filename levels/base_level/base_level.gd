@@ -5,6 +5,7 @@ const Block := preload("res://objects/block/block.tscn")
 const CardBase := preload("res://objects/card_base/card_base.tscn")
 const LevelMenu := preload("res://levels/chapter_menu/level_menu/level_menu.tscn")
 const TableCloth := preload("res://objects/table_cloth/table_cloth.tscn")
+const BaseLevel := preload("res://levels/base_level/base_level.tscn")
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
 const SEP := 28
@@ -148,7 +149,7 @@ func stage_clear() -> void:
 		card_base.call("set_victory")
 		
 	$HUDs/TableCloth/GoldenCloth.set_visible(true)
-	
+	$HUDs/NextLevelButton.start_fade()
 
 
 func _on_card_put() -> void:
@@ -196,7 +197,16 @@ func _on_back_button_pressed():
 	get_tree().root.add_child(level_menu)
 	queue_free()
 
-
+func _on_next_level_button_pressed():
+	var base_level := BaseLevel.instantiate()
+	
+	if lvl_id == len(DATA[chap_id]) - 1:
+		base_level.init(chap_id + 1, 0)
+	else:
+		base_level.init(chap_id, lvl_id + 1)
+	get_tree().root.add_child(base_level)
+	queue_free()
+	
 func _on_replay_button_pressed():
 	for card_base: CardBase in $CardBases.get_children():
 		card_base.reset_all_card_position()
