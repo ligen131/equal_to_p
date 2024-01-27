@@ -1,7 +1,7 @@
 extends AnimatedSprite2D
 
-var ChapterMenu = preload("res://levels/chapter_menu/chapter_menu.tscn")
-
+const ChapterMenu = preload("res://levels/chapter_menu/chapter_menu.tscn")
+const BaseLevel := preload("res://levels/base_level/base_level.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$start_button/AnimatedSprite2D.play()
@@ -18,5 +18,12 @@ func _on_animation_finished():
 
 
 func _on_start_button_pressed():
-	get_tree().root.add_child(ChapterMenu.instantiate())
+	var base_level := BaseLevel.instantiate()
+	
+	# print(chap_id, lvl_id)
+	
+	base_level.init(0, 0)
+	get_tree().root.add_child(base_level)
 	queue_free()
+	#get_tree().root.add_child(ChapterMenu.instantiate())
+	#queue_free()

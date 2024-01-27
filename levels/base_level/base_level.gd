@@ -17,6 +17,7 @@ var req_pos = [] # Array[int]
 var chap_id : int
 var lvl_id : int
 
+const I_NUMBER = ["I","II","III","VI","V"]
 
 const DATA := [
 	[
@@ -70,7 +71,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	var choices = count(DATA[chap_id][lvl_id][2].replace(" ", "").replace("X", "*"))
 	
 	
-	$HUDs/Title.set_text("%d-%d  %s" % [chap_id + 1, lvl_id + 1, lvl_name])
+	$HUDs/Title.set_text("%s-%d  %s" % [I_NUMBER[chap_id], lvl_id + 1, lvl_name])
 	
 	
 	
