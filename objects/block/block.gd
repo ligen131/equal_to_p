@@ -3,7 +3,7 @@ extends Area2D
 class_name Block
 
 
-const SHAKE_AMOUNT := 5
+const SHAKE_AMOUNT := 4
 
 
 var occupied := false
@@ -25,11 +25,17 @@ func _on_area_exited(area: Card):
 
 func set_word(e: String) -> void:
 	$Word.set_word(e)
+	if e != "_" and e != ".":
+		occupied = true
+		occupied_word = e
+	else:
+		occupied = false
+		occupied_word = "_"
 	
 func set_block_type(value: String) -> void:
 	if value == "GOLDEN":
 		$GoalFrameSprite.set_visible(true)
-		$GoalFrameSprite.set_visible(true)
+		$PitSprite.set_visible(true)
 	elif value == "PIT":
 		$GoalFrameSprite.set_visible(false)
 		$PitSprite.set_visible(true)

@@ -22,7 +22,6 @@ z_index = -1
 texture = ExtResource("3_ye3hk")
 
 [node name="GoalFrameSprite" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("4_v6rgm")
 
 [node name="ShakeTimer" type="Timer" parent="."]

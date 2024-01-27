@@ -27,6 +27,7 @@ animations = [{
 }]
 
 [node name="Card" type="Area2D"]
+z_index = 50
 script = ExtResource("1_0bviv")
 
 [node name="Word" parent="." instance=ExtResource("1_ns36n")]

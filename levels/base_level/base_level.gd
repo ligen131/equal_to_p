@@ -3,6 +3,7 @@ extends Node
 
 const Block := preload("res://objects/block/block.tscn")
 const CardBase := preload("res://objects/card_base/card_base.tscn")
+const TableCloth := preload("res://objects/table_cloth/table_cloth.tscn")
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
 const SEP := 35
@@ -63,8 +64,15 @@ func init(chap_id: int, lvl_id: int) -> void:
 	question = question.replace("[]", ".")
 	question = question.replace("{}", "_")
 		
-	var pos : int
-	pos = WIDTH / 2 - SEP * len(question) / 2 + 12
+	
+	var table_cloth = TableCloth.instantiate()
+	table_cloth.size.x = SEP * len(question) + 16
+	table_cloth.size.y = 48
+	table_cloth.position.x = WIDTH / 2 - SEP * len(question) / 2 - 12
+	table_cloth.position.y = HEIGHT / 2 - 24
+	$HUDs.add_child(table_cloth)
+		
+	var pos := WIDTH / 2 - SEP * len(question) / 2 + 12
 	for i in range(len(question)):
 		var ch = question[i]
 		
@@ -98,7 +106,7 @@ func init(chap_id: int, lvl_id: int) -> void:
 		new_card_base.set_word(ch)
 		
 		new_card_base.set_card_count(choices[ch])
-		new_card_base.set_position(Vector2(pos, HEIGHT * 7 / 8))
+		new_card_base.set_position(Vector2(pos, HEIGHT * 6 / 7))
 		pos += SEP
 		
 		$CardBases.add_child(new_card_base)
@@ -114,8 +122,10 @@ func _process(_delta):
 
 func _on_card_put() -> void:
 	for block : Block in $Blocks.get_children():
-		prints(block.quest_pos, expr, len(expr))
-		expr[block.quest_pos] = block.get_word()
+		if not block.occupied:
+			print(block.quest_pos, " is not occupied")
+			return
+		expr[block.quest_pos] = block.occupied_word
 		
 	prints("# expr: ", expr)
 	
