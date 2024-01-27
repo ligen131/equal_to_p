@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://doirpa1bwbjhr"]
+[gd_scene load_steps=3 format=3 uid="uid://doirpa1bwbjhr"]
 
 [ext_resource type="Script" path="res://levels/chapter_menu/level_menu/level_menu.gd" id="1_sd65g"]
+[ext_resource type="PackedScene" uid="uid://bepyyenjtc0p3" path="res://levels/chapter_menu/level_menu/level_button/level_button.tscn" id="2_saprs"]
 
 [node name="LevelMenu" type="Node2D"]
 script = ExtResource("1_sd65g")
+
+[node name="BackButton" parent="." instance=ExtResource("2_saprs")]
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
