@@ -2,12 +2,14 @@ extends Area2D
 
 class_name Card
 
+signal put
+
 var is_dragging = false
 var origin_position: Vector2
 var last_position: Vector2
 var is_area_entered = 0
 var entered_area: Block
-var last_entered_area: Block
+var last_occupied_area: Block
 
 func _ready():
 	origin_position = position
@@ -16,12 +18,13 @@ func _ready():
 func _on_mouse_release():
 	#prints(entered_area.name, is_area_entered, entered_area.occupied)
 	if is_area_entered > 0 and not entered_area.occupied:
+		emit_signal("put")
 		position = entered_area.position
 		last_position = position
-		if last_entered_area:
-			last_entered_area.occupied = false
+		if last_occupied_area:
+			last_occupied_area.occupied = false
 		entered_area.occupied = true
-		last_entered_area = entered_area
+		last_occupied_area = entered_area
 	else:
 		position = last_position
 		
@@ -31,10 +34,10 @@ func _on_mouse_release():
 func reset_position():
 	position = origin_position
 	last_position = origin_position
-	#print(last_entered_area)
-	if last_entered_area:
-		last_entered_area.occupied = false
-		last_entered_area = null
+	#print(last_occupied_area)
+	if last_occupied_area:
+		last_occupied_area.occupied = false
+		last_occupied_area = null
 
 func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
