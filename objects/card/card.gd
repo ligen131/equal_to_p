@@ -29,6 +29,7 @@ func _on_mouse_release():
 			last_occupied_area.occupied = false
 		entered_area.occupied = true
 		last_occupied_area = entered_area
+		entered_area.occupied_word = $Word.get_word()
 		# prints("card", $Word.get_word(), "put at", entered_area.name, "at global_position", global_position, "when origin global_position at", origin_global_position)
 	else:
 		global_position = last_global_position

@@ -7,8 +7,9 @@ const SHAKE_AMOUNT := 5
 
 
 var occupied := false
-var quest_pos := -1
+var occupied_word: String
 
+var quest_pos := -1
 var is_shaking := false
 
 
