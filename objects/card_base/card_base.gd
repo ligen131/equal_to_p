@@ -3,8 +3,13 @@ extends Area2D
 class_name CardBase
 
 const Card := preload("res://objects/card/card.tscn")
+const FADE_MOVE_AMOUNT := 70
 
 signal card_put
+
+
+var fade_flag := false
+
 
 var card_count = 0
 var new_card_node: Card
@@ -30,7 +35,7 @@ func set_card_count(value):
 func draw_card():
 	if card_count <= 0:
 		return
-	set_card_count(card_count - 1)
+	set_card_count(card_count - 1) 
 	$SFXPickUp.play()
 	new_card_node = Card.instantiate()
 	new_card_node.set_word($Word.get_word())
@@ -70,3 +75,19 @@ func set_word(e: String) -> void:
 func _on_card_put():
 	emit_signal("card_put")
 
+
+
+
+
+func start_fade() -> void:
+	fade_flag = true
+	$FadeTimer.start()
+	$CollisionShape2D.set_deferred("disabled", true)
+	$Label.set_visible(false)
+
+func _process(delta) -> void:
+	if fade_flag:
+		var offset = $FadeTimer.time_left / $FadeTimer.wait_time
+		offset = (1 - pow(offset, 1.5)) * FADE_MOVE_AMOUNT
+		$AnimatedSprite2D.position.y = offset
+		$Word.position.y = offset
