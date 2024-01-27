@@ -17,20 +17,26 @@ func _ready():
 func _process(delta):
 	pass
 
+func set_word(value: String) -> void:
+	$Word.set_word(value)
+	
+
 func init(chapter_id: int, level_id : int, pos : Vector2, type : int) -> void :
 	chap_id = chapter_id
 	lvl_id = level_id
 
+	var txt
 	if type == 0:
-		text = str(chapter_id + 1)
+		txt = str(chapter_id + 1)
 	else:
-		text = str(level_id + 1)
+		txt = str(level_id + 1)
+	set_word(txt)
 
 	position = pos
 	button_type = type
 
 func _on_pressed():
-	print("choose: ",chap_id,"-",lvl_id)
+	# print("choose: ",chap_id,"-",lvl_id)
 	if button_type == 1:
 		enter_level.emit(chap_id, lvl_id)
 	else:

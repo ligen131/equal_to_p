@@ -1,14 +1,16 @@
 extends AnimatedSprite2D
 
 
-@export var text_id := 0
+@export var text_id := 1
 
 
-const STEP := 20
-const LETTER_NAME = ["", "=", "P", "b", "D", 
+const STEP := 30
+const LETTER_NAME = ["_", "=", "P", "b", "D", 
 "I1", "I2", "I3", "I4", "I5", 
 "R", "Q", "d", "q", "(",
-"*", "+", "<", ">", ")"]
+"*", "+", "<", ">", ")",
+"0", "1", "2", "3", "4",
+"5", "6", "7", "8", "9"]
 
 
 ## 内建，不要用。
@@ -23,6 +25,8 @@ func get_letter_id(letter: String) -> int:
 ## 内建，不要用。
 func set_text_id(value: int) -> void:
 	text_id = value
+	
+	assert(value > 0, "text id <= 0")
 	
 	if not sprite_frames.has_animation(str(text_id)):
 		sprite_frames.add_animation(str(text_id))
