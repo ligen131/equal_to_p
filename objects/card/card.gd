@@ -22,7 +22,6 @@ func _ready():
 func _on_mouse_release():
 	#prints(entered_area.name, is_card_entered, entered_area.occupied)
 	if is_card_entered > 0 and entered_area and not entered_area.occupied:
-		emit_signal("put")
 		global_position = entered_area.global_position
 		last_global_position = global_position
 		if last_occupied_area:
@@ -30,7 +29,8 @@ func _on_mouse_release():
 		entered_area.occupied = true
 		last_occupied_area = entered_area
 		entered_area.occupied_word = $Word.get_word()
-		prints("card", $Word.get_word(), "put at", entered_area.name, "at global_position", global_position, "when origin global_position at", origin_global_position)
+		emit_signal("put")
+		# prints("card", $Word.get_word(), "put at", entered_area.name, "at global_position", global_position, "when origin global_position at", origin_global_position)
 	else:
 		global_position = last_global_position
 	

@@ -1,27 +1,56 @@
-[gd_scene load_steps=5 format=3 uid="uid://d35prv6j48a2y"]
+[gd_scene load_steps=10 format=3 uid="uid://d35prv6j48a2y"]
 
 [ext_resource type="Script" path="res://objects/card_base/card_base.gd" id="1_k5qn1"]
-[ext_resource type="Texture2D" uid="uid://u7iwt4hyuw48" path="res://icon.svg" id="1_sonvw"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="2_jvsp3"]
+[ext_resource type="FontFile" uid="uid://1000owdyvwfg" path="res://fonts/unifont-15.1.04.otf" id="3_0qykx"]
+[ext_resource type="Texture2D" uid="uid://b5d2rfms7vyfi" path="res://objects/card_base/card_base1.png" id="3_h7i1h"]
+[ext_resource type="Texture2D" uid="uid://bkjbrw1ppac5q" path="res://objects/card_base/card_base_disabled.png" id="4_0unxr"]
+[ext_resource type="Texture2D" uid="uid://cs7vfmsrhpomj" path="res://objects/card_base/card_base_highlighted.png" id="5_tkdj2"]
+[ext_resource type="AudioStream" uid="uid://0sefo32v1jne" path="res://objects/card_base/pick_up.wav" id="7_0c7kt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cmwb"]
-size = Vector2(32, 32)
+size = Vector2(28, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bhb3x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_h7i1h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0unxr")
+}],
+"loop": true,
+"name": &"disabled",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_tkdj2")
+}],
+"loop": true,
+"name": &"highlighted",
+"speed": 5.0
+}]
 
 [node name="CardBase" type="Area2D"]
 script = ExtResource("1_k5qn1")
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(-3.8147e-06, -3.8147e-06)
-scale = Vector2(0.234375, 0.234375)
-texture = ExtResource("1_sonvw")
-
 [node name="Word" parent="." instance=ExtResource("2_jvsp3")]
+z_index = 1
+frame_progress = 0.953211
 
 [node name="Label" type="Label" parent="."]
-offset_left = -20.0
-offset_top = 16.0
-offset_right = 20.0
-offset_bottom = 39.0
+offset_left = -13.0
+offset_top = 17.0
+offset_right = 13.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("3_0qykx")
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -29,7 +58,14 @@ vertical_alignment = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2cmwb")
 
-[node name="Cards" type="Node2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bhb3x")
+
+[node name="Cards" type="Node" parent="."]
+
+[node name="SFXPickUp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_0c7kt")
+volume_db = 8.54
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
