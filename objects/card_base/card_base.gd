@@ -31,6 +31,7 @@ func draw_card():
 	if card_count <= 0:
 		return
 	set_card_count(card_count - 1)
+	$SFXPickUp.play()
 	new_card_node = Card.instantiate()
 	new_card_node.set_word($Word.get_word())
 	new_card_node.set_position(position)
