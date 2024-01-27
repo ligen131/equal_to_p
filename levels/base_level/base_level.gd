@@ -209,5 +209,11 @@ func _on_next_level_button_pressed():
 	queue_free()
 	
 func _on_replay_button_pressed():
-	for card_base: CardBase in $CardBases.get_children():
-		card_base.reset_all_card_position()
+	var new_level = BaseLevel.instantiate()
+	new_level.init(chap_id, lvl_id)
+	get_tree().root.add_child(new_level)
+	queue_free()
+	#print(get_tree().current_scene)
+	#get_tree().reload_current_scene()
+	#for card_base: CardBase in $CardBases.get_children():
+		#card_base.reset_all_card_position()
