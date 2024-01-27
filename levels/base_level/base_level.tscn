@@ -1,19 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://cother2aiigge"]
+[gd_scene load_steps=7 format=3 uid="uid://cother2aiigge"]
 
 [ext_resource type="Script" path="res://levels/base_level/base_level.gd" id="1_diojb"]
 [ext_resource type="PackedScene" uid="uid://xom5kpqs1rue" path="res://objects/calculator/calculator.tscn" id="1_tpuy7"]
+[ext_resource type="PackedScene" uid="uid://bepyyenjtc0p3" path="res://levels/chapter_menu/level_menu/level_button/level_button.tscn" id="2_0egdl"]
 [ext_resource type="AudioStream" uid="uid://cjhl2qr4mau8g" path="res://levels/base_level/level_clear.wav" id="3_ou3kh"]
+[ext_resource type="FontFile" uid="uid://1000owdyvwfg" path="res://fonts/unifont-15.1.04.otf" id="3_q0kqv"]
+[ext_resource type="AudioStream" uid="uid://c6rflw11edxrt" path="res://levels/base_level/wrong_answer.wav" id="4_yxsxp"]
 
 [node name="BaseLevel" type="Node"]
 script = ExtResource("1_diojb")
 
 [node name="HUDs" type="Node" parent="."]
 
-[node name="Button" type="Button" parent="HUDs"]
-visible = false
-offset_right = 8.0
-offset_bottom = 8.0
-mouse_filter = 1
+[node name="BackButton" parent="HUDs" instance=ExtResource("2_0egdl")]
+
+[node name="Title" type="Label" parent="HUDs"]
+offset_top = 8.0
+offset_right = 480.0
+offset_bottom = 31.0
+theme_override_fonts/font = ExtResource("3_q0kqv")
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Calculator" parent="." instance=ExtResource("1_tpuy7")]
 
@@ -27,3 +35,9 @@ mouse_filter = 1
 
 [node name="LevelClear" type="AudioStreamPlayer2D" parent="SFXs"]
 stream = ExtResource("3_ou3kh")
+
+[node name="WrongAnswer" type="AudioStreamPlayer2D" parent="SFXs"]
+stream = ExtResource("4_yxsxp")
+volume_db = 1.0
+
+[connection signal="pressed" from="HUDs/BackButton" to="." method="_on_back_button_pressed"]
