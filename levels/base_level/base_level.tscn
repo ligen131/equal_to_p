@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cother2aiigge"]
+[gd_scene load_steps=16 format=3 uid="uid://cother2aiigge"]
 
 [ext_resource type="Script" path="res://levels/base_level/base_level.gd" id="1_diojb"]
 [ext_resource type="PackedScene" uid="uid://xom5kpqs1rue" path="res://objects/calculator/calculator.tscn" id="1_tpuy7"]
@@ -94,7 +94,7 @@ centered = false
 
 [node name="LevelClear" type="AudioStreamPlayer2D" parent="SFXs"]
 stream = ExtResource("3_ou3kh")
-volume_db = -26.29
+volume_db = -5.0
 
 [node name="WrongAnswer" type="AudioStreamPlayer2D" parent="SFXs"]
 stream = ExtResource("4_yxsxp")
