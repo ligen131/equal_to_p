@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdu8yubd7fyvb"]
+
+[ext_resource type="FontFile" uid="uid://1000owdyvwfg" path="res://fonts/unifont-15.1.04.otf" id="1_re7ax"]
+
+[node name="Label" type="Label"]
+custom_minimum_size = Vector2(480, 256)
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("1_re7ax")
+text = " 
+ 
+[ Equal to P ]
+ 
+Created by 玩一个四字音游导致的 @ GGJ2024
+ 
+ligen131         Tsukimaru
+ 
+  Bunnycxk       IssactheMouse
+ 
+ 
+THANKS FOR PLAYING! ;-)"
+horizontal_alignment = 1
