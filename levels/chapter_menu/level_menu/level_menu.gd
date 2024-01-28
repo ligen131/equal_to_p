@@ -8,6 +8,7 @@ const I_NUMBER = ["I","II","III","VI","V"]
 
 const LevelButton := preload("res://levels/chapter_menu/level_menu/level_button/level_button.tscn")
 const BaseLevel := preload("res://levels/base_level/base_level.tscn")
+const Credits := preload("res://objects/credits/credits.tscn")
 
 # Called when the node enters the scene tree for the first time.
 
@@ -17,6 +18,12 @@ const button_heigth : int = 50
 
 func init(chap_id : int, lvl_num : int) -> void:
 	#print("init?")
+	
+	if chap_id == len(BaseLevel.instantiate().DATA):
+		add_child(Credits.instantiate())
+		$Title.set_text("")
+		return
+		
 	
 	if lvl_num == -1:
 		lvl_num = len(BaseLevel.instantiate().DATA[chap_id])
