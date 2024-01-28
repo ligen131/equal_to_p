@@ -199,13 +199,14 @@ func _on_back_button_pressed():
 	queue_free()
 
 func _on_next_level_button_pressed():
-	var base_level := BaseLevel.instantiate()
-	
 	if lvl_id == len(DATA[chap_id]) - 1:
-		base_level.init(chap_id + 1, 0)
+		var level_menu := LevelMenu.instantiate()
+		level_menu.init(chap_id + 1, -1)
+		get_tree().root.add_child(level_menu)
 	else:
+		var base_level := BaseLevel.instantiate()
 		base_level.init(chap_id, lvl_id + 1)
-	get_tree().root.add_child(base_level)
+		get_tree().root.add_child(base_level)
 	queue_free()
 	
 func _on_replay_button_pressed():
