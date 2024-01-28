@@ -1,11 +1,11 @@
-extends AnimatedSprite2D
+extends Node2D
 
 const ChapterMenu = preload("res://levels/chapter_menu/chapter_menu.tscn")
 const BaseLevel := preload("res://levels/base_level/base_level.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$start_button/AnimatedSprite2D.play()
-	play("init")
+	
+	$title.play("init")
 	pass # Replace with function body.
 
 
@@ -14,7 +14,7 @@ func _process(delta):
 	pass
 
 func _on_animation_finished():
-	play("wait_for_start")
+	$title.play("wait_for_start")
 
 
 func _on_start_button_pressed():
