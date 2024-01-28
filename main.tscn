@@ -1,14 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://c17fbsiogbgo1"]
+[gd_scene load_steps=5 format=3 uid="uid://c17fbsiogbgo1"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_d0et0"]
 [ext_resource type="PackedScene" uid="uid://c07co5p46apu7" path="res://objects/main_menu/main_menu.tscn" id="1_fk6j6"]
+[ext_resource type="Script" path="res://main.gd" id="1_nb6uf"]
 [ext_resource type="PackedScene" uid="uid://d3geq38s5fjc6" path="res://bg/dynamic_bg/dynamic_bg.tscn" id="2_8k4il"]
+[ext_resource type="AudioStream" uid="uid://cr3nkhf0fejm5" path="res://levels/base_level/bgm.wav" id="3_n81it"]
 
 [node name="Main" type="Node"]
-script = ExtResource("1_d0et0")
+script = ExtResource("1_nb6uf")
 
 [node name="MainMenu" parent="." instance=ExtResource("1_fk6j6")]
 
 [node name="Bg" type="Node" parent="."]
 
 [node name="DynamicBg" parent="Bg" instance=ExtResource("2_8k4il")]
+
+[node name="BGMPlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(234, 150)
+stream = ExtResource("3_n81it")
+volume_db = -4.685
+attenuation = 0.0001
+
+[connection signal="enter_level" from="MainMenu" to="." method="_on_main_menu_enter_level"]
+[connection signal="finished" from="BGMPlayer" to="." method="_on_bgm_player_finished"]

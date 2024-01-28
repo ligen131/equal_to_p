@@ -92,13 +92,13 @@ centered = false
 
 [node name="SFXs" type="Node" parent="."]
 
-[node name="LevelClear" type="AudioStreamPlayer2D" parent="SFXs"]
+[node name="LevelClear" type="AudioStreamPlayer" parent="SFXs"]
 stream = ExtResource("3_ou3kh")
-volume_db = -5.0
+volume_db = -5.622
 
-[node name="WrongAnswer" type="AudioStreamPlayer2D" parent="SFXs"]
+[node name="WrongAnswer" type="AudioStreamPlayer" parent="SFXs"]
 stream = ExtResource("4_yxsxp")
-volume_db = 1.0
+volume_db = 4.685
 
 [connection signal="pressed" from="HUDs/NextLevelButton" to="." method="_on_next_level_button_pressed"]
 [connection signal="pressed" from="HUDs/BackButton" to="." method="_on_back_button_pressed"]

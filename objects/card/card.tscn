@@ -51,9 +51,9 @@ shape = SubResource("RectangleShape2D_gu6l6")
 sprite_frames = SubResource("SpriteFrames_fo0r0")
 autoplay = "default"
 
-[node name="SFXPutDown" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXPutDown" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_u4ylf")
-volume_db = 6.558
+volume_db = 13.117
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
