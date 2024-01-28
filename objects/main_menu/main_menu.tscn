@@ -1,60 +1,63 @@
-[gd_scene load_steps=27 format=3 uid="uid://c07co5p46apu7"]
+[gd_scene load_steps=30 format=3 uid="uid://c07co5p46apu7"]
 
-[ext_resource type="Texture2D" uid="uid://ceeypoydffke" path="res://objects/main_menu/background/main_menu1.png" id="1_yr1dc"]
-[ext_resource type="Texture2D" uid="uid://7gpyu0xntcot" path="res://objects/main_menu/background/main_menu2.png" id="2_fhihs"]
-[ext_resource type="Texture2D" uid="uid://13bbhjgsdyy7" path="res://objects/main_menu/background/main_menu3.png" id="3_l4rda"]
-[ext_resource type="Texture2D" uid="uid://cyly0xfifssay" path="res://objects/main_menu/background/main_menu4.png" id="4_vlerm"]
-[ext_resource type="Texture2D" uid="uid://be7wgh0pa8bvi" path="res://objects/main_menu/background/main_menu5.png" id="5_kh2ro"]
-[ext_resource type="Texture2D" uid="uid://c6hd45docu4q4" path="res://objects/main_menu/background/main_menu6.png" id="6_h0tx1"]
-[ext_resource type="Texture2D" uid="uid://brrl02ie8hhti" path="res://objects/main_menu/background/main_menu7.png" id="7_xmnrp"]
-[ext_resource type="Texture2D" uid="uid://wcuegw03wxuq" path="res://objects/main_menu/background/main_menu8.png" id="8_8g4og"]
-[ext_resource type="Texture2D" uid="uid://csciwny3id80p" path="res://objects/main_menu/background/main_menu9.png" id="9_v2d5d"]
-[ext_resource type="Texture2D" uid="uid://doj3api7yqkwa" path="res://objects/main_menu/background/main_menu10.png" id="10_6ukle"]
-[ext_resource type="Texture2D" uid="uid://cb8hwijy6lslu" path="res://objects/main_menu/background/main_menu11.png" id="11_j1jkd"]
-[ext_resource type="Texture2D" uid="uid://bretm2cyiirtb" path="res://objects/main_menu/background/main_menu13.png" id="13_5snq7"]
+[ext_resource type="Texture2D" uid="uid://b53614pajfqep" path="res://objects/main_menu/background/main_menu_nobg1.png" id="1_2j22j"]
+[ext_resource type="Texture2D" uid="uid://cyq78augwb5fc" path="res://objects/main_menu/background/main_menu_nobg2.png" id="2_bd160"]
+[ext_resource type="Texture2D" uid="uid://bfxt74668j86g" path="res://objects/main_menu/background/main_menu_nobg3.png" id="3_af26u"]
+[ext_resource type="Texture2D" uid="uid://bsyb5suuj1fya" path="res://objects/main_menu/background/main_menu_nobg4.png" id="4_vtqv0"]
+[ext_resource type="Texture2D" uid="uid://b4e6via0cxnfa" path="res://objects/main_menu/background/main_menu_nobg5.png" id="5_rr4nh"]
+[ext_resource type="Texture2D" uid="uid://bw8d844mfacux" path="res://objects/main_menu/background/main_menu_nobg6.png" id="6_ccgtl"]
+[ext_resource type="Texture2D" uid="uid://desq3wqpim8q4" path="res://objects/main_menu/background/main_menu_nobg7.png" id="7_njft2"]
+[ext_resource type="Texture2D" uid="uid://cx104dg5tqb1u" path="res://objects/main_menu/background/main_menu_nobg8.png" id="8_2eqtc"]
+[ext_resource type="Texture2D" uid="uid://c5hyflj0ro1n7" path="res://objects/main_menu/background/main_menu_nobg9.png" id="9_k6yu7"]
+[ext_resource type="Texture2D" uid="uid://b6nf6pqpo3hpe" path="res://objects/main_menu/background/main_menu_nobg10.png" id="10_ytkos"]
+[ext_resource type="Texture2D" uid="uid://bkcuudpkn5l2c" path="res://objects/main_menu/background/main_menu_nobg11.png" id="11_birxr"]
+[ext_resource type="Texture2D" uid="uid://dvkqdwofybidx" path="res://objects/main_menu/background/main_menu_nobg12.png" id="12_s2sku"]
+[ext_resource type="Texture2D" uid="uid://5hqsuqryf4es" path="res://objects/main_menu/background/main_menu_nobg13.png" id="13_q13uj"]
+[ext_resource type="Texture2D" uid="uid://c4xg1rhvx6trg" path="res://objects/main_menu/background/main_menu_nobg14.png" id="14_0p4kr"]
 [ext_resource type="Script" path="res://objects/main_menu/main_menu.gd" id="14_npy3s"]
-[ext_resource type="Texture2D" uid="uid://bqm3lgo8c8nfb" path="res://objects/main_menu/background/main_menu14.png" id="14_tufeb"]
-[ext_resource type="Texture2D" uid="uid://bw8xulwxqnhbc" path="res://objects/main_menu/background/main_menu15.png" id="15_qjtad"]
+[ext_resource type="Texture2D" uid="uid://bs3g6c351s8or" path="res://objects/main_menu/background/main_menu_nobg15.png" id="15_bwyyk"]
 [ext_resource type="Texture2D" uid="uid://cmcc5xrpkrd0f" path="res://objects/card/card_highlighted.png" id="16_5m8f1"]
 [ext_resource type="Texture2D" uid="uid://83p3glm3htsp" path="res://objects/styled_button/start1.png" id="16_skwdr"]
+[ext_resource type="Texture2D" uid="uid://ksc3hj3vyr8" path="res://objects/main_menu/background/backgroud.png" id="17_hvarn"]
 [ext_resource type="Texture2D" uid="uid://64ivn20qcjoy" path="res://objects/styled_button/start2.png" id="17_mrqss"]
 [ext_resource type="Texture2D" uid="uid://cbwkjh7uudgr5" path="res://objects/styled_button/start3.png" id="18_qh4cp"]
+[ext_resource type="Script" path="res://objects/main_menu/start_button.gd" id="19_bldvj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b4517"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_yr1dc")
+"texture": ExtResource("1_2j22j")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_fhihs")
+"texture": ExtResource("2_bd160")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_l4rda")
+"texture": ExtResource("3_af26u")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_vlerm")
+"texture": ExtResource("4_vtqv0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_kh2ro")
+"texture": ExtResource("5_rr4nh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_h0tx1")
+"texture": ExtResource("6_ccgtl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_xmnrp")
+"texture": ExtResource("7_njft2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_8g4og")
+"texture": ExtResource("8_2eqtc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_v2d5d")
+"texture": ExtResource("9_k6yu7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_6ukle")
+"texture": ExtResource("10_ytkos")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_j1jkd")
+"texture": ExtResource("11_birxr")
 }],
 "loop": false,
 "name": &"init",
@@ -62,16 +65,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_5snq7")
+"texture": ExtResource("12_s2sku")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_tufeb")
+"texture": ExtResource("13_q13uj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_qjtad")
+"texture": ExtResource("14_0p4kr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_j1jkd")
+"texture": ExtResource("15_bwyyk")
 }],
 "loop": true,
 "name": &"wait_for_start",
@@ -110,27 +113,44 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="MainMenu" type="AnimatedSprite2D"]
+[node name="MainMenu" type="Node2D"]
 scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_b4517")
-animation = &"init"
-centered = false
 script = ExtResource("14_npy3s")
 
+[node name="title" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.780392, 0.643137, 0.87451, 1)
+position = Vector2(9.6, 8.79999)
+scale = Vector2(0.924248, 0.924248)
+sprite_frames = SubResource("SpriteFrames_b4517")
+animation = &"init"
+frame = 10
+frame_progress = 1.0
+centered = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(0.996224, 0.994968)
+texture = ExtResource("17_hvarn")
+centered = false
+
 [node name="start_button" type="Button" parent="."]
-offset_left = 89.0
-offset_top = 77.0
-offset_right = 113.0
-offset_bottom = 102.0
+offset_left = 87.6
+offset_top = 87.6
+offset_right = 106.6
+offset_bottom = 107.6
+scale = Vector2(0.87554, 0.87554)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_htdlk")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6khk3")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_m8edv")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_gegaq")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_146ea")
+script = ExtResource("19_bldvj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="start_button"]
+position = Vector2(1, 1)
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_c72mh")
 centered = false
 
-[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
+[connection signal="animation_finished" from="title" to="title" method="_on_animation_finished"]
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
