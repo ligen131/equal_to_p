@@ -8,6 +8,7 @@ const SHAKE_AMOUNT := 4
 
 var occupied := false
 var occupied_word: String
+var occupied_card: Card
 
 var quest_pos := -1
 var is_shaking := false
@@ -31,6 +32,10 @@ func set_word(e: String) -> void:
 	else:
 		occupied = false
 		occupied_word = "_"
+
+func set_card(c: Card) -> void:
+	occupied_card = c
+	occupied_word = c.get_word()
 	
 func set_block_type(value: String) -> void:
 	if value == "GOLDEN":
@@ -64,3 +69,9 @@ func shake():
 
 func _on_shake_timer_timeout():
 	is_shaking = false
+	
+func set_victory(v: bool):
+	if occupied and occupied_card:
+		occupied_card.set_victory(v)
+	else:
+		$Word.set_victory(v)

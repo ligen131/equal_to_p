@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 
 
 @export var text_id := 1
+@export var is_victory = false
 
 
 const STEP := 30
@@ -28,11 +29,12 @@ func set_text_id(value: int) -> void:
 	
 	assert(value > 0, "text id <= 0")
 	
-	if not sprite_frames.has_animation(str(text_id)):
-		sprite_frames.add_animation(str(text_id))
+	var animation_id = str(text_id) + str(is_victory)
+	if not sprite_frames.has_animation(animation_id):
+		sprite_frames.add_animation(animation_id)
 		for i in range(3):
-			sprite_frames.add_frame(str(text_id), load("res://objects/word/sprites/sprite" + str(i * STEP + text_id) + ".png"))
-	animation = str(text_id)
+			sprite_frames.add_frame(animation_id, load_image(i * STEP + text_id, is_victory))
+	animation = animation_id
 	
 	
 
@@ -55,3 +57,21 @@ func _ready():
 func _process(delta):
 	if animation == "default":
 		set_text_id(text_id)
+		
+func set_victory(v: bool):
+	if v != is_victory:
+		is_victory = v
+		set_text_id(text_id)
+		
+func load_image(h: int, is_victory: bool):
+	var image := load("res://objects/word/sprites/sprite" + str(h) + ".png")
+	if is_victory:
+		var new_texture = image.get_image()
+		for x in range(new_texture.get_width()):
+			for y in range(new_texture.get_height()):
+				var color = new_texture.get_pixel(x, y)
+				if color == Color(0, 0, 0, 1):  # 如果像素是黑色
+					new_texture.set_pixel(x, y, Color(0xf5 / 256.0, 0xdf / 256.0, 0x4d / 256.0, 1))  # 将其改为金黄色
+		return ImageTexture.create_from_image(new_texture)
+		
+	return image

@@ -1,8 +1,10 @@
 extends Node2D
 
+signal victory_change(v: bool)
 
 const DynamicBgPattern = preload("res://bg/dynamic_bg/dynamic_bg_pattern/dynamic_bg_pattern.tscn")
 
+var is_victory = false
 
 const WIDTH = 1920 / 4
 const HEIGHT = 1080 / 4
@@ -21,11 +23,17 @@ func spawn(x_offset, y_offset):
 		
 		new_pattern.position = Vector2(pat_x, pat_y)
 		new_pattern.velocity = VELOCITY
+		victory_change.connect(new_pattern._on_victory_change)
+		new_pattern._on_victory_change(is_victory)
 		add_child(new_pattern)
 		
 		pat_x += W_STEP
 		pat_y += H_STEP
 
+func set_victory(v: bool):
+	if is_victory != v:
+		is_victory = v
+		victory_change.emit(v)
 
 func _ready():
 	var x_offset = 0
