@@ -19,9 +19,15 @@ Players solve the game by filling in different elements in the arithmetic expres
 
 由{布尔运算式}启发的解谜游戏 =P 玩家通过在算数式中填入不同的元素 ;-) 让表达式恒为真的同时 :-> 式子中的某个部分能够构成一个笑脸的颜文字。
 
-## Demo
+## Try Demo
 
 The latest built artifacts can be found at [the latest actions](https://github.com/ligen131/ggj2024-game/actions).
+
+Windows: [Download](https://github.com/ligen131/equal_to_p/actions/runs/7684305585/artifacts/1200398972)
+
+Linux: [Download](https://github.com/ligen131/equal_to_p/actions/runs/7684305585/artifacts/1200398969)
+
+MacOS: [Download](https://github.com/ligen131/equal_to_p/actions/runs/7684305585/artifacts/1200398970)
 
 **You can also try our online demo at <https://ligen131.github.io/ggj2024-game/>.** Due to the rendering process requiring time to load, the webpage may take a while to load.
 
@@ -37,8 +43,8 @@ The latest built artifacts can be found at [the latest actions](https://github.c
 - [x] 录入数据
 - [x] 算式框，备选框，关卡框纹理
 - [x] card card_base 边框纹理
-- [ ] 音效
-- [ ] 关卡设计 `<` `>`- cxk
+- [x] 音效
+- [x] 关卡设计 `<` `>`- cxk
 - [x] 背景颜色
 - [x] 主页 MainMenu UI
 - [x] 主页动画 - mouse
@@ -47,16 +53,17 @@ The latest built artifacts can be found at [the latest actions](https://github.c
 - [x] 通关后禁用鼠标操作 card
 - [x] 选关页面返回按钮
 - [x] 右上角重玩按钮
-- [ ] 通关之后高亮笑脸
+- [x] 通关之后高亮笑脸
 - [x] 通关之后下一关底部浮现按钮
 - [x] 金色框纹理统一
-- [ ] 关卡高亮动画 // 这是啥？
+- [x] 关卡高亮动画 // 这是啥？
 - [x] 章节标题
-- [ ] 卡片文字偏移
+- [x] 卡片文字偏移
 - [x] 瞎几把拖 card 有 bug
 - [ ] 卡片被放置后继续动画会露馅
 - [x] 主页笑脸乱飞动画
 - [ ] 场景切换的过场动画
+- [ ] 卡片替换交互逻辑
 
 ## Build
 
