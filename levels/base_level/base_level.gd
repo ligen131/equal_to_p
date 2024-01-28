@@ -17,6 +17,7 @@ var req_pos = [] # Array[int]
 var chap_id : int
 var lvl_id : int
 
+const I_NUMBER = ["I","II","III","VI","V"]
 
 const DATA := [
 	[
@@ -70,7 +71,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	var choices = count(DATA[chap_id][lvl_id][2].replace(" ", "").replace("X", "*"))
 	
 	
-	$HUDs/Title.set_text("%d-%d  %s" % [chap_id + 1, lvl_id + 1, lvl_name])
+	$HUDs/Title.set_text("%s-%d  %s" % [I_NUMBER[chap_id], lvl_id + 1, lvl_name])
 	
 	
 	
@@ -208,5 +209,11 @@ func _on_next_level_button_pressed():
 	queue_free()
 	
 func _on_replay_button_pressed():
-	for card_base: CardBase in $CardBases.get_children():
-		card_base.reset_all_card_position()
+	var new_level = BaseLevel.instantiate()
+	new_level.init(chap_id, lvl_id)
+	get_tree().root.add_child(new_level)
+	queue_free()
+	#print(get_tree().current_scene)
+	#get_tree().reload_current_scene()
+	#for card_base: CardBase in $CardBases.get_children():
+		#card_base.reset_all_card_position()
