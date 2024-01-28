@@ -2,7 +2,7 @@ extends Node2D
 
 
 
-const CHAP_NAMES = ["=P", "Add", "Multiply", "()", "Equal?"]
+const CHAP_NAMES = ["=P", "Add and Multiply", "()", "Equal?", "<>"]
 
 const I_NUMBER = ["I","II","III","VI","V"]
 
@@ -34,8 +34,8 @@ func init(chap_id : int, lvl_num : int) -> void:
 	for level_id in range(0, lvl_num):
 		#print(level_id)
 		var button = LevelButton.instantiate();
-		var x : int = button_width * (level_id % 9) + 60
-		var y : int = button_heigth * (level_id / 9) + 100
+		var x : int = button_width * (level_id % 7) + 60
+		var y : int = button_heigth * (level_id / 7) + 100
 		button.init(chapter_id, level_id, Vector2(x, y), 1)
 		button.enter_level.connect(_on_button_enter_level)
 		add_child(button)

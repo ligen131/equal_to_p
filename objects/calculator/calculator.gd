@@ -69,6 +69,8 @@ func get_priority(ch: String) -> int:
 		return 2
 	elif ch == "(" or ch == ")":
 		return 1
+	elif ch == "@":
+		return 0
 	else:
 		assert(false, "get_priority error when ch=" + ch)
 		return -1
@@ -102,17 +104,23 @@ func infix_to_suffix(expr: String) -> String:
 				opt_stack.pop_back()
 			opt_stack.pop_back()
 		else:
-			if not opt_stack.is_empty() and (get_char_type(ch) != COMP or get_char_type(opt_stack.back()) != COMP):
+			if get_char_type(pre_ch) != COMP or get_char_type(ch) != COMP:
 				while not opt_stack.is_empty() and get_priority(ch) <= get_priority(opt_stack.back()):
 					res += opt_stack.back()
 					opt_stack.pop_back()
 			opt_stack.push_back(ch)
+		if not res.is_empty() and get_char_type(res[len(res) - 1]) == COMP:
+			res += "@"
 		pre_ch = ch
 			
 	while not opt_stack.is_empty():
 		res += opt_stack.back()
 		opt_stack.pop_back()
 
+	if get_char_type(res[len(res) - 1]) == COMP:
+		res += "@"
+	
+	prints(expr, res)
 	return res
 	
 
@@ -120,24 +128,22 @@ func infix_to_suffix(expr: String) -> String:
 ## 计算后缀表达式 expr 的值，其中变量的值给定，放在字典 var_values 中（不判断 expr 的合法性）。
 func calculate_value(expr: String, var_values: Dictionary) -> bool:
 	var stack: Array = []
-	var val: bool
-	var is_holding := false
+	var val := false
 
 	for ch in expr:
-		if get_char_type(ch) != COMP and is_holding:
-			is_holding = false
+		if ch == "@":
 			stack.pop_back()
 			stack.pop_back()
 			stack.push_back(val)
 			val = false
 		
-		if get_char_type(ch) == VAL:
+		
+		elif get_char_type(ch) == VAL:
 			if is_alpha(ch):
 				stack.push_back(var_values[ch])
 			else:
 				stack.push_back(ch == "1")
 		elif get_char_type(ch) == COMP:
-			is_holding = true
 			if ch == "<":
 				val = val or (stack[len(stack) - 2] < stack[len(stack) - 1])
 			elif ch == "=":
@@ -153,13 +159,6 @@ func calculate_value(expr: String, var_values: Dictionary) -> bool:
 			stack.pop_back()
 			stack.push_back(val)
 			val = false
-	
-	if is_holding:
-		is_holding = false
-		stack.pop_back()
-		stack.pop_back()
-		stack.push_back(val)
-		val = false
 		
 	assert(stack.size() == 1, "suffix expr is invalid.")
 	return stack[0]
@@ -256,7 +255,8 @@ func check(expr: String, req_pos: Array) -> Array:
 
 
 func _ready():
-	check("q*Pq*bd*b=D", [])
+	#check("q*Pq*bd*b=D", [])
+	check("0=P<>P", [])	
 	#assert(check("(1=P)+(0=P)", []) == ["OK", 200], "9")
 	#assert(check("Q+P=P+Q", [3, 4]) == ["OK", 200], "1")
 	#assert(check("Q+P=P+Q", [4]) == ["OK", 200], "2")

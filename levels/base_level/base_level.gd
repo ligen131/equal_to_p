@@ -31,10 +31,8 @@ const DATA := [
 		["True", "[] {} {} [] 1", "= + P 1"],
 		["Swap", "Q + [] = {} + []", "P P P P Q Q Q Q"],
 		["Always True", "[] [] {} = {} [] []", "11++PPdd"],
-		["Not Really Challenging", "1 [] [] [] {} [] [] [] {} [] {} [] []", "== ++++++ 11 P q b R"]
-	],
-	[
-		["Laughing", "1 {} {} = []", "XDD"],
+		["Not Really Challenging", "1 [] [] [] {} [] [] [] {} [] {} [] []", "== ++++++ 11 P q b R"],
+		["Make Me Laugh", "1 {} {} = []", "XDD"],
 		["Reset", "0 [] [] {} []", "XD=0"],
 		["Not Necessary", "[] {} {} {} {} []", "QQQQQQ DDXX="],
 		["Golden Experience", "{} {} {} {} {} {} {} {} {} {}", "PP DD qq dd bb XXX ="],
@@ -48,7 +46,13 @@ const DATA := [
 	[
 		["Why?", "[] [] {} = {} [] {} = []", "PP qq ++ 1"],
 		["Where is the Equation?", "[] [] {} {} [] + [] [] {} {} []", "(())==01PP"],
-	]
+		["Untitled", "[] [] {} {} [] [] [] []", "=QPP0+()"],
+	],
+	[
+		["<", "0 {} {} [] 1", "XD<"],
+		["<=", "[] X [] {} {} [] + []", "QQPP<="],
+		["<>", "0 {} P [] [] []", "<>=P"],
+	],
 ]
 
 
