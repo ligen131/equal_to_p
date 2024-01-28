@@ -16,3 +16,7 @@ func _process(delta):
 	position += velocity * delta
 	if position.x > 1920 / 4 + 70 or position.y < -70:
 		queue_free()
+
+func _on_victory_change(v: bool):
+	$Word1.set_victory(v)
+	$Word2.set_victory(v)

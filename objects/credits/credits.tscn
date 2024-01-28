@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdu8yubd7fyvb"]
+[gd_scene load_steps=3 format=3 uid="uid://cdu8yubd7fyvb"]
 
 [ext_resource type="FontFile" uid="uid://1000owdyvwfg" path="res://fonts/unifont-15.1.04.otf" id="1_re7ax"]
+[ext_resource type="Script" path="res://objects/credits/credits.gd" id="2_epjvn"]
 
 [node name="Label" type="Label"]
 custom_minimum_size = Vector2(480, 256)
@@ -20,3 +21,4 @@ ligen131         Tsukimaru
  
 THANKS FOR PLAYING! ;-)"
 horizontal_alignment = 1
+script = ExtResource("2_epjvn")

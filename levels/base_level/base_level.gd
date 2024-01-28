@@ -154,11 +154,13 @@ func stage_clear() -> void:
 
 
 func _on_card_put() -> void:
+	var block_array = []
 	for block : Block in $Blocks.get_children():
 		if not block.occupied:
 			print(block.quest_pos, " is not occupied")
 			return
 		expr[block.quest_pos] = block.occupied_word
+		block_array.append(block)
 		
 	prints("# expr: ", expr)
 	
@@ -182,7 +184,16 @@ func _on_card_put() -> void:
 			for block: Block in $Blocks.get_children():
 				block.call("shake")
 		else:
+			# victory
+			get_tree().current_scene.set_victory(true)
 			stage_clear()
+			print(block_array)
+			for i in range(len(block_array)):
+				if i != 0:
+					if $Calculator.is_smile(expr[i-1]+expr[i]):
+						print(expr[i-1]+expr[i])
+						block_array[i-1].set_victory(true)
+						block_array[i].set_victory(true)
 
 func _input(event: InputEvent):
 	if event is InputEventKey:
@@ -190,6 +201,10 @@ func _input(event: InputEvent):
 			_on_replay_button_pressed()
 		if event.keycode == KEY_ESCAPE and event.pressed:
 			_on_back_button_pressed()
+
+
+func _exit_tree():
+	get_tree().current_scene.set_victory(false)
 
 
 func _on_back_button_pressed():
