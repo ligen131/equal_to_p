@@ -5,8 +5,12 @@ var velocity : Vector2
 
 
 func _ready():
-	$Word1.set_word("=*"[randi_range(0, 1)])
-	$Word2.set_word("DPb"[randi_range(0, 2)])
+	if randi() % 2 == 1:
+		$Word1.set_word("=*"[randi_range(0, 1)])
+		$Word2.set_word("DPb>"[randi_range(0, 2)])
+	else:
+		$Word1.set_word("qd<"[randi_range(0, 2)])
+		$Word2.set_word("=*"[randi_range(0, 1)])
 
 func _process(delta):
 	position += velocity * delta
