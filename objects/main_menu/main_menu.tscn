@@ -152,5 +152,5 @@ scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_c72mh")
 centered = false
 
-[connection signal="animation_finished" from="title" to="title" method="_on_animation_finished"]
+[connection signal="animation_finished" from="title" to="." method="_on_title_animation_finished"]
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]

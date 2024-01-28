@@ -5,19 +5,8 @@ const BaseLevel := preload("res://levels/base_level/base_level.tscn")
 
 signal enter_level()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	
+func _ready():	
 	$title.play("init")
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func _on_animation_finished():
-	$title.play("wait_for_start")
 
 
 func _on_start_button_pressed():
@@ -31,3 +20,7 @@ func _on_start_button_pressed():
 	queue_free()
 	#get_tree().root.add_child(ChapterMenu.instantiate())
 	#queue_free()
+
+
+func _on_title_animation_finished():
+	$title.play("wait_for_start")
