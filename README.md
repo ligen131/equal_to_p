@@ -2,7 +2,7 @@
 
 # Equal to P (=P)
 
-**Try our online demo at <https://ligen131.github.io/ggj2024-game/> now!**
+**Try our online demo at <https://ligen131.github.io/equal_to_p/> now!**
 
 A game made by Team 玩一个四字音游导致的 during [Global Game Jam](https://globalgamejam.org/) 2024. Participated [onsite](https://www.huodongxing.com/event/2732777803400?td=6303464850639) at [ChillyRoom](https://www.chillyroom.com/), Shenzhen, China.
 
