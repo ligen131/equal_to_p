@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdu8yubd7fyvb"]
+[gd_scene load_steps=7 format=3 uid="uid://cdu8yubd7fyvb"]
 
 [ext_resource type="FontFile" uid="uid://1000owdyvwfg" path="res://fonts/unifont-15.1.04.otf" id="1_re7ax"]
 [ext_resource type="Script" path="res://objects/credits/credits.gd" id="2_epjvn"]
+[ext_resource type="Texture2D" uid="uid://c585nvnsd4utt" path="res://objects/credits/bunny.png" id="3_4jp5o"]
+[ext_resource type="Texture2D" uid="uid://dtf6v2q2p4mku" path="res://objects/credits/ligen.png" id="4_m7war"]
+[ext_resource type="Texture2D" uid="uid://chh0duwbissj5" path="res://objects/credits/tsuki.png" id="5_uqmmc"]
+[ext_resource type="Texture2D" uid="uid://c0pt1v7cx7631" path="res://objects/credits/mouse.png" id="6_316uh"]
 
 [node name="Label" type="Label"]
 custom_minimum_size = Vector2(480, 256)
@@ -22,3 +26,20 @@ ligen131         Tsukimaru
 THANKS FOR PLAYING! ;-)"
 horizontal_alignment = 1
 script = ExtResource("2_epjvn")
+metadata/_edit_vertical_guides_ = [112.0]
+
+[node name="Bunny" type="Sprite2D" parent="."]
+position = Vector2(90, 165)
+texture = ExtResource("3_4jp5o")
+
+[node name="Ligen" type="Sprite2D" parent="."]
+position = Vector2(90, 120)
+texture = ExtResource("4_m7war")
+
+[node name="Tsuki" type="Sprite2D" parent="."]
+position = Vector2(390, 120)
+texture = ExtResource("5_uqmmc")
+
+[node name="Mouse" type="Sprite2D" parent="."]
+position = Vector2(390, 167)
+texture = ExtResource("6_316uh")
