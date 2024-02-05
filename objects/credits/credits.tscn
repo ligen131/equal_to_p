@@ -18,9 +18,9 @@ text = "
  
 Created by 玩一个四字音游导致的 @ GGJ2024
  
-ligen131         Tsukimaru
+Bunnycxk         Tsukimaru
  
-  Bunnycxk       IsaacTheMouse
+  ligen131       IsaacTheMouse
  
  
 THANKS FOR PLAYING! ;-)"
@@ -29,11 +29,11 @@ script = ExtResource("2_epjvn")
 metadata/_edit_vertical_guides_ = [112.0]
 
 [node name="Bunny" type="Sprite2D" parent="."]
-position = Vector2(90, 165)
+position = Vector2(90, 122)
 texture = ExtResource("3_4jp5o")
 
 [node name="Ligen" type="Sprite2D" parent="."]
-position = Vector2(90, 120)
+position = Vector2(90, 165)
 texture = ExtResource("4_m7war")
 
 [node name="Tsuki" type="Sprite2D" parent="."]
