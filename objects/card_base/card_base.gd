@@ -38,6 +38,7 @@ func draw_card():
 		return
 	set_card_count(card_count - 1) 
 	$SFXPickUp.play()
+	Input.set_default_cursor_shape(Input.CURSOR_DRAG)
 	new_card_node = Card.instantiate()
 	new_card_node.set_word($Word.get_word())
 	new_card_node.set_position(position)
@@ -101,9 +102,11 @@ func _process(delta) -> void:
 func _on_mouse_entered():
 	mouse_on = true
 	if $AnimatedSprite2D.animation == "default":
-		$AnimatedSprite2D.animation = "highlighted"
+		$AnimatedSprite2D.animation = "highlighted"	
+		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 func _on_mouse_exited():
 	mouse_on = false
 	if $AnimatedSprite2D.animation == "highlighted":
 		$AnimatedSprite2D.animation = "default"
+		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
