@@ -34,6 +34,7 @@ func _on_mouse_release():
 		last_occupied_area = entered_area
 		entered_area.set_card(self)
 		emit_signal("put")
+		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 		$SFXPutDown.play()
 		# prints("card", $Word.get_word(), "put at", entered_area.name, "at global_position", global_position, "when origin global_position at", origin_global_position)
 	else:
@@ -85,7 +86,8 @@ func _process(delta: float) -> void:
 		_on_mouse_release()
 	if is_dragging:
 		have_deal_on_mouse_release = false
-		global_position = get_global_mouse_position()
+		global_position = get_global_mouse_position().round()
+		Input.set_default_cursor_shape(Input.CURSOR_DRAG)
 
 func on_card_entered(area: Block) -> void:
 	is_card_entered += 1
@@ -115,9 +117,11 @@ func get_word() -> String:
 
 func _on_mouse_entered():
 	$CardBackSprite.animation = "highlighted"
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 func _on_mouse_exited():
 	$CardBackSprite.animation = "default"
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 func set_victory(v: bool):
 	$Word.set_victory(v)

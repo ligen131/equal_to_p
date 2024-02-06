@@ -24,6 +24,7 @@ window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/scale=4.0
 window/stretch/scale_mode="integer"
+mouse_cursor/custom_image="res://bg/cursor/cursor_arrow.png"
 
 [rendering]
 
