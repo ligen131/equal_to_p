@@ -71,7 +71,7 @@ func load_image(h: int, is_victory: bool):
 			for y in range(new_texture.get_height()):
 				var color = new_texture.get_pixel(x, y)
 				if color == Color(0, 0, 0, 1):  # 如果像素是黑色
-					new_texture.set_pixel(x, y, Color(0xf5 / 256.0, 0xdf / 256.0, 0x4d / 256.0, 1))  # 将其改为金黄色
+					new_texture.set_pixel(x, y, Color.hex(0xf5df4dff))  # 将其改为金黄色
 		return ImageTexture.create_from_image(new_texture)
 		
 	return image

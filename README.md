@@ -6,10 +6,10 @@
 
 A game made by Team 玩一个四字音游导致的 during [Global Game Jam](https://globalgamejam.org/) 2024. Participated [onsite](https://www.huodongxing.com/event/2732777803400?td=6303464850639) at [ChillyRoom](https://www.chillyroom.com/), Shenzhen, China.
 
-- Coding: [@cutekibry](https://github.com/cutekibry), [@ligen131](https://github.com/ligen131), [@Bunnycxk](https://github.com/Bunnycxk)
+- Code: [@cutekibry](https://github.com/cutekibry), [@ligen131](https://github.com/ligen131), [@Bunnycxk](https://github.com/Bunnycxk)
 - Art: [@IsaacTheMouse](https://github.com/IsaacTheMouse), [@Bunnycxk](https://github.com/Bunnycxk)
 - Music: [@cutekibry](https://github.com/cutekibry)
-- Planning: everyone
+- Design: everyone
 
 ## Introduction
 
