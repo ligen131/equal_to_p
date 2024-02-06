@@ -1,14 +1,16 @@
 extends Node
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+const CURSOR_ARROW := preload("res://bg/cursor/cursor_arrow.png")
+const CURSOR_POINTING_HAND := preload("res://bg/cursor/cursor_pointing_hand.png")
+const CURSOR_DRAG := preload("res://bg/cursor/cursor_drag.png")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _ready():	
+	Input.set_custom_mouse_cursor(CURSOR_ARROW)
+	Input.set_custom_mouse_cursor(CURSOR_POINTING_HAND, Input.CURSOR_POINTING_HAND)
+	Input.set_custom_mouse_cursor(CURSOR_DRAG, Input.CURSOR_DRAG)
+
 
 func _on_main_menu_enter_level():
 	$BGMPlayer.play()
