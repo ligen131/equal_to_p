@@ -26,7 +26,7 @@ func init() -> void:
 	
 
 func _ready():
-	print("ready")
+	# print("ready")
 	init()
 	#print(BaseLevel.instantiate().DATA[chapter_id])
 	# print(chapter_num)

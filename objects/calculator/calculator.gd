@@ -93,7 +93,7 @@ func infix_to_suffix(expr: String) -> String:
 			
 			
 			
-		print("ch=", ch, " stk=", opt_stack, " res=", res)
+		#print("ch=", ch, " stk=", opt_stack, " res=", res)
 		if get_char_type(ch) == VAL:
 			res += ch
 		elif ch == "(":
@@ -119,8 +119,8 @@ func infix_to_suffix(expr: String) -> String:
 
 	if get_char_type(res[len(res) - 1]) == COMP:
 		res += "@"
+	#prints(expr, res)
 	
-	prints(expr, res)
 	return res
 	
 
@@ -192,12 +192,13 @@ func check_valid(expr: String) -> Array:
 	
 ## 判断表达式 expr 是否满足笑脸要求。
 ##
-## 合法返回 -1，否则返回不为笑脸的最小字符下标。
-func check_smile(expr: String, req_pos: Array) -> int:
+## 合法返回 []，否则返回不为笑脸的字符下标列表。
+func check_smile(expr: String, req_pos: Array) -> Array:
+	var res := []
 	for i in req_pos:
 		if (i == 0 or not is_smile(expr.substr(i - 1, 2))) and (i == len(expr) - 1 or not is_smile(expr.substr(i, 2))):
-			return i
-	return -1
+			res.append(i)
+	return res
 	
 	
 ## 判断表达式 expr 是否恒为真（不检查是否合法）。
@@ -209,7 +210,7 @@ func check_always_true(expr: String) -> Dictionary:
 	
 	# 中缀转后缀
 	expr = infix_to_suffix(expr)
-	print(expr)
+	#print(expr)
 	
 	for ch in expr:
 		if is_alpha(ch) and not var_names.has(ch):
@@ -243,7 +244,7 @@ func check(expr: String, req_pos: Array) -> Array:
 	
 	# 判断笑脸要求
 	tmp = check_smile(expr, req_pos)
-	if tmp != -1:
+	if tmp != []:
 		return ["SMILE_UNSATISFIED", tmp]
 	
 	# 判断是否恒为正

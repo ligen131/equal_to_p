@@ -43,7 +43,7 @@ func _ready():
 		x_offset += $Timer.wait_time * VELOCITY.x
 		x_offset -= int(x_offset / W_STEP) * W_STEP
 		y_offset += $Timer.wait_time * VELOCITY.y
-		print(y_offset)
+		# print(y_offset)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
