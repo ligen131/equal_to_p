@@ -16,7 +16,11 @@ var last_occupied_area: Block
 var is_card_base_entered = 0
 var entered_card_base_global_position: Vector2
 
-var is_victory = false
+var is_victory := false
+
+var shake_amount : float
+var is_shaking := false
+
 
 func _ready():
 	origin_global_position = global_position
@@ -81,13 +85,19 @@ func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
 			reset_position()
 
 func _process(delta: float) -> void:
-	#prints(name, global_position)
 	if not have_deal_on_mouse_release and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		_on_mouse_release()
 	if is_dragging:
 		have_deal_on_mouse_release = false
 		global_position = get_global_mouse_position().round()
 		Input.set_default_cursor_shape(Input.CURSOR_DRAG)
+		
+	var offset := 0
+	if is_shaking:
+		var progress = $ShakeTimer.time_left / $ShakeTimer.wait_time * 2 * PI
+		offset = int(sin(progress) * shake_amount)
+	$CardBackSprite.position.x = offset
+	$Word.position.x = offset 
 
 func on_card_entered(area: Block) -> void:
 	is_card_entered += 1
@@ -113,6 +123,20 @@ func get_word() -> String:
 	return $Word.get_word()
 
 
+func shake(is_letter_red: bool, amount: float, duration: float) -> void:
+	$ShakeTimer.wait_time = duration
+	shake_amount = amount
+
+	# 开启震动
+	$ShakeTimer.start()
+	is_shaking = true
+	
+	
+	if is_letter_red:
+		$Word.set_color_from_name("red")
+	else:
+		$CardBackSprite.animation = "default"
+
 
 
 func _on_mouse_entered():
@@ -123,5 +147,18 @@ func _on_mouse_exited():
 	$CardBackSprite.animation = "default"
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
+func set_color_from_name(name: String) -> void:
+	$Word.set_color_from_name(name)
+
+func set_color(value: Color) -> void:
+	$Word.set_color(value)
+
+
 func set_victory(v: bool):
-	$Word.set_victory(v)
+	if v:
+		$CollisionShape2D.set_deferred("disabled", true)
+
+
+func _on_shake_timer_timeout():
+	is_shaking = false
+	$Word.set_color_from_name("default")

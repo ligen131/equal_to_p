@@ -18,5 +18,10 @@ func _process(delta):
 		queue_free()
 
 func _on_victory_change(v: bool):
-	$Word1.set_victory(v)
-	$Word2.set_victory(v)
+	if v:
+		$Word1.set_color_from_name("golden")
+		$Word2.set_color_from_name("golden")
+	else:
+		$Word1.set_color_from_name("default")
+		$Word2.set_color_from_name("default")
+

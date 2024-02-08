@@ -55,5 +55,10 @@ autoplay = "default"
 stream = ExtResource("7_u4ylf")
 volume_db = 13.117
 
+[node name="ShakeTimer" type="Timer" parent="."]
+wait_time = 100.0
+one_shot = true
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]

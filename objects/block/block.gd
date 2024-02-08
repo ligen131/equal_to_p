@@ -3,32 +3,31 @@ extends Area2D
 class_name Block
 
 
-const SHAKE_AMOUNT := 4
+const SHAKE_AMOUNT := 3.0 ## 振动时的振幅（单位为像素）。
 
 
-var occupied := false
-var occupied_word: String
-var occupied_card: Card
+var occupied := false ## 当 Block 上有 Card 或 Block 字符固定时，occupied 为 true。
+var occupied_word := "_" ## Block 上的字符，若没有字符则为 _ 。
+var occupied_card: Card = null
 
-var quest_pos := -1
-var is_shaking := false
+var quest_pos := -1 ## 在表达式中对应字符位置的下标。
+var is_shaking := false ## 是否正在振动。
+
 
 
 func _on_area_entered(area: Card):
-	#prints("Entered", self, name)
 	if not occupied:
 		area.on_card_entered(self)
 
 func _on_area_exited(area: Card):
-	#prints("Exited", self, name)
 	if not occupied:
 		area.on_card_exited()
 
-func set_word(e: String) -> void:
-	$Word.set_word(e)
-	if e != "_" and e != ".":
+func set_word(value: String) -> void:
+	$Word.set_word(value)
+	if value != "_" and value != ".":
 		occupied = true
-		occupied_word = e
+		occupied_word = value
 	else:
 		occupied = false
 		occupied_word = "_"
@@ -63,15 +62,33 @@ func _process(_delta):
 	$Word.position.x = offset 
 
 
-func shake():
+## 开始震动。
+## is_frame_red 表示是否将框改为红色。
+func shake(is_frame_red: bool) -> void: 
+	# 开启震动
 	$ShakeTimer.start()
 	is_shaking = true
-
-func _on_shake_timer_timeout():
-	is_shaking = false
 	
-func set_victory(v: bool):
-	if occupied and occupied_card:
+	# 使附着的卡牌也震动
+	if occupied_card != null:
+		occupied_card.shake(not is_frame_red, SHAKE_AMOUNT, $ShakeTimer.wait_time) # 若框不红，则里面的字要红
+	elif not is_frame_red:
+		$Word.set_color_from_name("red")
+	
+	if is_frame_red:
+		$GoalFrameSprite.animation = "red"
+	
+func _on_shake_timer_timeout() -> void:
+	is_shaking = false
+	$GoalFrameSprite.animation = "default"
+	$Word.set_color_from_name("default")
+	
+func set_victory(v: bool) -> void:
+	if v and occupied_card != null:
 		occupied_card.set_victory(v)
+
+func set_color_from_name(name: String) -> void:
+	if occupied_card != null:
+		occupied_card.set_color_from_name(name)
 	else:
-		$Word.set_victory(v)
+		$Word.set_color_from_name("golden")	
