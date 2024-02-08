@@ -21,14 +21,15 @@ const I_NUMBER = ["I","II","III","VI","V"]
 
 const DATA := [
 	[
-		["=P", "P {} {}", "= P"],
-		["P", "P [] {}", "= P P"],
-		["=D", "D {} {}", "= D P"],
-		["Reverse", "{} {} []", "d d = P P D D"]
+		["=P", "P [] []", "= P"],
+		["Make a Smile", "P {} {}", "= P P"],
+		["=D", "[] {} {}", "P = D D"],
+		["Reversed", "{} [] []", "D D = d d"],
+		["Watch Out the Direction", "[] {} {}", "d d = R R b b"],
 	],
 	[
-		["False", "[] [] 0 {} {}", "= + P P"],
-		["True", "[] {} {} [] 1", "= + P 1"],
+		["0+0=0, 1+0=1", "[] [] {} {} d", "= + 0 d"],
+		["1+1=1", "[] [] {} {} 1", "= + d 1"],
 		["Swap", "Q + [] = {} + []", "P P P P Q Q Q Q"],
 		["Always True", "1 [] {} = {} [] []", "1++PPdd"],
 		["Make Me Laugh", "1 {} {} = []", "XDD"],
@@ -123,7 +124,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 		$Blocks.add_child(new_block)
 	
 	expr = question
-	print(expr)
+	# print(expr)
 	
 	
 	pos = WIDTH / 2 - CARDS_SEP * len(choices) / 2 + 16
@@ -151,7 +152,7 @@ func _process(_delta):
 func stage_clear() -> void:
 	$SFXs/LevelClear.play()
 	for card_base: CardBase in $CardBases.get_children():
-		card_base.call("set_victory")
+		card_base.set_victory()
 		
 	$HUDs/TableCloth/GoldenCloth.set_visible(true)
 	$HUDs/NextLevelButton.start_fade()
@@ -161,17 +162,17 @@ func _on_card_put() -> void:
 	var block_array = []
 	for block : Block in $Blocks.get_children():
 		if not block.occupied:
-			print(block.quest_pos, " is not occupied")
+			# print(block.quest_pos, " is not occupied")
 			return
 		expr[block.quest_pos] = block.occupied_word
 		block_array.append(block)
 		
-	prints("# expr: ", expr)
+	# prints("# expr: ", expr)
 	
 	if expr.count("_") == 0:
 		var info = $Calculator.check(expr, req_pos)
-		prints("expr:", expr)
-		prints("info:", info)
+		# prints("expr:", expr)
+		# prints("info:", info)
 		
 		if info[0] != "OK":
 			$SFXs/WrongAnswer.play()
@@ -179,25 +180,26 @@ func _on_card_put() -> void:
 		if info[0] == "INVALID":
 			for block: Block in $Blocks.get_children():
 				if block.quest_pos in info[1]:
-					block.call("shake")
+					block.shake(false)
 		elif info[0] == "SMILE_UNSATISFIED":
 			for block: Block in $Blocks.get_children():
-				if block.quest_pos == info[1]:
-					block.call("shake")
+				if block.quest_pos in info[1]:
+					block.shake(true)
 		elif info[0] == "NOT_ALWAYS_TRUE":
 			for block: Block in $Blocks.get_children():
-				block.call("shake")
+				block.shake(false)
 		else:
 			# victory
 			get_tree().current_scene.set_victory(true)
 			stage_clear()
-			print(block_array)
+			# print(block_array)
 			for i in range(len(block_array)):
 				if i != 0:
 					if $Calculator.is_smile(expr[i-1]+expr[i]):
 						print(expr[i-1]+expr[i])
-						block_array[i-1].set_victory(true)
-						block_array[i].set_victory(true)
+						# print(expr[i-1]+expr[i])
+						block_array[i-1].set_color_from_name("golden")
+						block_array[i].set_color_from_name("golden")
 
 func _input(event: InputEvent):
 	if event is InputEventKey:
