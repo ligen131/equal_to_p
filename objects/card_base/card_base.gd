@@ -73,6 +73,9 @@ func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
 
 func set_word(e: String) -> void:
 	$Word.set_word(e)
+	
+func get_word() -> String:
+	return $Word.get_word()
 
 func _on_card_put():
 	emit_signal("card_put")
@@ -85,7 +88,7 @@ func set_victory() -> void:
 	$Label.set_visible(false)
 	
 	for card: Card in $Cards.get_children():
-		card.is_victory = true
+		card.set_victory(true)
 
 func reset_all_card_position():
 	for card: Card in $Cards.get_children():
