@@ -7,15 +7,7 @@ signal enter_chapter(chapter_id:int, level_num : int)
 var lvl_id = 0	# 如果 type = 0 那么 lvl_id 表示的是该章节的关卡数 lvl_num
 var chap_id = 0
 var button_type = 0 # type = 0 表示为选择章节的按钮， type = 1 表示为选择关卡的按钮
-# Called when the node enters the scene tree for the first time.
 
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func set_word(value: String) -> void:
 	$Word.set_word(value)

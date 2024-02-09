@@ -66,7 +66,7 @@ func _on_area_exited(area: Card):
 	if area.get_word() == $Word.get_word():
 		area.on_card_base_exited()
 	
-func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
+func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 			draw_card()
@@ -94,7 +94,7 @@ func reset_all_card_position():
 	for card: Card in $Cards.get_children():
 		card.reset_position()
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	if fade_flag:
 		var offset = $FadeTimer.time_left / $FadeTimer.wait_time
 		offset = (1 - pow(offset, 1.5)) * FADE_MOVE_AMOUNT

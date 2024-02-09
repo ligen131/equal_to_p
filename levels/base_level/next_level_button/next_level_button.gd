@@ -16,7 +16,6 @@ func _ready():
 	position = Vector2(WIDTH / 2 - 20, HEIGHT + 80)
 	$Word.set_word(">")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if fade_flag:
 		position.y = HEIGHT + 50    - 120 * (1 - pow($FadeTimer.time_left / $FadeTimer.wait_time, 1.5))

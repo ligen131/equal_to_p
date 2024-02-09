@@ -32,10 +32,6 @@ func _ready():
 	# print(chapter_num)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _is_choose_chapter(chapter_id : int, level_num : int):
 	var level_menu = LevelMenu.instantiate()
 	level_menu.init(chapter_id, level_num)
