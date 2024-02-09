@@ -1,11 +1,14 @@
 extends Node
 
 
-const Block := preload("res://objects/block/block.tscn")
-const CardBase := preload("res://objects/card_base/card_base.tscn")
-const LevelMenu := preload("res://levels/chapter_menu/level_menu/level_menu.tscn")
-const TableCloth := preload("res://objects/table_cloth/table_cloth.tscn")
-const BaseLevel := preload("res://levels/base_level/base_level.tscn")
+# FIXME
+# 由于 Godot preload 容易出错，此处改为 load
+var Block = load("res://objects/block/block.tscn")
+var CardBase = load("res://objects/card_base/card_base.tscn")
+var LevelMenu = load("res://levels/chapter_menu/level_menu/level_menu.tscn")
+var TableCloth = load("res://objects/table_cloth/table_cloth.tscn")
+var BaseLevel = load("res://levels/base_level/base_level.tscn")
+
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
 const SEP := 28
@@ -104,7 +107,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	for i in range(len(question)):
 		var ch = question[i]
 		
-		var new_block := Block.instantiate()
+		var new_block = Block.instantiate()
 
 		new_block.quest_pos = i
 		if ch != "." and ch != "_":
@@ -129,7 +132,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	
 	pos = WIDTH / 2 - CARDS_SEP * len(choices) / 2 + 16
 	for ch in choices:
-		var new_card_base := CardBase.instantiate()
+		var new_card_base = CardBase.instantiate()
 
 		new_card_base.set_word(ch)
 		
@@ -221,11 +224,11 @@ func _on_back_button_pressed():
 
 func _on_next_level_button_pressed():
 	if lvl_id == len(DATA[chap_id]) - 1:
-		var level_menu := LevelMenu.instantiate()
+		var level_menu = LevelMenu.instantiate()
 		level_menu.init(chap_id + 1, -1)
 		get_tree().root.add_child(level_menu)
 	else:
-		var base_level := BaseLevel.instantiate()
+		var base_level = BaseLevel.instantiate()
 		base_level.init(chap_id, lvl_id + 1)
 		get_tree().root.add_child(base_level)
 	queue_free()
