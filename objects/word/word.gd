@@ -56,18 +56,8 @@ func _ready():
 	
 
 
-func _process(delta):
+func _process(_delta):
 	update_animation()
-		
-func set_color_from_name(name: String) -> void:
-	if name == "red":
-		set_color(Color("#DD4132"))
-	elif name == "golden":
-		set_color(Color("#F5DF4D"))
-	elif name == "default":
-		set_color(Color.BLACK)
-	else:
-		assert(false, "color %s not in list" % name)
 
 func set_color(value: Color) -> void:
 	color = value
@@ -79,19 +69,12 @@ func set_color(value: Color) -> void:
 func set_victory(v: bool) -> void:
 	push_warning("void set_victory(v: bool) is deprecated.")
 	if v:
-		set_color_from_name("golden")
+		set_color(ImageLib.PALETTE["golden"])
 	else:
-		set_color_from_name("default")
+		set_color(ImageLib.PALETTE["default"])
 		
 func load_image(h: int, new_color: Color):
 	var image := load("res://objects/word/sprites/sprite" + str(h) + ".png")
 	if new_color != Color.BLACK:
-		var new_texture = image.get_image()
-		for x in range(new_texture.get_width()):
-			for y in range(new_texture.get_height()):
-				var color = new_texture.get_pixel(x, y)
-				if color == Color.BLACK:  # 如果像素是黑色
-					new_texture.set_pixel(x, y, new_color)  # 将其改为金黄色
-		return ImageTexture.create_from_image(new_texture)
-		
+		return ImageLib.change_color(image, Color.BLACK, new_color)
 	return image

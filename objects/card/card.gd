@@ -73,7 +73,7 @@ func _on_mouse_pressed():
 	is_card_base_entered = 0
 	
 
-func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
+func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void:
 	#prints(self, event)
 	if not is_victory and event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
@@ -84,7 +84,7 @@ func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
 			reset_position()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not have_deal_on_mouse_release and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		_on_mouse_release()
 	if is_dragging:
@@ -133,7 +133,7 @@ func shake(is_letter_red: bool, amount: float, duration: float) -> void:
 	
 	
 	if is_letter_red:
-		$Word.set_color_from_name("red")
+		$Word.set_color(ImageLib.PALETTE["red"])
 	else:
 		$CardBackSprite.animation = "default"
 
@@ -147,9 +147,6 @@ func _on_mouse_exited():
 	$CardBackSprite.animation = "default"
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
-func set_color_from_name(name: String) -> void:
-	$Word.set_color_from_name(name)
-
 func set_color(value: Color) -> void:
 	$Word.set_color(value)
 
@@ -161,4 +158,4 @@ func set_victory(v: bool):
 
 func _on_shake_timer_timeout():
 	is_shaking = false
-	$Word.set_color_from_name("default")
+	$Word.set_color(ImageLib.PALETTE["default"])

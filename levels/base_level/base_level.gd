@@ -1,13 +1,16 @@
 extends Node
 
 
+class_name BaseLevel
+
 # FIXME
 # 由于 Godot preload 容易出错，此处改为 load
-var Block = load("res://objects/block/block.tscn")
-var CardBase = load("res://objects/card_base/card_base.tscn")
-var LevelMenu = load("res://levels/chapter_menu/level_menu/level_menu.tscn")
-var TableCloth = load("res://objects/table_cloth/table_cloth.tscn")
-var BaseLevel = load("res://levels/base_level/base_level.tscn")
+var BlockScn = load("res://objects/block/block.tscn")
+var CardBaseScn = load("res://objects/card_base/card_base.tscn")
+var LevelMenuScn = load("res://levels/chapter_menu/level_menu/level_menu.tscn")
+var TableClothScn = load("res://objects/table_cloth/table_cloth.tscn")
+var BaseLevelScn = load("res://levels/base_level/base_level.tscn")
+
 
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
@@ -87,7 +90,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	question = question.replace("{}", "_")
 		
 	
-	var table_cloth = TableCloth.instantiate()
+	var table_cloth = TableClothScn.instantiate()
 	var sep := SEP
 	
 	if len(question) >= 16:
@@ -107,7 +110,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	for i in range(len(question)):
 		var ch = question[i]
 		
-		var new_block = Block.instantiate()
+		var new_block = BlockScn.instantiate()
 
 		new_block.quest_pos = i
 		if ch != "." and ch != "_":
@@ -132,7 +135,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	
 	pos = WIDTH / 2 - CARDS_SEP * len(choices) / 2 + 16
 	for ch in choices:
-		var new_card_base = CardBase.instantiate()
+		var new_card_base = CardBaseScn.instantiate()
 
 		new_card_base.set_word(ch)
 		
@@ -173,7 +176,7 @@ func _on_card_put() -> void:
 	# prints("# expr: ", expr)
 	
 	if expr.count("_") == 0:
-		var info = $Calculator.check(expr, req_pos)
+		var info = ExprValidator.check(expr, req_pos)
 		# prints("expr:", expr)
 		# prints("info:", info)
 		
@@ -198,11 +201,11 @@ func _on_card_put() -> void:
 			# print(block_array)
 			for i in range(len(block_array)):
 				if i != 0:
-					if $Calculator.is_smile(expr[i-1]+expr[i]):
+					if ExprValidator.is_smile(expr[i-1]+expr[i]):
 						print(expr[i-1]+expr[i])
 						# print(expr[i-1]+expr[i])
-						block_array[i-1].set_color_from_name("golden")
-						block_array[i].set_color_from_name("golden")
+						block_array[i-1].set_color(ImageLib.PALETTE["golden"])
+						block_array[i].set_color(ImageLib.PALETTE["golden"])
 
 func _input(event: InputEvent):
 	if event is InputEventKey:
@@ -217,24 +220,24 @@ func _exit_tree():
 
 
 func _on_back_button_pressed():
-	var level_menu = LevelMenu.instantiate()
+	var level_menu = LevelMenuScn.instantiate()
 	level_menu.init(chap_id, -1)
 	get_tree().root.add_child(level_menu)
 	queue_free()
 
 func _on_next_level_button_pressed():
 	if lvl_id == len(DATA[chap_id]) - 1:
-		var level_menu = LevelMenu.instantiate()
+		var level_menu = LevelMenuScn.instantiate()
 		level_menu.init(chap_id + 1, -1)
 		get_tree().root.add_child(level_menu)
 	else:
-		var base_level = BaseLevel.instantiate()
+		var base_level = BaseLevelScn.instantiate()
 		base_level.init(chap_id, lvl_id + 1)
 		get_tree().root.add_child(base_level)
 	queue_free()
 	
 func _on_replay_button_pressed():
-	var new_level = BaseLevel.instantiate()
+	var new_level = BaseLevelScn.instantiate()
 	new_level.init(chap_id, lvl_id)
 	get_tree().root.add_child(new_level)
 	queue_free()

@@ -19,9 +19,9 @@ func _process(delta):
 
 func _on_victory_change(v: bool):
 	if v:
-		$Word1.set_color_from_name("golden")
-		$Word2.set_color_from_name("golden")
+		$Word1.set_color(ImageLib.PALETTE["golden"])
+		$Word2.set_color(ImageLib.PALETTE["golden"])
 	else:
-		$Word1.set_color_from_name("default")
-		$Word2.set_color_from_name("default")
+		$Word1.set_color(ImageLib.PALETTE["default"])
+		$Word2.set_color(ImageLib.PALETTE["default"])
 

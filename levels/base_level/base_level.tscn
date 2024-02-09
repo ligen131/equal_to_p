@@ -1,7 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://cother2aiigge"]
+[gd_scene load_steps=15 format=3 uid="uid://cother2aiigge"]
 
 [ext_resource type="Script" path="res://levels/base_level/base_level.gd" id="1_diojb"]
-[ext_resource type="PackedScene" uid="uid://xom5kpqs1rue" path="res://objects/calculator/calculator.tscn" id="1_tpuy7"]
 [ext_resource type="PackedScene" uid="uid://bepyyenjtc0p3" path="res://levels/chapter_menu/level_menu/level_button/level_button.tscn" id="2_0egdl"]
 [ext_resource type="PackedScene" uid="uid://d1mp3ld6wsrwo" path="res://levels/base_level/next_level_button/next_level_button.tscn" id="2_0363i"]
 [ext_resource type="Texture2D" uid="uid://bxda1ilvqwc6f" path="res://objects/styled_button/return1.png" id="3_4xtpo"]
@@ -81,8 +80,6 @@ position = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_5hm0m")
 animation = &"replay"
 centered = false
-
-[node name="Calculator" parent="." instance=ExtResource("1_tpuy7")]
 
 [node name="Cards" type="Node" parent="."]
 

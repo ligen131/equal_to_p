@@ -31,3 +31,5 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_3n85j")
 autoplay = "default"
 script = ExtResource("1_lkxlh")
+text_id = null
+color = null

@@ -73,7 +73,7 @@ func shake(is_frame_red: bool) -> void:
 	if occupied_card != null:
 		occupied_card.shake(not is_frame_red, SHAKE_AMOUNT, $ShakeTimer.wait_time) # 若框不红，则里面的字要红
 	elif not is_frame_red:
-		$Word.set_color_from_name("red")
+		$Word.set_color(ImageLib.PALETTE["red"])
 	
 	if is_frame_red:
 		$GoalFrameSprite.animation = "red"
@@ -81,14 +81,14 @@ func shake(is_frame_red: bool) -> void:
 func _on_shake_timer_timeout() -> void:
 	is_shaking = false
 	$GoalFrameSprite.animation = "default"
-	$Word.set_color_from_name("default")
+	$Word.set_color(ImageLib.PALETTE["default"])
 	
 func set_victory(v: bool) -> void:
 	if v and occupied_card != null:
 		occupied_card.set_victory(v)
 
-func set_color_from_name(name: String) -> void:
+func set_color(value: Color) -> void:
 	if occupied_card != null:
-		occupied_card.set_color_from_name(name)
+		occupied_card.set_color(value)
 	else:
-		$Word.set_color_from_name("golden")	
+		$Word.set_color(value)	
