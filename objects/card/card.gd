@@ -25,6 +25,7 @@ var is_shaking := false
 func _ready():
 	origin_global_position = global_position
 	last_global_position = global_position
+	$HighlightSprite.visible = false
 
 func _on_mouse_release():
 	#prints(entered_area.name, is_card_entered, entered_area.occupied)
@@ -135,21 +136,21 @@ func shake(is_letter_red: bool, amount: float, duration: float) -> void:
 	if is_letter_red:
 		$Word.set_color(ImageLib.PALETTE["red"])
 	else:
-		$CardBackSprite.animation = "default"
+		$HighlightSprite.visible = false
+
 
 
 
 func _on_mouse_entered():
-	$CardBackSprite.animation = "highlighted"
+	$HighlightSprite.visible = true
 	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 func _on_mouse_exited():
-	$CardBackSprite.animation = "default"
+	$HighlightSprite.visible = false
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 func set_color(value: Color) -> void:
 	$Word.set_color(value)
-
 
 func set_victory(v: bool):
 	if v:
