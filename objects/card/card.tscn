@@ -5,10 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cfbqh1k0etr6g" path="res://objects/card/card1.png" id="3_o4f0v"]
 [ext_resource type="Texture2D" uid="uid://c8qjbksyn1bqt" path="res://objects/card/card2.png" id="4_c30j1"]
 [ext_resource type="Texture2D" uid="uid://bevrfq1hhyqwe" path="res://objects/card/card3.png" id="5_w81n3"]
-[ext_resource type="Texture2D" uid="uid://cmcc5xrpkrd0f" path="res://objects/card/card_highlighted.png" id="6_po2i6"]
+[ext_resource type="Texture2D" uid="uid://pmapbo480in1" path="res://objects/card/card_highlight_border.png" id="7_kix4t"]
 [ext_resource type="AudioStream" uid="uid://cj4v8ehypq3sk" path="res://objects/card/put_down.wav" id="7_u4ylf"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu6l6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fo0r0"]
 animations = [{
@@ -25,15 +23,9 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_po2i6")
-}],
-"loop": true,
-"name": &"highlighted",
-"speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu6l6"]
 
 [node name="Card" type="Area2D"]
 z_index = 50
@@ -41,17 +33,16 @@ script = ExtResource("1_0bviv")
 
 [node name="Word" parent="." instance=ExtResource("1_ns36n")]
 z_index = 1
-frame_progress = 0.111549
-text_id = 1
-color = Color(0, 0, 0, 1)
+
+[node name="CardBackSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fo0r0")
+
+[node name="HighlightSprite" type="Sprite2D" parent="."]
+texture = ExtResource("7_kix4t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 15
 shape = SubResource("RectangleShape2D_gu6l6")
-
-[node name="CardBackSprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_fo0r0")
-autoplay = "default"
 
 [node name="SFXPutDown" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_u4ylf")

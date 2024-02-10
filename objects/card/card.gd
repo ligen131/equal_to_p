@@ -25,6 +25,7 @@ var is_shaking := false
 func _ready():
 	origin_global_position = global_position
 	last_global_position = global_position
+	$HighlightSprite.visible = false
 
 func _on_mouse_release():
 	#prints(entered_area.name, is_card_entered, entered_area.occupied)
@@ -97,6 +98,7 @@ func _process(_delta: float) -> void:
 		var progress = $ShakeTimer.time_left / $ShakeTimer.wait_time * 2 * PI
 		offset = int(sin(progress) * shake_amount)
 	$CardBackSprite.position.x = offset
+	$HighlightSprite.position.x = offset
 	$Word.position.x = offset 
 
 func on_card_entered(area: Block) -> void:
@@ -116,8 +118,17 @@ func on_card_base_exited() -> void:
 	is_card_base_entered -= 1
 	#print(is_card_entered)
 
-func set_word(e: String) -> void:
-	$Word.set_word(e)
+func set_word(value: String) -> void:
+	$Word.set_word(value)
+	var card_type := "card-%s" % ExprValidator.get_char_type_as_str(get_word()).to_lower()
+	if ImageLib.PALETTE.has(card_type):
+		ImageLib.update_animation(
+			$CardBackSprite, 1, 3, 1, "res://objects/card/card%d.png", 
+			ImageLib.PALETTE["lightblue"], ImageLib.PALETTE[card_type]
+		)
+	print($CardBackSprite.animation)
+	print($CardBackSprite.sprite_frames.animations)
+	
 
 func get_word() -> String:
 	return $Word.get_word()
@@ -135,21 +146,21 @@ func shake(is_letter_red: bool, amount: float, duration: float) -> void:
 	if is_letter_red:
 		$Word.set_color(ImageLib.PALETTE["red"])
 	else:
-		$CardBackSprite.animation = "default"
+		$HighlightSprite.visible = false
+
 
 
 
 func _on_mouse_entered():
-	$CardBackSprite.animation = "highlighted"
+	$HighlightSprite.visible = true
 	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 func _on_mouse_exited():
-	$CardBackSprite.animation = "default"
+	$HighlightSprite.visible = false
 	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 func set_color(value: Color) -> void:
 	$Word.set_color(value)
-
 
 func set_victory(v: bool):
 	if v:

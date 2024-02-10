@@ -48,7 +48,7 @@ const IS_PAIR_VALID := [
 	[1, 1, 1, 1, 0, 0]
 ]
 
-enum {OP, COMP, BRAC_L, BRAC_R, VAR, CONST}
+enum {OP, COMP, BRACL, BRACR, VAR, CONST}
 
 
 static func get_char_type(ch: String) -> int:
@@ -57,16 +57,40 @@ static func get_char_type(ch: String) -> int:
 	elif ch == "<" or ch == "=" or ch == ">":
 		return COMP
 	elif ch == "(":
-		return BRAC_L
+		return BRACL
 	elif ch == ")":
-		return BRAC_R
+		return BRACR
 	elif ch == "0" or ch == "1":
 		return CONST
-	else:
+	elif is_alpha(ch):
 		return VAR
+	else:
+		push_error("get_char_type(%s) is undefined" % ch)
+		return -1
+	
+static func get_char_type_enum_name(value: int) -> String:
+	if value == OP:
+		return "OP"
+	elif value == COMP:
+		return "COMP"
+	elif value == BRACL:
+		return "BRACL"
+	elif value == BRACR:
+		return "BRACR"
+	elif value == VAR:
+		return "VAR"
+	elif value == CONST:
+		return "CONST"
+	else:
+		push_error("get_char_type_enum_name(%d) is undefined" % value)
+		return "ERR"
 
+static func get_char_type_as_str(ch: String) -> String:
+	return get_char_type_enum_name(get_char_type(ch))
+	
+	
 static func has_implict_prod(string: String) -> bool:
-	return get_char_type(string[0]) in [BRAC_R, VAR, CONST] and get_char_type(string[1]) in [BRAC_L, VAR, CONST]
+	return get_char_type(string[0]) in [BRACR, VAR, CONST] and get_char_type(string[1]) in [BRACL, VAR, CONST]
 	
 static func get_priority(ch: String) -> int:
 	if ch == "*":
@@ -175,9 +199,9 @@ static func calculate_value(expr: String, var_values: Dictionary) -> bool:
 ##
 ## 合法返回 []，否则返回不合法的下标。
 static func check_valid(expr: String) -> Array:
-	if get_char_type(expr[0]) != BRAC_L and get_char_type(expr[0]) not in [VAR, CONST]:
+	if get_char_type(expr[0]) != BRACL and get_char_type(expr[0]) not in [VAR, CONST]:
 		return [0]
-	if get_char_type(expr[len(expr) - 1]) != BRAC_R and get_char_type(expr[len(expr) - 1]) not in [VAR, CONST]:
+	if get_char_type(expr[len(expr) - 1]) != BRACR and get_char_type(expr[len(expr) - 1]) not in [VAR, CONST]:
 		return [len(expr) - 1]
 	for i in range(len(expr) - 1):
 		if not IS_PAIR_VALID[get_char_type(expr[i])][get_char_type(expr[i + 1])]:

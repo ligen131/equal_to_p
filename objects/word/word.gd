@@ -30,12 +30,7 @@ func set_text_id(value: int) -> void:
 	update_animation()
 
 func update_animation() -> void:
-	var animation_id = str(text_id) + color.to_html()
-	if not sprite_frames.has_animation(animation_id):
-		sprite_frames.add_animation(animation_id)
-		for i in range(3):
-			sprite_frames.add_frame(animation_id, load_image(i * STEP + text_id + 1, color))
-	animation = animation_id
+	ImageLib.update_animation(self, text_id + 1, 3, STEP, "res://objects/word/sprites/sprite%d.png", Color.BLACK, color)
 	
 	
 
@@ -53,11 +48,6 @@ func get_word() -> String:
 
 func _ready():
 	update_animation()
-	
-
-
-func _process(_delta):
-	update_animation()
 
 func set_color(value: Color) -> void:
 	color = value
@@ -72,9 +62,3 @@ func set_victory(v: bool) -> void:
 		set_color(ImageLib.PALETTE["golden"])
 	else:
 		set_color(ImageLib.PALETTE["default"])
-		
-func load_image(h: int, new_color: Color):
-	var image := load("res://objects/word/sprites/sprite" + str(h) + ".png")
-	if new_color != Color.BLACK:
-		return ImageLib.change_color(image, Color.BLACK, new_color)
-	return image
