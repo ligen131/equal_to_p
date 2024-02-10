@@ -98,6 +98,7 @@ func _process(_delta: float) -> void:
 		var progress = $ShakeTimer.time_left / $ShakeTimer.wait_time * 2 * PI
 		offset = int(sin(progress) * shake_amount)
 	$CardBackSprite.position.x = offset
+	$HighlightSprite.position.x = offset
 	$Word.position.x = offset 
 
 func on_card_entered(area: Block) -> void:
