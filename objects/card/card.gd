@@ -13,8 +13,6 @@ var is_card_entered = 0
 var entered_area: Block
 var last_occupied_area: Block
 
-var cardback_color : Color
-
 var is_card_base_entered = 0
 var entered_card_base_global_position: Vector2
 
