@@ -11,6 +11,9 @@ signal card_put
 var fade_flag := false
 var mouse_on := false
 
+enum { DEFAULT, HIGHLIGHT, DISABLED}
+var available_stat := DEFAULT
+
 
 var card_count = 0
 var new_card_node: Card
@@ -25,11 +28,11 @@ func set_card_count(value):
 	card_count = value
 	if card_count > 0:
 		if mouse_on:
-			$AnimatedSprite2D.animation = "highlighted"
+			available_stat = HIGHLIGHT
 		else:
-			$AnimatedSprite2D.animation = "default"
+			available_stat = DEFAULT
 	else:
-		$AnimatedSprite2D.animation = "disabled"
+		available_stat = DISABLED
 	update_card_count_label()
 
 
@@ -74,6 +77,11 @@ func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void
 func set_word(e: String) -> void:
 	$Word.set_word(e)
 	
+	var card_type := "card-%s" % ExprValidator.get_char_type_as_str(e).to_lower()
+	if ImageLib.PALETTE.has(card_type):
+		ImageLib.update_animation($CardBaseSprite, 1, 1, 1, "res://objects/card_base/card_base%d.png", 
+								  ImageLib.PALETTE["lightblue"], ImageLib.PALETTE[card_type])
+	
 func get_word() -> String:
 	return $Word.get_word()
 
@@ -98,18 +106,23 @@ func _process(_delta) -> void:
 	if fade_flag:
 		var offset = $FadeTimer.time_left / $FadeTimer.wait_time
 		offset = (1 - pow(offset, 1.5)) * FADE_MOVE_AMOUNT
-		$AnimatedSprite2D.position.y = offset
+		$CardBaseSprite.position.y = offset
+		$HighlightSprite.position.y = offset
+		$DisabledSprite.position.y = offset
 		$Word.position.y = offset
+	
+	$HighlightSprite.visible = (available_stat == HIGHLIGHT)
+	$DisabledSprite.visible = (available_stat == DISABLED)
 
 
 func _on_mouse_entered():
 	mouse_on = true
-	if $AnimatedSprite2D.animation == "default":
-		$AnimatedSprite2D.animation = "highlighted"	
+	if available_stat == DEFAULT:
+		available_stat = HIGHLIGHT
 		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 func _on_mouse_exited():
 	mouse_on = false
-	if $AnimatedSprite2D.animation == "highlighted":
-		$AnimatedSprite2D.animation = "default"
+	if available_stat == HIGHLIGHT:
+		available_stat = DEFAULT
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
