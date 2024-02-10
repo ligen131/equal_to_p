@@ -13,6 +13,8 @@ var is_card_entered = 0
 var entered_area: Block
 var last_occupied_area: Block
 
+var cardback_color : Color
+
 var is_card_base_entered = 0
 var entered_card_base_global_position: Vector2
 
@@ -117,8 +119,17 @@ func on_card_base_exited() -> void:
 	is_card_base_entered -= 1
 	#print(is_card_entered)
 
-func set_word(e: String) -> void:
-	$Word.set_word(e)
+func set_word(value: String) -> void:
+	$Word.set_word(value)
+	var card_type := "card-%s" % ExprValidator.get_char_type_as_str(get_word()).to_lower()
+	if ImageLib.PALETTE.has(card_type):
+		ImageLib.update_animation(
+			$CardBackSprite, 1, 3, 1, "res://objects/card/card%d.png", 
+			ImageLib.PALETTE["lightblue"], ImageLib.PALETTE[card_type]
+		)
+	print($CardBackSprite.animation)
+	print($CardBackSprite.sprite_frames.animations)
+	
 
 func get_word() -> String:
 	return $Word.get_word()

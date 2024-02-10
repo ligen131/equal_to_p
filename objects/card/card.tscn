@@ -33,13 +33,9 @@ script = ExtResource("1_0bviv")
 
 [node name="Word" parent="." instance=ExtResource("1_ns36n")]
 z_index = 1
-frame_progress = 0.111549
-text_id = 1
-color = Color(0, 0, 0, 1)
 
 [node name="CardBackSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fo0r0")
-autoplay = "default"
 
 [node name="HighlightSprite" type="Sprite2D" parent="."]
 texture = ExtResource("7_kix4t")
