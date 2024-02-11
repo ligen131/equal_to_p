@@ -126,8 +126,6 @@ func set_word(value: String) -> void:
 			$CardBackSprite, 1, 3, 1, "res://objects/card/card%d.png", 
 			ImageLib.PALETTE["lightblue"], ImageLib.PALETTE[card_type]
 		)
-	print($CardBackSprite.animation)
-	print($CardBackSprite.sprite_frames.animations)
 	
 
 func get_word() -> String:

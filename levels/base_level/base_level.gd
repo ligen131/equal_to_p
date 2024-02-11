@@ -202,7 +202,6 @@ func _on_card_put() -> void:
 			for i in range(len(block_array)):
 				if i != 0:
 					if ExprValidator.is_smile(expr[i-1]+expr[i]):
-						print(expr[i-1]+expr[i])
 						# print(expr[i-1]+expr[i])
 						block_array[i-1].set_color(ImageLib.PALETTE["golden"])
 						block_array[i].set_color(ImageLib.PALETTE["golden"])
