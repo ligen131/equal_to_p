@@ -2,7 +2,7 @@ extends Area2D
 
 class_name CardBase
 
-const Card := preload("res://objects/card/card.tscn")
+const CardScn := preload("res://objects/card/card.tscn")
 const FADE_MOVE_AMOUNT := 70
 
 signal card_put
@@ -42,7 +42,7 @@ func draw_card():
 	set_card_count(card_count - 1) 
 	$SFXPickUp.play()
 	Input.set_default_cursor_shape(Input.CURSOR_DRAG)
-	new_card_node = Card.instantiate()
+	new_card_node = CardScn.instantiate()
 	new_card_node.set_word($Word.get_word())
 	new_card_node.set_position(position)
 	$Cards.add_child(new_card_node)
