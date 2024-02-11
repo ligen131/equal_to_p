@@ -1,19 +1,23 @@
 [gd_scene load_steps=8 format=3 uid="uid://drl1xe103umpi"]
 
-[ext_resource type="Texture2D" uid="uid://cfbqh1k0etr6g" path="res://objects/card/card1.png" id="1_l6dpy"]
-[ext_resource type="Texture2D" uid="uid://cmcc5xrpkrd0f" path="res://objects/card/card_highlighted.png" id="2_j1sqk"]
+[ext_resource type="Texture2D" uid="uid://y5v6eoqttfkv" path="res://objects/styled_button/button.png" id="1_64thl"]
+[ext_resource type="Texture2D" uid="uid://dqoba5dcyefbj" path="res://objects/styled_button/button_highlighted.png" id="2_8xse4"]
 [ext_resource type="Script" path="res://objects/styled_button/styled_button.gd" id="3_rtcig"]
 [ext_resource type="AudioStream" uid="uid://dpwscp4bw7pay" path="res://objects/styled_button/button_down.wav" id="4_no3m1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c0uot"]
-texture = ExtResource("1_l6dpy")
+texture = ExtResource("1_64thl")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eifmj"]
-texture = ExtResource("2_j1sqk")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-texture_margin_bottom = 4.0
+texture = ExtResource("2_8xse4")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tfhr0"]
 
