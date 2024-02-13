@@ -75,3 +75,4 @@ volume_db = 9.58
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="child_exiting_tree" from="Cards" to="." method="_on_cards_child_exiting_tree"]
