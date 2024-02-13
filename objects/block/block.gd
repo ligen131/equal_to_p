@@ -3,39 +3,57 @@ extends Area2D
 class_name Block
 
 
+signal occupied_card_changed(block: Block) ## 当被占用的 Card 发生改变后发出。
+
+
 const SHAKE_AMOUNT := 3.0 ## 振动时的振幅（单位为像素）。
 
 
-var occupied := false ## 当 Block 上有 Card 或 Block 字符固定时，occupied 为 true。
-var occupied_word := "_" ## Block 上的字符，若没有字符则为 _ 。
-var occupied_card: Card = null
+var is_fixed : bool ## 是否为固定的（即在表达式中已初始化了的）。
+var occupied_card: Card = null ## 占用的 Card 对象。
 
 var quest_pos := -1 ## 在表达式中对应字符位置的下标。
 var is_shaking := false ## 是否正在振动。
 
 
+## 是否为空槽。
+func is_empty() -> bool:
+	return not self.is_fixed and self.occupied_card == null
 
-func _on_area_entered(area: Card):
-	if not occupied:
-		area.on_card_entered(self)
 
-func _on_area_exited(area: Card):
-	if not occupied:
-		area.on_card_exited()
-
-func set_word(value: String) -> void:
+## 设置固定的字符为 value。
+##
+## 应当只在 is_fixed 为 true 时被调用。
+func set_word(value: String) -> void:	
+	assert(self.is_fixed, "void Block::set_word(value: String) should only be called when is_fixed is true.")
 	$Word.set_word(value)
-	if value != "_" and value != ".":
-		occupied = true
-		occupied_word = value
-	else:
-		occupied = false
-		occupied_word = "_"
 
-func set_card(c: Card) -> void:
-	occupied_card = c
-	occupied_word = c.get_word()
+
+## 设置占用的 Card 为 card。
+##
+## 应当只在 is_fixed 为 false 时被调用。
+func set_card(card: Card) -> void:
+	assert(not self.is_fixed, "void Block::set_card(card: Card) should only be called when is_fixed is false.")
+	if self.occupied_card != card:
+		self.occupied_card = card
+		occupied_card_changed.emit(self)
 	
+
+## 获取当前字符。
+##
+## 当 is_fixed 为 true 时，从子节点 Word 返回固定的字符。
+##
+## 当 is_fixed 为 false 时，返回占用的 Card 的字符。
+func get_word() -> String:
+	if self.is_fixed:
+		return $Word.get_word()
+	else:
+		if self.occupied_card == null:
+			return " "
+		else:
+			return self.occupied_card.get_word()
+
+
 func set_block_type(value: String) -> void:
 	if value == "GOLDEN":
 		$GoalFrameSprite.set_visible(true)
@@ -46,20 +64,21 @@ func set_block_type(value: String) -> void:
 	else:
 		$GoalFrameSprite.set_visible(false)
 		$PitSprite.set_visible(false)
-		
+	
 
-func get_word() -> String:
-	return $Word.get_word()
+func set_victory(v: bool) -> void:
+	if v and not self.is_fixed and self.occupied_card != null:
+		self.occupied_card.set_victory(v)
+
+
+## 设置字符颜色为 value。
+func set_color(value: Color) -> void:
+	if self.is_fixed:
+		$Word.set_color(value)	
+	else:
+		if self.occupied_card != null:
+			self.occupied_card.set_color(value)
 	
-	
-func _process(_delta):
-	var offset := 0
-	if is_shaking:
-		var progress = $ShakeTimer.time_left / $ShakeTimer.wait_time * 2 * PI
-		offset = int(sin(progress) * SHAKE_AMOUNT)
-	$GoalFrameSprite.position.x = offset
-	$PitSprite.position.x = offset 
-	$Word.position.x = offset 
 
 
 ## 开始震动。
@@ -67,28 +86,31 @@ func _process(_delta):
 func shake(is_frame_red: bool) -> void: 
 	# 开启震动
 	$ShakeTimer.start()
-	is_shaking = true
+	self.is_shaking = true
 	
 	# 使附着的卡牌也震动
-	if occupied_card != null:
-		occupied_card.shake(not is_frame_red, SHAKE_AMOUNT, $ShakeTimer.wait_time) # 若框不红，则里面的字要红
+	if self.occupied_card != null:
+		self.occupied_card.shake(not is_frame_red, SHAKE_AMOUNT, $ShakeTimer.wait_time) # 若框不红，则里面的字要红
 	elif not is_frame_red:
 		$Word.set_color(ImageLib.PALETTE["red"])
 	
 	if is_frame_red:
 		$GoalFrameSprite.animation = "red"
+
+
+func _process(_delta):
+	var offset := 0
+	if is_shaking:
+		var progress = (1 - $ShakeTimer.time_left / $ShakeTimer.wait_time) * 2 * PI
+		offset = int(sin(progress) * SHAKE_AMOUNT)
+	$GoalFrameSprite.position.x = offset
+	$PitSprite.position.x = offset 
+	$Word.position.x = offset 
+
+
 	
 func _on_shake_timer_timeout() -> void:
-	is_shaking = false
+	self.is_shaking = false
 	$GoalFrameSprite.animation = "default"
 	$Word.set_color(ImageLib.PALETTE["default"])
 	
-func set_victory(v: bool) -> void:
-	if v and occupied_card != null:
-		occupied_card.set_victory(v)
-
-func set_color(value: Color) -> void:
-	if occupied_card != null:
-		occupied_card.set_color(value)
-	else:
-		$Word.set_color(value)	
