@@ -1,12 +1,12 @@
 extends AnimatedSprite2D
 
 
-@export var text_id := 1
+@export var text_id := 0
 @export var color := Color.BLACK
 
 
 const STEP := 30
-const LETTER_NAME = ["_", "=", "P", "b", "D", 
+const LETTER_NAME = [" ", "=", "P", "b", "D", 
 "I1", "I2", "I3", "I4", "I5", 
 "R", "Q", "d", "q", "(",
 "*", "+", "<", ">", ")",
