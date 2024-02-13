@@ -33,7 +33,7 @@ MacOS: [Download](https://github.com/ligen131/equal_to_p/actions/runs/7684305585
 
 ## TODO
 
-- [x] 右键 card 返回 card_base
+<!-- - [x] 右键 card 返回 card_base
 - [x] card_base：
   - 数字 ok
   - 灰色（剩下为 0 时变灰）toggle_color
@@ -58,12 +58,20 @@ MacOS: [Download](https://github.com/ligen131/equal_to_p/actions/runs/7684305585
 - [x] 金色框纹理统一
 - [x] 关卡高亮动画 // 这是啥？
 - [x] 章节标题
-- [x] 卡片文字偏移
-- [x] 瞎几把拖 card 有 bug
-- [ ] 卡片被放置后继续动画会露馅
-- [x] 主页笑脸乱飞动画
+- [x] 卡牌文字偏移
+- [x] 瞎几把拖 card 有 bug -->
+<!-- - [x] 卡牌被放置后继续动画会露馅 -->
+<!-- - [x] 主页笑脸乱飞动画 -->
+### UI
 - [ ] 场景切换的过场动画
-- [ ] 卡片替换交互逻辑
+- [ ] 配色问题？
+- [ ] 选关页面优化
+
+### 程序
+- [ ] 卡牌替换交互逻辑
+
+### 关卡设计
+- [ ] 更多关卡设计
 
 ## Build
 
