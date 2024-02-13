@@ -108,17 +108,17 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 		
 	var pos := WIDTH / 2 - sep * len(question) / 2 + 12 + 7
 	for i in range(len(question)):
-		var ch = question[i]
+		var ch: String = question[i]
 		
-		var new_block = BlockScn.instantiate()
+		var new_block: Block = BlockScn.instantiate()
 
 		new_block.quest_pos = i
 		if ch != "." and ch != "_":
-			new_block.occupied = true
+			new_block.is_fixed = true
 			new_block.set_word(ch)
 			new_block.set_block_type("CONST")
 		else:
-			new_block.set_word("_")
+			new_block.is_fixed = false
 			if ch == "_":
 				req_pos.append(i)
 				new_block.set_block_type("GOLDEN")
@@ -128,6 +128,8 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 		pos += sep
 		
 		$Blocks.add_child(new_block)
+
+		new_block.occupied_card_changed.connect(_on_block_occupied_card_changed)
 	
 	expr = question
 	# print(expr)
@@ -135,7 +137,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	
 	pos = WIDTH / 2 - CARDS_SEP * len(choices) / 2 + 16
 	for ch in choices:
-		var new_card_base = CardBaseScn.instantiate()
+		var new_card_base: CardBase = CardBaseScn.instantiate()
 
 		new_card_base.set_word(ch)
 		
@@ -144,7 +146,6 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 		pos += CARDS_SEP
 		
 		$CardBases.add_child(new_card_base)
-		new_card_base.card_put.connect(_on_card_put)
 
 
 func _ready():
@@ -164,13 +165,13 @@ func stage_clear() -> void:
 	$HUDs/NextLevelButton.start_fade()
 
 
-func _on_card_put() -> void:
+func _on_block_occupied_card_changed(_node) -> void:
 	var block_array = []
 	for block : Block in $Blocks.get_children():
-		if not block.occupied:
-			# print(block.quest_pos, " is not occupied")
+		if block.is_empty():
+			#print(block.quest_pos, " is not occupied")
 			return
-		expr[block.quest_pos] = block.occupied_word
+		expr[block.quest_pos] = block.get_word()
 		block_array.append(block)
 		
 	# prints("# expr: ", expr)
