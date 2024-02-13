@@ -1,11 +1,17 @@
 extends Node
 
 
-const Block := preload("res://objects/block/block.tscn")
-const CardBase := preload("res://objects/card_base/card_base.tscn")
-const LevelMenu := preload("res://levels/chapter_menu/level_menu/level_menu.tscn")
-const TableCloth := preload("res://objects/table_cloth/table_cloth.tscn")
-const BaseLevel := preload("res://levels/base_level/base_level.tscn")
+class_name BaseLevel
+
+# FIXME
+# 由于 Godot preload 容易出错，此处改为 load
+var BlockScn = load("res://objects/block/block.tscn")
+var CardBaseScn = load("res://objects/card_base/card_base.tscn")
+var LevelMenuScn = load("res://levels/chapter_menu/level_menu/level_menu.tscn")
+var TableClothScn = load("res://objects/table_cloth/table_cloth.tscn")
+var BaseLevelScn = load("res://levels/base_level/base_level.tscn")
+
+
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
 const SEP := 28
@@ -21,14 +27,15 @@ const I_NUMBER = ["I","II","III","VI","V"]
 
 const DATA := [
 	[
-		["=P", "P {} {}", "= P"],
-		["P", "P [] {}", "= P P"],
-		["=D", "D {} {}", "= D P"],
-		["Reverse", "{} {} []", "d d = P P D D"]
+		["=P", "P [] []", "= P"],
+		["Make a Smile", "P {} {}", "= P P"],
+		["=D", "[] {} {}", "P = D D"],
+		["Reversed", "{} [] []", "D D = d d"],
+		["Watch Out the Direction", "[] {} {}", "d d = R R b b"],
 	],
 	[
-		["False", "[] [] 0 {} {}", "= + P P"],
-		["True", "[] {} {} [] 1", "= + P 1"],
+		["0+0=0, 1+0=1", "[] [] {} {} d", "= + 0 d"],
+		["1+1=1", "[] [] {} {} 1", "= + d 1"],
 		["Swap", "Q + [] = {} + []", "P P P P Q Q Q Q"],
 		["Always True", "1 [] {} = {} [] []", "1++PPdd"],
 		["Make Me Laugh", "1 {} {} = []", "XDD"],
@@ -83,7 +90,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	question = question.replace("{}", "_")
 		
 	
-	var table_cloth = TableCloth.instantiate()
+	var table_cloth = TableClothScn.instantiate()
 	var sep := SEP
 	
 	if len(question) >= 16:
@@ -103,7 +110,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	for i in range(len(question)):
 		var ch = question[i]
 		
-		var new_block := Block.instantiate()
+		var new_block = BlockScn.instantiate()
 
 		new_block.quest_pos = i
 		if ch != "." and ch != "_":
@@ -123,12 +130,12 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 		$Blocks.add_child(new_block)
 	
 	expr = question
-	print(expr)
+	# print(expr)
 	
 	
 	pos = WIDTH / 2 - CARDS_SEP * len(choices) / 2 + 16
 	for ch in choices:
-		var new_card_base := CardBase.instantiate()
+		var new_card_base = CardBaseScn.instantiate()
 
 		new_card_base.set_word(ch)
 		
@@ -151,7 +158,7 @@ func _process(_delta):
 func stage_clear() -> void:
 	$SFXs/LevelClear.play()
 	for card_base: CardBase in $CardBases.get_children():
-		card_base.call("set_victory")
+		card_base.set_victory()
 		
 	$HUDs/TableCloth/GoldenCloth.set_visible(true)
 	$HUDs/NextLevelButton.start_fade()
@@ -161,17 +168,17 @@ func _on_card_put() -> void:
 	var block_array = []
 	for block : Block in $Blocks.get_children():
 		if not block.occupied:
-			print(block.quest_pos, " is not occupied")
+			# print(block.quest_pos, " is not occupied")
 			return
 		expr[block.quest_pos] = block.occupied_word
 		block_array.append(block)
 		
-	prints("# expr: ", expr)
+	# prints("# expr: ", expr)
 	
 	if expr.count("_") == 0:
-		var info = $Calculator.check(expr, req_pos)
-		prints("expr:", expr)
-		prints("info:", info)
+		var info = ExprValidator.check(expr, req_pos)
+		# prints("expr:", expr)
+		# prints("info:", info)
 		
 		if info[0] != "OK":
 			$SFXs/WrongAnswer.play()
@@ -179,25 +186,25 @@ func _on_card_put() -> void:
 		if info[0] == "INVALID":
 			for block: Block in $Blocks.get_children():
 				if block.quest_pos in info[1]:
-					block.call("shake")
+					block.shake(false)
 		elif info[0] == "SMILE_UNSATISFIED":
 			for block: Block in $Blocks.get_children():
-				if block.quest_pos == info[1]:
-					block.call("shake")
+				if block.quest_pos in info[1]:
+					block.shake(true)
 		elif info[0] == "NOT_ALWAYS_TRUE":
 			for block: Block in $Blocks.get_children():
-				block.call("shake")
+				block.shake(false)
 		else:
 			# victory
 			get_tree().current_scene.set_victory(true)
 			stage_clear()
-			print(block_array)
+			# print(block_array)
 			for i in range(len(block_array)):
 				if i != 0:
-					if $Calculator.is_smile(expr[i-1]+expr[i]):
-						print(expr[i-1]+expr[i])
-						block_array[i-1].set_victory(true)
-						block_array[i].set_victory(true)
+					if ExprValidator.is_smile(expr[i-1]+expr[i]):
+						# print(expr[i-1]+expr[i])
+						block_array[i-1].set_color(ImageLib.PALETTE["golden"])
+						block_array[i].set_color(ImageLib.PALETTE["golden"])
 
 func _input(event: InputEvent):
 	if event is InputEventKey:
@@ -212,24 +219,24 @@ func _exit_tree():
 
 
 func _on_back_button_pressed():
-	var level_menu = LevelMenu.instantiate()
+	var level_menu = LevelMenuScn.instantiate()
 	level_menu.init(chap_id, -1)
 	get_tree().root.add_child(level_menu)
 	queue_free()
 
 func _on_next_level_button_pressed():
 	if lvl_id == len(DATA[chap_id]) - 1:
-		var level_menu := LevelMenu.instantiate()
+		var level_menu = LevelMenuScn.instantiate()
 		level_menu.init(chap_id + 1, -1)
 		get_tree().root.add_child(level_menu)
 	else:
-		var base_level := BaseLevel.instantiate()
+		var base_level = BaseLevelScn.instantiate()
 		base_level.init(chap_id, lvl_id + 1)
 		get_tree().root.add_child(base_level)
 	queue_free()
 	
 func _on_replay_button_pressed():
-	var new_level = BaseLevel.instantiate()
+	var new_level = BaseLevelScn.instantiate()
 	new_level.init(chap_id, lvl_id)
 	get_tree().root.add_child(new_level)
 	queue_free()

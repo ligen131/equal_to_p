@@ -1,33 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvx7wowcbfo0r"]
+[gd_scene load_steps=4 format=3 uid="uid://cvx7wowcbfo0r"]
 
 [ext_resource type="Texture2D" uid="uid://cyyu6tsje4x72" path="res://objects/word/sprites/sprite3.png" id="1_ariam"]
 [ext_resource type="Script" path="res://objects/word/word.gd" id="1_lkxlh"]
-[ext_resource type="Texture2D" uid="uid://bqtqgiv5etyny" path="res://objects/word/sprites/sprite28.png" id="2_l4ops"]
-[ext_resource type="Texture2D" uid="uid://dua7hylyf4ws6" path="res://objects/word/sprites/sprite53.png" id="3_2kshj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3n85j"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_ariam")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_l4ops")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_2kshj")
 }],
 "loop": true,
 "name": &"default",
-"speed": 3.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
 "speed": 5.0
 }]
 
 [node name="Word" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_3n85j")
-autoplay = "default"
 script = ExtResource("1_lkxlh")

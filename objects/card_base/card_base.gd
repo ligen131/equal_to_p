@@ -2,7 +2,7 @@ extends Area2D
 
 class_name CardBase
 
-const Card := preload("res://objects/card/card.tscn")
+const CardScn := preload("res://objects/card/card.tscn")
 const FADE_MOVE_AMOUNT := 70
 
 signal card_put
@@ -10,6 +10,9 @@ signal card_put
 
 var fade_flag := false
 var mouse_on := false
+
+enum { DEFAULT, HIGHLIGHT, DISABLED}
+var available_stat := DEFAULT
 
 
 var card_count = 0
@@ -25,11 +28,11 @@ func set_card_count(value):
 	card_count = value
 	if card_count > 0:
 		if mouse_on:
-			$AnimatedSprite2D.animation = "highlighted"
+			available_stat = HIGHLIGHT
 		else:
-			$AnimatedSprite2D.animation = "default"
+			available_stat = DEFAULT
 	else:
-		$AnimatedSprite2D.animation = "disabled"
+		available_stat = DISABLED
 	update_card_count_label()
 
 
@@ -39,7 +42,7 @@ func draw_card():
 	set_card_count(card_count - 1) 
 	$SFXPickUp.play()
 	Input.set_default_cursor_shape(Input.CURSOR_DRAG)
-	new_card_node = Card.instantiate()
+	new_card_node = CardScn.instantiate()
 	new_card_node.set_word($Word.get_word())
 	new_card_node.set_position(position)
 	$Cards.add_child(new_card_node)
@@ -66,13 +69,21 @@ func _on_area_exited(area: Card):
 	if area.get_word() == $Word.get_word():
 		area.on_card_base_exited()
 	
-func _input_event(viewport: Object, event: InputEvent, shape_idx: int) -> void:
+func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 			draw_card()
 
 func set_word(e: String) -> void:
 	$Word.set_word(e)
+	
+	var card_type := "card-%s" % ExprValidator.get_char_type_as_str(e).to_lower()
+	if ImageLib.PALETTE.has(card_type):
+		ImageLib.update_animation($CardBaseSprite, 1, 1, 1, "res://objects/card_base/card_base%d.png", 
+								  ImageLib.PALETTE["lightblue"], ImageLib.PALETTE[card_type])
+	
+func get_word() -> String:
+	return $Word.get_word()
 
 func _on_card_put():
 	emit_signal("card_put")
@@ -85,28 +96,33 @@ func set_victory() -> void:
 	$Label.set_visible(false)
 	
 	for card: Card in $Cards.get_children():
-		card.is_victory = true
+		card.set_victory(true)
 
 func reset_all_card_position():
 	for card: Card in $Cards.get_children():
 		card.reset_position()
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	if fade_flag:
 		var offset = $FadeTimer.time_left / $FadeTimer.wait_time
 		offset = (1 - pow(offset, 1.5)) * FADE_MOVE_AMOUNT
-		$AnimatedSprite2D.position.y = offset
+		$CardBaseSprite.position.y = offset
+		$HighlightSprite.position.y = offset
+		$DisabledSprite.position.y = offset
 		$Word.position.y = offset
+	
+	$HighlightSprite.visible = (available_stat == HIGHLIGHT)
+	$DisabledSprite.visible = (available_stat == DISABLED)
 
 
 func _on_mouse_entered():
 	mouse_on = true
-	if $AnimatedSprite2D.animation == "default":
-		$AnimatedSprite2D.animation = "highlighted"	
+	if available_stat == DEFAULT:
+		available_stat = HIGHLIGHT
 		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 func _on_mouse_exited():
 	mouse_on = false
-	if $AnimatedSprite2D.animation == "highlighted":
-		$AnimatedSprite2D.animation = "default"
+	if available_stat == HIGHLIGHT:
+		available_stat = DEFAULT
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)

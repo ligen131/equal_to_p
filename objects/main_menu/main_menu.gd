@@ -1,7 +1,9 @@
 extends Node2D
 
-const ChapterMenu = preload("res://levels/chapter_menu/chapter_menu.tscn")
-const BaseLevel := preload("res://levels/base_level/base_level.tscn")
+class_name MainMenu
+
+const ChapterMenuScn := preload("res://levels/chapter_menu/chapter_menu.tscn")
+const BaseLevelScn := preload("res://levels/base_level/base_level.tscn")
 
 signal enter_level()
 
@@ -10,7 +12,7 @@ func _ready():
 
 
 func _on_start_button_pressed():
-	var base_level := BaseLevel.instantiate()
+	var base_level := BaseLevelScn.instantiate()
 	
 	# print(chap_id, lvl_id)
 	
@@ -18,7 +20,7 @@ func _on_start_button_pressed():
 	get_tree().root.add_child(base_level)
 	enter_level.emit()
 	queue_free()
-	#get_tree().root.add_child(ChapterMenu.instantiate())
+	#get_tree().root.add_child(ChapterMenuScn.instantiate())
 	#queue_free()
 
 

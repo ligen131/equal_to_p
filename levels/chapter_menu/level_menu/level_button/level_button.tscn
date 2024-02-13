@@ -12,3 +12,4 @@ script = ExtResource("1_wwqfn")
 [node name="Word" parent="." index="0" instance=ExtResource("3_js2i2")]
 position = Vector2(19, 19)
 scale = Vector2(1.5, 1.5)
+text_id = 0
