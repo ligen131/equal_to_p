@@ -1,6 +1,10 @@
 extends AnimatedSprite2D
 
 
+class_name Word
+
+
+
 @export var text_id := 0
 @export var color := Color.BLACK
 
