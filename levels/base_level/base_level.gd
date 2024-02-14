@@ -78,16 +78,15 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 
 		new_block.quest_pos = i
 		if ch != "." and ch != "_":
-			new_block.is_fixed = true
+			new_block.set_is_fixed(true)
 			new_block.set_word(ch)
-			new_block.set_block_type("CONST")
 		else:
-			new_block.is_fixed = false
+			new_block.set_is_fixed(false)
 			if ch == "_":
 				req_pos.append(i)
-				new_block.set_block_type("GOLDEN")
+				new_block.set_is_golden_frame(true)
 			else:
-				new_block.set_block_type("PIT")
+				new_block.set_is_golden_frame(false)
 		new_block.set_position(Vector2(pos, HEIGHT / 2))
 		pos += sep
 		
