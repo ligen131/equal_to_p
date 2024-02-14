@@ -26,7 +26,7 @@ jobs:
       - name: Windows Build
         run: |
           mkdir -v -p build/windows
-          godot --headless --verbose --export "Windows Desktop" build/windows/$EXPORT_NAME.exe
+          godot --headless --verbose --export-debug "Windows Desktop" build/windows/$EXPORT_NAME.exe
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -50,7 +50,7 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
-          godot --headless --verbose --export "Linux/X11" build/linux/$EXPORT_NAME.x86_64
+          godot --headless --verbose --export-debug "Linux/X11" build/linux/$EXPORT_NAME.x86_64
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -74,7 +74,7 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p build/web
-          godot --headless --verbose --export "Web" build/web/index.html
+          godot --headless --verbose --export-debug "Web" build/web/index.html
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync curl
@@ -107,7 +107,7 @@ jobs:
       - name: Mac Build
         run: |
           mkdir -v -p build/mac
-          godot --headless --verbose --export "mac" build/mac/$EXPORT_NAME.zip
+          godot --headless --verbose --export-debug "mac" build/mac/$EXPORT_NAME.zip
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
