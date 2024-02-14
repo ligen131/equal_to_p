@@ -2,33 +2,27 @@ extends Node2D
 
 class_name LevelMenu
 
-const CHAP_NAMES = ["=P", "Add and Multiply", "()", "Equal?", "<>"]
-
-const I_NUMBER = ["I","II","III","VI","V"]
+# const I_NUMBER = ["I","II","III","VI","V"]
 
 const LevelButtonScn := preload("res://levels/chapter_menu/level_menu/level_button/level_button.tscn")
 const BaseLevelScn := preload("res://levels/base_level/base_level.tscn")
 const CreditsScn := preload("res://objects/credits/credits.tscn")
-
-# Called when the node enters the scene tree for the first time.
 
 @export var chapter_id : int = 0
 const button_width : int = 50
 const button_heigth : int = 50
 
 func init(chap_id : int, lvl_num : int) -> void:
-	#print("init?")
-	
-	if chap_id == len(BaseLevelScn.instantiate().DATA):
+	if chap_id == LevelData.get_chapter_count():
 		add_child(CreditsScn.instantiate())
 		$Title.set_text("")
 		return
 		
 	
 	if lvl_num == -1:
-		lvl_num = len(BaseLevelScn.instantiate().DATA[chap_id])
+		lvl_num = LevelData.get_chapter_level_count(chap_id)
 	
-	$Title.set_text("Ch." + I_NUMBER[chap_id] + "  " + CHAP_NAMES[chap_id])
+	$Title.set_text(LevelData.CHAP_NAMES[chap_id]["name-en"])
 	
 	chapter_id = chap_id
 	for level_id in range(0, lvl_num):
@@ -42,17 +36,11 @@ func init(chap_id : int, lvl_num : int) -> void:
 
 func _ready():
 	$BackButton/icon.play("return")
-	#print(BaseLevel.instantiate().DATA[chapter_id])
-	#var level_num : int = len(BaseLevel.instantiate().DATA[chapter_id])
-	#print(level_num)
-	#print("why not?")
 	pass
 
 
 func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:
 	var base_level := BaseLevelScn.instantiate()
-	
-	# print(chap_id, lvl_id)
 	
 	base_level.init(chap_id, lvl_id)
 	get_tree().root.add_child(base_level)
