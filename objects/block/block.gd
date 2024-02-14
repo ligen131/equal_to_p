@@ -1,9 +1,13 @@
-extends Area2D
+## 表达式中的一个可被放入 [Card] 的卡槽，或是字符固定的一个格子。
 
-class_name Block
+class_name Block extends Area2D
 
 
-signal occupied_card_changed(block: Block) ## 当被占用的 Card 发生改变后发出。
+## 当被占用的 [Card] 发生改变后发出。
+## [br][br]
+## [param block] 为发出该信号的 [Block] 对象。
+signal occupied_card_changed(block: Block) 
+
 
 
 const SHAKE_AMOUNT := 3.0 ## 振动时的振幅（单位为像素）。
@@ -19,22 +23,22 @@ var quest_pos := -1 ## 在表达式中对应字符位置的下标。
 
 
 
-## 是否为空槽。
+## 是否为空槽，即能否被 [Card] 占用。
 func is_empty() -> bool:
 	return not self.is_fixed and self.occupied_card == null
 
 
-## 设置固定的字符为 value。
-##
-## 应当只在 is_fixed 为 true 时被调用。
+## 设置固定的字符为 [param value]。
+## [br][br]
+## 应当只在 [member is_fixed] 为 [code]true[/code] 时被调用。
 func set_word(value: String) -> void:	
 	assert(self.is_fixed, "void Block::set_word(value: String) should only be called when is_fixed is true.")
 	$Word.set_word(value)
 
 
-## 设置占用的 Card 为 card。
-##
-## 应当只在 is_fixed 为 false 时被调用。
+## 设置占用的 [Card] 为 [param card]。
+## [br][br]
+## 应当只在 [member is_fixed] 为 [code]false[/code] 时被调用。
 func set_card(card: Card) -> void:
 	assert(not self.is_fixed, "void Block::set_card(card: Card) should only be called when is_fixed is false.")
 	if self.occupied_card != card:
@@ -43,10 +47,10 @@ func set_card(card: Card) -> void:
 	
 
 ## 获取当前字符。
-##
-## 当 is_fixed 为 true 时，从子节点 Word 返回固定的字符。
-##
-## 当 is_fixed 为 false 时，返回占用的 Card 的字符。
+## [br][br]
+## 当 [member is_fixed] 为 [code]true[/code] 时，从子节点 [Word] 返回固定的字符。
+## [br][br]
+## 当 [member is_fixed] 为 [code]false[/code] 时，返回占用的 [Card] 的字符。
 func get_word() -> String:
 	if self.is_fixed:
 		return $Word.get_word()
@@ -70,12 +74,13 @@ func set_is_golden_frame(value: bool) -> void:
 	$GoalFrameSprite.visible = not self.is_fixed and self.is_golden_frame
 	
 
+## 若 [param v] 为 [code]true[/code]，且有占用的 [Card]，则将其设置为通关状态（即调用 [method Card.set_victory])。
 func set_victory(v: bool) -> void:
 	if v and not self.is_fixed and self.occupied_card != null:
 		self.occupied_card.set_victory(v)
 
 
-## 设置字符颜色为 value。
+## 设置字符颜色为 [param value]。
 func set_color(value: Color) -> void:
 	if self.is_fixed:
 		$Word.set_color(value)	
@@ -85,8 +90,7 @@ func set_color(value: Color) -> void:
 	
 
 
-## 开始震动。
-## is_frame_red 表示是否将框改为红色。
+## 开启震动。若 [param is_frame_red] 为 [code]true[/code]，则将框改为红色。
 func shake(is_frame_red: bool) -> void: 
 	# 开启震动
 	$ShakeTimer.start()
