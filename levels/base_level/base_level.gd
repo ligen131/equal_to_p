@@ -28,13 +28,14 @@ const I_NUMBER = ["I","II","III","VI","V"]
 const DATA := [
 	[
 		["=P", "P [] []", "= P"],
-		["Make a Smile", "P {} {}", "= P P"],
-		["=D", "[] {} {}", "P = D D"],
-		["Reversed", "{} [] []", "D D = d d"],
-		["Watch Out the Direction", "[] {} {}", "d d = R R b b"],
+		["Smile", "P {} {}", "= P P"],
+		["Another Smile", "[] = {}", "R R P D D"],
+		["Reverse", "{} [] []", "D D = d d"],
+		["Reverse Again", "[] {} {}", "d d = R R b b"],
+		["Snake", "[] = {} = {} = [] = {} = {}", "dddddd QQQQQQ RRRRRR DDDDDD PPPPPP qqqqqq"]
 	],
 	[
-		["0+0=0, 1+0=1", "[] [] {} {} d", "= + 0 d"],
+		["0+0=0, 0+1=1", "[] [] {} {} d", "= + 0 d"],
 		["1+1=1", "[] [] {} {} 1", "= + d 1"],
 		["Swap", "Q + [] = {} + []", "P P P P Q Q Q Q"],
 		["Always True", "1 [] {} = {} [] []", "1++PPdd"],
@@ -53,7 +54,7 @@ const DATA := [
 	[
 		["Why?", "[] [] {} = {} [] {} = []", "PP qq ++ 1"],
 		["Where is the Equation?", "[] [] {} {} [] + [] [] {} {} []", "(())==01PP"],
-		["Untitled", "[] [] {} {} [] [] [] []", "=QPP0+()"],
+		["Untitled", "[] [] {} {} [] [] [] []", "=PPQQ+()"],
 	],
 	[
 		["<", "0 {} {} [] 1", "XD<"],
