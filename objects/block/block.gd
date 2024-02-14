@@ -10,10 +10,13 @@ const SHAKE_AMOUNT := 3.0 ## 振动时的振幅（单位为像素）。
 
 
 var is_fixed : bool ## 是否为固定的（即在表达式中已初始化了的）。
+var is_golden_frame : bool ## 是否为金色框。
+var is_shaking := false ## 是否正在振动。
+
 var occupied_card: Card = null ## 占用的 Card 对象。
 
 var quest_pos := -1 ## 在表达式中对应字符位置的下标。
-var is_shaking := false ## 是否正在振动。
+
 
 
 ## 是否为空槽。
@@ -54,16 +57,17 @@ func get_word() -> String:
 			return self.occupied_card.get_word()
 
 
-func set_block_type(value: String) -> void:
-	if value == "GOLDEN":
-		$GoalFrameSprite.set_visible(true)
-		$PitSprite.set_visible(true)
-	elif value == "PIT":
-		$GoalFrameSprite.set_visible(false)
-		$PitSprite.set_visible(true)
-	else:
-		$GoalFrameSprite.set_visible(false)
-		$PitSprite.set_visible(false)
+## 设置 [member is_fixed] 为 [param value]。
+func set_is_fixed(value: bool) -> void:
+	self.is_fixed = value
+	$PitSprite.visible = not self.is_fixed
+	$GoalFrameSprite.visible = not self.is_fixed and self.is_golden_frame
+
+
+## 设置 [member is_golden_frame] 为 [param value]。
+func set_is_golden_frame(value: bool) -> void:
+	self.is_golden_frame = value
+	$GoalFrameSprite.visible = not self.is_fixed and self.is_golden_frame
 	
 
 func set_victory(v: bool) -> void:
