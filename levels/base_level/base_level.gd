@@ -18,50 +18,13 @@ const SEP := 28
 const CARDS_SEP := 34
 
 
-var expr := ""
-var req_pos = [] # Array[int]
-var chap_id : int
-var lvl_id : int
-
 const I_NUMBER = ["I","II","III","VI","V"]
 
-const DATA := [
-	[
-		["=P", "P [] []", "= P"],
-		["Smile", "P {} {}", "= P P"],
-		["Another Smile", "[] = {}", "R R P D D"],
-		["Reverse", "{} [] []", "D D = d d"],
-		["Reverse Again", "[] {} {}", "d d = R R b b"],
-		["Snake", "[] = {} = {} = [] = {} = {}", "dddddd QQQQQQ RRRRRR DDDDDD PPPPPP qqqqqq"]
-	],
-	[
-		["0+0=0, 0+1=1", "[] [] {} {} d", "= + 0 d"],
-		["1+1=1", "[] [] {} {} 1", "= + d 1"],
-		["Swap", "Q + [] = {} + []", "P P P P Q Q Q Q"],
-		["Always True", "1 [] {} = {} [] []", "1++PPdd"],
-		["Make Me Laugh", "1 {} {} = []", "XDD"],
-		["Reset", "0 [] [] {} []", "XD=0"],
-		["Not Necessary", "[] {} {} {} {} []", "QQQQQQ DDXX="],
-		["[EX] Not Really Challenging", "1 [] [] [] {} [] [] [] {} [] {} [] []", "== ++++++ 11 P q b R"],
-		["[EX] Golden Experience", "{} {} {} {} {} {} {} {} {} {}", "PP DD qq dd bb XXX ="],
-	],
-	[
-		["He Goes First", "[] [] + [] = ( [] {} {} ) [] []", "PP QQ RR X +"],
-		["Still, He Goes First", "[] + [] [] = [] [] ( [] {} {} )", "PP QQ RR X +"],
-		["It's My Turn", "P ([] [] []) = {} [] [] [] []", "PP QQ RR ++"],
-		["[EX] Really Challenging", "[] [] [] [] [] {} {} [] [] [] [] {} {} + [] []", "PPP QQ DD (()) ++ = X"]
-	],
-	[
-		["Why?", "[] [] {} = {} [] {} = []", "PP qq ++ 1"],
-		["Where is the Equation?", "[] [] {} {} [] + [] [] {} {} []", "(())==01PP"],
-		["Untitled", "[] [] {} {} [] [] [] []", "=PPQQ+()"],
-	],
-	[
-		["<", "0 {} {} [] 1", "XD<"],
-		["<=", "[] X [] {} {} [] + []", "QQPP<="],
-		["<>", "0 {} P [] [] []", "<>=P"],
-	],
-]
+
+var expr := ""
+var req_pos := [] # Array[int]，金色框的位置列表
+var chap_id : int ## 当前章节编号
+var lvl_id : int ## 当前关卡编号
 
 
 
@@ -78,9 +41,9 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	chap_id = _chap_id
 	lvl_id = _lvl_id
 	
-	var lvl_name = DATA[chap_id][lvl_id][0]
-	var question = DATA[chap_id][lvl_id][1].replace(" ", "").replace("X", "*")
-	var choices = count(DATA[chap_id][lvl_id][2].replace(" ", "").replace("X", "*"))
+	var lvl_name = LevelData.LEVEL_DATA[chap_id][lvl_id]["name-en"]
+	var question = LevelData.LEVEL_DATA[chap_id][lvl_id]["question"].replace(" ", "").replace("X", "*")
+	var choices = count(LevelData.LEVEL_DATA[chap_id][lvl_id]["choices"].replace(" ", "").replace("X", "*"))
 	
 	
 	$HUDs/Title.set_text("%s-%d  %s" % [I_NUMBER[chap_id], lvl_id + 1, lvl_name])
@@ -227,7 +190,7 @@ func _on_back_button_pressed():
 	queue_free()
 
 func _on_next_level_button_pressed():
-	if lvl_id == len(DATA[chap_id]) - 1:
+	if self.lvl_id == LevelData.get_chapter_level_count(self.chap_id) - 1:
 		var level_menu = LevelMenuScn.instantiate()
 		level_menu.init(chap_id + 1, -1)
 		get_tree().root.add_child(level_menu)
