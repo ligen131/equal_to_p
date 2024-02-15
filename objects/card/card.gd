@@ -4,6 +4,12 @@ class_name Card extends Area2D
 
 
 var current_block: Block = null ## 当前所占用的 Block 对象。
+
+## 当 [member is_dragging] 为 [code]true[/code] 时，[member last_block] 为拾取该 [Card] 前占用的 [Block] 对象。
+## [br][br]
+## 当 [member is_dragging] 为 [code]false[/code] 时，[member last_block] 为 [code]null[/code]。
+var last_block: Block = null
+
 var is_dragging := false  ## 是否正在被鼠标拖拽。
 var is_shaking := false  ## 是否正在震动。
 var is_victory := false  ## 是否已通关。
@@ -11,13 +17,13 @@ var shake_amount : float  ## 震动幅度（单位为像素）。
 
 
 
-## 获取当前最近的，[Area2D] 相交的，且未被占用的 [Block]。
+## 获取当前最近的，[Area2D] 相交且字符不固定（即 [member Block.is_fixed] 为 [code]false[/code]）的 [Block]。
 ## [br][br]
 ## 距离按两个中心点间的距离计算。
 func get_top_prior_entered_block() -> Block:
 	var top_block: Block = null
 	for area: Area2D in get_overlapping_areas():
-		if area is Block and area.is_empty():
+		if area is Block and not area.is_fixed:
 			if top_block == null or (self.position - top_block.position).length() > (self.position - area.position).length():
 				top_block = area
 	return top_block
@@ -30,8 +36,11 @@ func pick_up():
 	self.z_index += 1
 	self.is_dragging = true
 	if self.current_block != null:
+		self.last_block = self.current_block
 		self.current_block.set_card(null)
 		self.current_block = null
+	else:
+		self.last_block = null
 
 
 ## 进行被放下时的处理。
@@ -41,13 +50,21 @@ func put_down():
 	self.z_index -= 1
 	var entered_block := get_top_prior_entered_block()
 	if entered_block != null:
+		if not entered_block.is_empty(): # 若 entered_block 非空，则进行交换
+			if self.last_block != null: # 若当前 Card 之前占用了 Block，则将该 Block 占用的 Card 放置在原先的位置上
+				entered_block.occupied_card.position = self.last_block.position
+				self.last_block.set_card(entered_block.occupied_card)
+			else: # 若当前 Card 是由 CardBase 生成的，则将该 Block 占用的 Card 释放
+				entered_block.occupied_card.queue_free()
+
+		entered_block.set_card(self)
+
 		self.current_block = entered_block
 		self.position = entered_block.position
 		self.is_dragging = false  
+		self.last_block = null
 
 		$SFXPutDown.play() 
-
-		entered_block.set_card(self)
 		
 	else:
 		queue_free()	
