@@ -50,14 +50,15 @@ func put_down():
 	self.z_index -= 1
 	var entered_block := get_top_prior_entered_block()
 	if entered_block != null:
-		if not entered_block.is_empty(): # 若 entered_block 非空，则进行交换
-			if self.last_block != null: # 若当前 Card 之前占用了 Block，则将该 Block 占用的 Card 放置在原先的位置上
-				entered_block.occupied_card.position = self.last_block.position
-				self.last_block.set_card(entered_block.occupied_card)
-			else: # 若当前 Card 是由 CardBase 生成的，则将该 Block 占用的 Card 释放
-				entered_block.occupied_card.queue_free()
-
+		var old_card = entered_block.occupied_card
 		entered_block.set_card(self)
+
+		if old_card != null: # 若原来占有的卡非空，则进行交换
+			if self.last_block != null: # 若当前 Card 之前占用了 Block，则将该 Block 占用的 Card 放置在原先的位置上
+				old_card.position = self.last_block.position
+				self.last_block.set_card(old_card)
+			else: # 若当前 Card 是由 CardBase 生成的，则将该 Block 占用的 Card 释放
+				old_card.queue_free()
 
 		self.current_block = entered_block
 		self.position = entered_block.position
