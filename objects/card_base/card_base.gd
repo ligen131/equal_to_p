@@ -116,14 +116,12 @@ func _on_mouse_entered():
 	is_mouse_on = true
 	if available_stat == DEFAULT:
 		available_stat = HIGHLIGHT
-		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 
 func _on_mouse_exited():
 	is_mouse_on = false
 	if available_stat == HIGHLIGHT:
 		available_stat = DEFAULT
-		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 
 func _on_cards_child_exiting_tree(node: Node) -> void:
