@@ -74,6 +74,11 @@ func get_word() -> String:
 	return $Word.get_word()
 
 
+## 获取剩余卡牌数量。
+func get_card_count() -> int:
+	return self.card_count
+
+
 ## 进行通关后的处理。
 func set_victory() -> void:
 	# 开始淡出
