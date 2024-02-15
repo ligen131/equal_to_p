@@ -1,17 +1,16 @@
-## 用于判定表达式 `expr` 是否满足通关要求的脚本。
-## 一般情况下只需要使用 `Array check(expr: String, req_pos: Array)` 即可，其他不需要使用。
+## 用于判定表达式 [code]expr[/code] 是否满足通关要求的脚本。
 class_name ExprValidator
 
 
-static func is_alpha(ch: String) -> bool: ## 判断字符 ch 是否为字母。
+static func is_alpha(ch: String) -> bool: ## 判断字符 [param ch] 是否为字母。
 	return (ch >= 'A' and ch <= 'Z') or (ch >= 'a' and ch <= 'z')
-static func is_eye(ch: String) -> bool: ## 判断字符 ch 是否为眼睛。
+static func is_eye(ch: String) -> bool: ## 判断字符 [param ch] 是否为眼睛。
 	return ch == "*" or ch == "="
-static func is_left_mouth(ch: String) -> bool: ## 判断字符 ch 是否为左边的嘴巴。
+static func is_left_mouth(ch: String) -> bool: ## 判断字符 [param ch] 是否为左边的嘴巴。
 	return ch == "q" or ch == "d" or ch == "<"
-static func is_right_mouth(ch: String) -> bool:  ## 判断字符 ch 是否为右边的嘴巴。
+static func is_right_mouth(ch: String) -> bool:  ## 判断字符 [param ch] 是否为右边的嘴巴。
 	return ch == "P" or ch == "b" or ch == "D" or ch == ">"
-static func is_smile(string: String) -> bool:  ## 判断长度为 2 的字符串 string 是否为笑脸。
+static func is_smile(string: String) -> bool:  ## 判断长度为 2 的字符串 [param string] 是否为笑脸。
 	return (is_left_mouth(string[0]) and is_eye(string[1])) or (is_eye(string[0]) and is_right_mouth(string[1]))
 
 """
@@ -39,6 +38,9 @@ Q		1	1	1	1	1	0
 Q/0		0	0	1	0	1
 """
 
+## 用于判断相邻字符是否合法。
+## [br][br]
+## [code]IS_PAIR_VALID[x][y][/code] 表示若表达式中 [enum CharType] 为 [code]x[/code] 的字符，右边相邻的字符 [enum CharType] 为 [code]y[/code] 的情况下是否合法。
 const IS_PAIR_VALID := [
 	[0, 0, 1, 0, 1, 1], 
 	[0, 1, 1, 0, 1, 1], 
@@ -46,7 +48,7 @@ const IS_PAIR_VALID := [
 	[1, 1, 1, 1, 1, 1], 
 	[1, 1, 1, 1, 1, 0], 
 	[1, 1, 1, 1, 0, 0]
-]
+] 
 
 ## 字符类型。
 enum CharType {
@@ -59,6 +61,7 @@ enum CharType {
 }
 
 
+## 获取 [param ch] 的 [enum CharType]。
 static func get_char_type(ch: String) -> CharType:
 	if ch == "*" or ch == "+":
 		return CharType.OP
@@ -76,6 +79,8 @@ static func get_char_type(ch: String) -> CharType:
 		push_error("get_char_type(%s) is undefined" % ch)
 		return -1
 	
+
+## 获取值等于 [param value] 的 [enum CharType] 名称。
 static func get_char_type_enum_name(value: CharType) -> String:
 	if value == CharType.OP:
 		return "OP"
@@ -93,13 +98,29 @@ static func get_char_type_enum_name(value: CharType) -> String:
 		push_error("get_char_type_enum_name(%d) is undefined" % value)
 		return "ERR"
 
+
+## 获取 [param ch] 的 [enum CharType] 名称。
 static func get_char_type_as_str(ch: String) -> String:
 	return get_char_type_enum_name(get_char_type(ch))
 	
-	
+
+## 判断长度为 2 的字符串 [param string] 中间是否有隐含的乘号。
+## [br][br]
+## 如 [code]A([/code] 中有隐含的乘号，等价于 [code]A*([/code]。
+## [br][br]
+## 示例：
+## [codeblock]
+## has_implict_prod("A(") # true
+## has_implict_prod(")(") # true
+## has_implict_prod("AB") # true
+## has_implict_prod("A+") # false
+## has_implict_prod("+1") # false
+## [/codeblock]
 static func has_implict_prod(string: String) -> bool:
 	return get_char_type(string[0]) in [CharType.BRACR, CharType.VAR, CharType.CONST] and get_char_type(string[1]) in [CharType.BRACL, CharType.VAR, CharType.CONST]
 
+
+## 获取 [param ch] 在后缀运算中的优先级。
 static func get_priority(ch: String) -> int:
 	if ch == "*":
 		return 4
@@ -117,7 +138,7 @@ static func get_priority(ch: String) -> int:
 
 
 
-## 将中缀表达式 expr 转为后缀表达式并返回（不判断 expr 的合法性）。
+## 将中缀表达式 [param expr] 转为后缀表达式并返回（不判断 [param expr] 的合法性）。
 static func infix_to_suffix(expr: String) -> String:
 	var opt_stack: Array = []
 	var res := ""
@@ -164,8 +185,7 @@ static func infix_to_suffix(expr: String) -> String:
 	return res
 	
 
-
-## 计算后缀表达式 expr 的值，其中变量的值给定，放在字典 var_values 中（不判断 expr 的合法性）。
+## 计算后缀表达式 [param expr] 的值，其中变量的值给定，放在字典 [param var_values] 中（不判断 [param expr] 的合法性）。
 static func calculate_value(expr: String, var_values: Dictionary) -> bool:
 	var stack: Array = []
 	var val := false
@@ -203,9 +223,10 @@ static func calculate_value(expr: String, var_values: Dictionary) -> bool:
 	assert(stack.size() == 1, "suffix expr is invalid.")
 	return stack[0]
 	
-## 判断表达式 expr 是否合法（不检查括号匹配）。
-##
-## 合法返回 []，否则返回不合法的下标。
+
+## 判断表达式 [param expr] 是否合法。
+## [br][br]
+## 合法返回空数组 [code][][/code]，否则返回不合法的下标列表。
 static func check_valid(expr: String) -> Array:
 	if get_char_type(expr[0]) != CharType.BRACL and get_char_type(expr[0]) not in [CharType.VAR, CharType.CONST]:
 		return [0]
@@ -230,9 +251,9 @@ static func check_valid(expr: String) -> Array:
 	return []
 	
 	
-## 判断表达式 expr 是否满足笑脸要求。
-##
-## 合法返回 []，否则返回不为笑脸的字符下标列表。
+## 判断表达式 [param expr] 是否满足笑脸要求。
+## [br][br]
+## 合法返回空数组 [code][][/code]，否则返回不为笑脸的字符下标列表。
 static func check_smile(expr: String, req_pos: Array) -> Array:
 	var res := []
 	for i in req_pos:
@@ -242,8 +263,8 @@ static func check_smile(expr: String, req_pos: Array) -> Array:
 	
 	
 ## 判断表达式 expr 是否恒为真（不检查是否合法）。
-##
-## 合法返回空字典，否则一种使得表达式为假的变量取值。
+## [br][br]
+## 合法返回空字典 [code]{}[/code]，否则返回一种使得表达式为假的变量取值。
 static func check_always_true(expr: String) -> Dictionary:
 	var var_values: Dictionary = {} # var_values[var] 获取 var 的值。类型：Dictionary[String, bool]
 	var var_names := [] # 变量名称列表
@@ -265,15 +286,18 @@ static func check_always_true(expr: String) -> Dictionary:
 	
 	return {}
 
-## 测试表达式 expr 是否符合通关要求，并返回相关信息。
-## 
-## 返回的是 [msg, additional_info]: [String, *]，
-## 若表达式不合法，返回 ["INVALID", pos]，其中 pos: Array 是出错的位置。
-## 若不满足笑脸要求，返回 ["SMILE_UNSATISFIED", pos]，其中 pos: int 是没有笑脸的位置。
-## 若表达式不恒为正，返回 ["NOT_ALWAYS_TRUE", var_values]，其中 var_values: Dictionary[String, bool] 是一种使得表达式为假的变量取值。
-## 否则符合要求，返回 ["OK", 200]。
-
-static func check(expr: String, req_pos: Array) -> Array:	
+## 测试表达式 [param expr] 是否符合通关要求，并返回相关信息。
+## [br][br]
+## [param req_pos: Array[int]] 为要求是笑脸的表达式下标列表。
+## [br][br]
+## 若表达式不合法，返回 [code]["INVALID", pos][/code]，其中 [code]pos: Array[/code] 是出错的位置。
+## [br][br]
+## 若不满足笑脸要求，返回 [code]["SMILE_UNSATISFIED", pos][/code]，其中 [code]pos: int[/code] 是没有笑脸的位置。
+## [br][br]
+## 若表达式不恒为正，返回 [code]["NOT_ALWAYS_TRUE", var_values][/code]，其中 [code]var_values: Dictionary[String, bool][/code] 是一种使得表达式为假的变量取值。
+## [br][br]
+## 否则符合要求，返回 [code]["OK", 200][/code]。
+static func check(expr: String, req_pos: Array) -> Array:
 	var tmp
 
 	
@@ -295,9 +319,9 @@ static func check(expr: String, req_pos: Array) -> Array:
 	return ["OK", 200]
 
 
-static func test():
+# static func test():
 	#check("q*Pq*bd*b=D", [])
-	check("0=P<>P", [])	
+	# check("0=P<>P", [])	
 	#assert(check("(1=P)+(0=P)", []) == ["OK", 200], "9")
 	#assert(check("Q+P=P+Q", [3, 4]) == ["OK", 200], "1")
 	#assert(check("Q+P=P+Q", [4]) == ["OK", 200], "2")
