@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.1.0](https://github.com/ligen131/equal_to_p/compare/v1.0.0...v1.1.0) (2024-02-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* **card.gd:** get_top_prior_entered_block() 会选择占有 Card 的 Block。
+
+### Features
+
+* **card_base.gd:** 添加 get_card_count() 函数 ([0e441f9](https://github.com/ligen131/equal_to_p/commit/0e441f9629c038f8bc7f6edf71a4f7803cab2ef8))
+* **card.gd:** 添加交换两个卡槽 Card 的功能 ([c1a40fc](https://github.com/ligen131/equal_to_p/commit/c1a40fcaa15331053542602c546f575883daff34))
+* **cursor_manager:** 添加鼠标指针动画管理 ([0e86a48](https://github.com/ligen131/equal_to_p/commit/0e86a48cecb3032c43c7c71787532cb3895591dd))
+* **main.tscn:** 添加 CursorManager ([b7ba5d5](https://github.com/ligen131/equal_to_p/commit/b7ba5d5deabccac93a2aa7a16ef0c95f7e7ef482))
+
+
+### Bug Fixes
+
+* **card_base.gd:** 删除鼠标指针处理 ([27598eb](https://github.com/ligen131/equal_to_p/commit/27598eb6eeffcbbd59d408cb7a0ca3d96c591ee8))
+* **card.gd:** 修复交换导致的通关可能引起震动的 bug ([1b20ad9](https://github.com/ligen131/equal_to_p/commit/1b20ad90054782f33b70309b1d29293412aefd05))
+* **card.gd:** 删除鼠标指针处理 ([6cfe64f](https://github.com/ligen131/equal_to_p/commit/6cfe64f9010a46701b0c7411468abc87586655ab))
+* **main.gd:** 删除空 _ready() 函数导致的错误 ([d25a015](https://github.com/ligen131/equal_to_p/commit/d25a015aa5b9f0ed9b1d4d63de9086dacd8aa771))
+* **main.gd:** 删除鼠标指针处理 ([7faa392](https://github.com/ligen131/equal_to_p/commit/7faa392eacdb94881f7c719310d7dfb69d64d574))
+
+
+### Miscellaneous Chores
+
+* release 1.1.0 ([616c740](https://github.com/ligen131/equal_to_p/commit/616c7404cd4387874169f08f94709b8d876ad705))
+
 ## 1.0.0 (2024-02-14)
 
 
