@@ -1,21 +1,18 @@
-extends Area2D  
+## 写有单个字符的卡牌方块。由 [CardBase] 生成，可以被填入表达式的空格（即有空位的 [Block]）中。
+class_name Card extends Area2D  
 
-class_name Card 
 
-
-var is_dragging := false  ## 是否正在被拖拽。
 
 var current_block: Block = null ## 当前所占用的 Block 对象。
-
-var is_victory := false  ## 是否已通关。
-
-var shake_amount : float  ## 震动幅度（单位为像素）。
+var is_dragging := false  ## 是否正在被鼠标拖拽。
 var is_shaking := false  ## 是否正在震动。
+var is_victory := false  ## 是否已通关。
+var shake_amount : float  ## 震动幅度（单位为像素）。
 
 
 
-## 获取当前最近的，Area 相交的，且未被占用的 Block。
-##
+## 获取当前最近的，[Area2D] 相交的，且未被占用的 [Block]。
+## [br][br]
 ## 距离按两个中心点间的距离计算。
 func get_top_prior_entered_block() -> Block:
 	var top_block: Block = null
@@ -27,8 +24,8 @@ func get_top_prior_entered_block() -> Block:
 
 
 ## 进行被拾取时的处理。
-##
-## 一般在生成 Card 时，以及鼠标移到 Card 上点击鼠标左键时调用。
+## [br][br]
+## 一般在生成 [Card] 时，以及鼠标移到 [Card] 上点击鼠标左键时调用。
 func pick_up():
 	self.z_index += 1
 	self.is_dragging = true
@@ -38,8 +35,8 @@ func pick_up():
 
 
 ## 进行被放下时的处理。
-##
-## 一般在 Card 被拖动的过程中，点击鼠标右键时调用。
+## [br][br]
+## 一般在 [Card] 被拖动的过程中，点击鼠标右键时调用。
 func put_down(): 
 	self.z_index -= 1
 	var entered_block := get_top_prior_entered_block()
@@ -56,11 +53,9 @@ func put_down():
 		queue_free()	
 
 
-## 使 Card 开始震动。
-##
-## * is_letter_red：是否要将字符颜色改为红色
-## * amount：震动幅度
-## * duration：震动持续时长
+## 使 [Card] 开始震动。 [param amount] 和 [param duration] 为震动幅度和震动持续时间。
+## [br][br]
+## 若 [param is_letter_red] 为 [code]true[/code]，则将字符颜色改为红色。
 func shake(is_letter_red: bool, amount: float, duration: float) -> void:
 	$ShakeTimer.wait_time = duration
 	self.shake_amount = amount
@@ -75,18 +70,18 @@ func shake(is_letter_red: bool, amount: float, duration: float) -> void:
 		$HighlightSprite.visible = false
 		
 
-## 设置字符颜色。
-func set_color(value: Color) -> void:  # 设置颜色函数
+## 设置字符颜色为 [param value]。
+func set_color(value: Color) -> void: 
 	$Word.set_color(value)  # 设置文字颜色
 
 
-## 设置是否为胜利状态。
-func set_victory(v: bool):  # 设置胜利状态函数
+## 若 [param v] 为 [code]true[/code]，则进行通关时的处理。
+func set_victory(v: bool): 
 	if v:
 		$CollisionShape2D.set_deferred("disabled", true)  # 如果胜利，禁用碰撞形状
 
 
-## 设置字符为 value，同时更新卡背颜色。
+## 设置字符为 [param value]，同时更新卡背颜色。
 func set_word(value: String) -> void:
 	$Word.set_word(value) 
 	var card_type := "card-%s" % ExprValidator.get_char_type_as_str(get_word()).to_lower()  # 根据单词类型获取卡牌类型
@@ -130,7 +125,7 @@ func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed(): # 如果按下左键，则拾取 Card
 				pick_up()
-			elif self.is_dragging: # 否则则是放开左键，此时若 Card 正在拖拽，则放下
+			elif self.is_dragging: # 否则则是放开左键，此时若 [Card] 正在拖拽，则放下
 				put_down()
 			
 		elif event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():  # 按下右键时
