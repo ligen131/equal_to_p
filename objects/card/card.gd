@@ -48,8 +48,6 @@ func put_down():
 		$SFXPutDown.play() 
 
 		entered_block.set_card(self)
-
-		Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)  # 设置鼠标指针形状为手形
 		
 	else:
 		queue_free()	
@@ -107,7 +105,6 @@ func _ready():
 func _process(_delta: float) -> void:
 	if self.is_dragging:  # 如果正在拖拽
 		self.global_position = get_global_mouse_position().round()  # 将卡牌位置设置为鼠标位置的全局位置，四舍五入取整
-		Input.set_default_cursor_shape(Input.CURSOR_DRAG)  # 设置鼠标指针形状为拖拽形状
 		
 	var offset := 0
 	if self.is_shaking:  
@@ -138,12 +135,10 @@ func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void
 
 func _on_mouse_entered():
 	$HighlightSprite.visible = true
-	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)  # 设置鼠标指针形状为手形
 
 
 func _on_mouse_exited():
 	$HighlightSprite.visible = false
-	Input.set_default_cursor_shape(Input.CURSOR_ARROW)  # 设置鼠标指针形状为箭头
 
 
 func _on_tree_exiting():

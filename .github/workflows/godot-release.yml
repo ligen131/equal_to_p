@@ -1,7 +1,8 @@
-name: "godot-ci export"
-on: 
-  - push
-  - pull_request
+name: "godot-release"
+on:
+  push:
+    tags:
+      - "v*"
 
 env:
   GODOT_VERSION: 4.2.1
@@ -26,7 +27,7 @@ jobs:
       - name: Windows Build
         run: |
           mkdir -v -p build/windows
-          godot --headless --verbose --export-debug "Windows Desktop" build/windows/$EXPORT_NAME.exe
+          godot --headless --verbose --export-release "Windows Desktop" build/windows/$EXPORT_NAME.exe
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -50,7 +51,7 @@ jobs:
       - name: Linux Build
         run: |
           mkdir -v -p build/linux
-          godot --headless --verbose --export-debug "Linux/X11" build/linux/$EXPORT_NAME.x86_64
+          godot --headless --verbose --export-release "Linux/X11" build/linux/$EXPORT_NAME.x86_64
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -74,7 +75,7 @@ jobs:
       - name: Web Build
         run: |
           mkdir -v -p build/web
-          godot --headless --verbose --export-debug "Web" build/web/index.html
+          godot --headless --verbose --export-release "Web" build/web/index.html
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync curl
@@ -89,6 +90,11 @@ jobs:
         with:
           name: web
           path: build/web
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build/web # The folder the action should deploy.
 
   export-mac:
     name: Mac Export
@@ -107,7 +113,7 @@ jobs:
       - name: Mac Build
         run: |
           mkdir -v -p build/mac
-          godot --headless --verbose --export-debug "mac" build/mac/$EXPORT_NAME.zip
+          godot --headless --verbose --export-release "mac" build/mac/$EXPORT_NAME.zip
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
