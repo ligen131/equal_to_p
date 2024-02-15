@@ -1,10 +1,5 @@
-extends Node
+class_name Main extends Node
 
-
-
-
-
-func _ready():	
 
 
 func _on_main_menu_enter_level():
