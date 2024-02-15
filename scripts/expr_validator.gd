@@ -48,38 +48,46 @@ const IS_PAIR_VALID := [
 	[1, 1, 1, 1, 0, 0]
 ]
 
-enum {OP, COMP, BRACL, BRACR, VAR, CONST}
+## 字符类型。
+enum CharType {
+	OP, ## 算术运算符，包括 [code]*[/code] 和 [code]+[/code]。
+	COMP, ## 比较运算符，包括 [code]<[/code]，[code]=[/code] 和 [code]>[/code]。 
+	BRACL, ## 左括号。
+	BRACR, ## 右括号。
+	VAR, ## 变量，即字母。
+	CONST ## 常量，0 或 1。
+}
 
 
-static func get_char_type(ch: String) -> int:
+static func get_char_type(ch: String) -> CharType:
 	if ch == "*" or ch == "+":
-		return OP
+		return CharType.OP
 	elif ch == "<" or ch == "=" or ch == ">":
-		return COMP
+		return CharType.COMP
 	elif ch == "(":
-		return BRACL
+		return CharType.BRACL
 	elif ch == ")":
-		return BRACR
+		return CharType.BRACR
 	elif ch == "0" or ch == "1":
-		return CONST
+		return CharType.CONST
 	elif is_alpha(ch):
-		return VAR
+		return CharType.VAR
 	else:
 		push_error("get_char_type(%s) is undefined" % ch)
 		return -1
 	
-static func get_char_type_enum_name(value: int) -> String:
-	if value == OP:
+static func get_char_type_enum_name(value: CharType) -> String:
+	if value == CharType.OP:
 		return "OP"
-	elif value == COMP:
+	elif value == CharType.COMP:
 		return "COMP"
-	elif value == BRACL:
+	elif value == CharType.BRACL:
 		return "BRACL"
-	elif value == BRACR:
+	elif value == CharType.BRACR:
 		return "BRACR"
-	elif value == VAR:
+	elif value == CharType.VAR:
 		return "VAR"
-	elif value == CONST:
+	elif value == CharType.CONST:
 		return "CONST"
 	else:
 		push_error("get_char_type_enum_name(%d) is undefined" % value)
@@ -90,8 +98,8 @@ static func get_char_type_as_str(ch: String) -> String:
 	
 	
 static func has_implict_prod(string: String) -> bool:
-	return get_char_type(string[0]) in [BRACR, VAR, CONST] and get_char_type(string[1]) in [BRACL, VAR, CONST]
-	
+	return get_char_type(string[0]) in [CharType.BRACR, CharType.VAR, CharType.CONST] and get_char_type(string[1]) in [CharType.BRACL, CharType.VAR, CharType.CONST]
+
 static func get_priority(ch: String) -> int:
 	if ch == "*":
 		return 4
@@ -117,7 +125,7 @@ static func infix_to_suffix(expr: String) -> String:
 	
 	for ch in expr:
 		if pre_ch != "@" and has_implict_prod(pre_ch + ch):
-			if not opt_stack.is_empty() and (get_char_type("*") != COMP or get_char_type(opt_stack.back()) != COMP):
+			if not opt_stack.is_empty() and (get_char_type("*") != CharType.COMP or get_char_type(opt_stack.back()) != CharType.COMP):
 				while not opt_stack.is_empty() and get_priority("*") <= get_priority(opt_stack.back()):
 					res += opt_stack.back()
 					opt_stack.pop_back()
@@ -126,7 +134,7 @@ static func infix_to_suffix(expr: String) -> String:
 			
 			
 		#print("ch=", ch, " stk=", opt_stack, " res=", res)
-		if get_char_type(ch) in [VAR, CONST]:
+		if get_char_type(ch) in [CharType.VAR, CharType.CONST]:
 			res += ch
 		elif ch == "(":
 			opt_stack.push_back(ch)
@@ -136,12 +144,12 @@ static func infix_to_suffix(expr: String) -> String:
 				opt_stack.pop_back()
 			opt_stack.pop_back()
 		else:
-			if get_char_type(pre_ch) != COMP or get_char_type(ch) != COMP:
+			if get_char_type(pre_ch) != CharType.COMP or get_char_type(ch) != CharType.COMP:
 				while not opt_stack.is_empty() and get_priority(ch) <= get_priority(opt_stack.back()):
 					res += opt_stack.back()
 					opt_stack.pop_back()
 			opt_stack.push_back(ch)
-		if not res.is_empty() and get_char_type(res[len(res) - 1]) == COMP:
+		if not res.is_empty() and get_char_type(res[len(res) - 1]) == CharType.COMP:
 			res += "@"
 		pre_ch = ch
 			
@@ -149,7 +157,7 @@ static func infix_to_suffix(expr: String) -> String:
 		res += opt_stack.back()
 		opt_stack.pop_back()
 
-	if get_char_type(res[len(res) - 1]) == COMP:
+	if get_char_type(res[len(res) - 1]) == CharType.COMP:
 		res += "@"
 	#prints(expr, res)
 	
@@ -170,12 +178,12 @@ static func calculate_value(expr: String, var_values: Dictionary) -> bool:
 			val = false
 		
 		
-		elif get_char_type(ch) in [VAR, CONST]:
+		elif get_char_type(ch) in [CharType.VAR, CharType.CONST]:
 			if is_alpha(ch):
 				stack.push_back(var_values[ch])
 			else:
 				stack.push_back(ch == "1")
-		elif get_char_type(ch) == COMP:
+		elif get_char_type(ch) == CharType.COMP:
 			if ch == "<":
 				val = val or (stack[len(stack) - 2] < stack[len(stack) - 1])
 			elif ch == "=":
@@ -199,9 +207,9 @@ static func calculate_value(expr: String, var_values: Dictionary) -> bool:
 ##
 ## 合法返回 []，否则返回不合法的下标。
 static func check_valid(expr: String) -> Array:
-	if get_char_type(expr[0]) != BRACL and get_char_type(expr[0]) not in [VAR, CONST]:
+	if get_char_type(expr[0]) != CharType.BRACL and get_char_type(expr[0]) not in [CharType.VAR, CharType.CONST]:
 		return [0]
-	if get_char_type(expr[len(expr) - 1]) != BRACR and get_char_type(expr[len(expr) - 1]) not in [VAR, CONST]:
+	if get_char_type(expr[len(expr) - 1]) != CharType.BRACR and get_char_type(expr[len(expr) - 1]) not in [CharType.VAR, CharType.CONST]:
 		return [len(expr) - 1]
 	for i in range(len(expr) - 1):
 		if not IS_PAIR_VALID[get_char_type(expr[i])][get_char_type(expr[i + 1])]:
