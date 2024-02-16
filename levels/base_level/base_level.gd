@@ -167,8 +167,8 @@ func _on_block_occupied_card_changed(_node) -> void:
 				if i != 0:
 					if ExprValidator.is_smile(expr[i-1]+expr[i]):
 						# print(expr[i-1]+expr[i])
-						block_array[i-1].set_color(ImageLib.PALETTE["golden"])
-						block_array[i].set_color(ImageLib.PALETTE["golden"])
+						block_array[i-1].set_color(ImageLib.get_palette_color_by_name("golden"))
+						block_array[i].set_color(ImageLib.get_palette_color_by_name("golden"))
 
 func _input(event: InputEvent):
 	if event is InputEventKey:
