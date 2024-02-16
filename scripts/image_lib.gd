@@ -75,6 +75,20 @@ static func replace_palette_colors_in_image(image: Texture2D) -> Texture2D:
 	return ImageTexture.create_from_image(new_texture)
 
 
+## 为 [AnimatedSprite2D] [param sprite] 生成动画并播放。
+## [br][br]
+## 动画图像的路径模式串为 [param path_pattern]，应当为仅带一个 [code]%d[/code] 的模式串或常量串。[param start] 为起始帧编号，[param n] 为帧的数量，[param step] 为每帧之间编号的差值。
+## [br][br]
+## 图像会按照 [code]path_pattern % (i * step + start)[/code] 进行加载，其中 [code]i in range(n)[/code]。
+## [br][br]
+## 加载时，会先将图像里的所有 [Color] [param old_color] 替换为 [Color] [param new_color]，再将 [member PALETTE] 里出现的 [Color] 替换为当前配色主题下相同代号的 [Color]。
+## [br][br]
+## 示例：
+## [codeblock]
+## # 载入 res://image2.png, res://image22.png, res://image42.png 作为动画，设置 self 播放。
+## # 载入时，先将图片中的白色替换为红色，再将 PALETTE 中出现的颜色替换为当前主题下的同名色。
+## update_animation(self, 2, 3, 20, "res://image%d.png", Color.WHITE, Color.RED)
+## [/codeblock]
 static func update_animation(
 	sprite: AnimatedSprite2D,
 	start: int,
