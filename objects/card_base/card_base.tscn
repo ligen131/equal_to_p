@@ -42,6 +42,8 @@ sprite_frames = SubResource("SpriteFrames_bhb3x")
 
 [node name="Word" parent="." instance=ExtResource("2_jvsp3")]
 frame_progress = 0.953211
+text_id = null
+color = null
 
 [node name="HighlightSprite" type="Sprite2D" parent="."]
 visible = false
