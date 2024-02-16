@@ -9,11 +9,11 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_nb6uf")
 
+[node name="DynamicBg" parent="." instance=ExtResource("2_8k4il")]
+offset_right = 0.0
+offset_bottom = 0.0
+
 [node name="MainMenu" parent="." instance=ExtResource("1_fk6j6")]
-
-[node name="Bg" type="Node" parent="."]
-
-[node name="DynamicBg" parent="Bg" instance=ExtResource("2_8k4il")]
 
 [node name="BGMPlayer" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(234, 150)

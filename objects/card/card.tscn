@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://objects/card/card.gd" id="1_0bviv"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="1_ns36n"]
-[ext_resource type="Texture2D" uid="uid://cfbqh1k0etr6g" path="res://objects/card/card1.png" id="3_o4f0v"]
-[ext_resource type="Texture2D" uid="uid://c8qjbksyn1bqt" path="res://objects/card/card2.png" id="4_c30j1"]
-[ext_resource type="Texture2D" uid="uid://bevrfq1hhyqwe" path="res://objects/card/card3.png" id="5_w81n3"]
+[ext_resource type="Texture2D" uid="uid://mmtuv34pq4t2" path="res://objects/card/card1.png" id="2_m034v"]
+[ext_resource type="Texture2D" uid="uid://ct5w4n7kylfuc" path="res://objects/card/card2.png" id="3_2vd1f"]
+[ext_resource type="Texture2D" uid="uid://c6f6j4aln0qvp" path="res://objects/card/card3.png" id="4_wleyv"]
 [ext_resource type="Texture2D" uid="uid://pmapbo480in1" path="res://objects/card/card_highlight_border.png" id="7_kix4t"]
 [ext_resource type="AudioStream" uid="uid://cj4v8ehypq3sk" path="res://objects/card/put_down.wav" id="7_u4ylf"]
 
@@ -12,13 +12,13 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_o4f0v")
+"texture": ExtResource("2_m034v")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_c30j1")
+"texture": ExtResource("3_2vd1f")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_w81n3")
+"texture": ExtResource("4_wleyv")
 }],
 "loop": true,
 "name": &"default",

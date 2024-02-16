@@ -62,11 +62,19 @@ func draw_card():
 ## 设置字符为 e，并更新卡背颜色。
 func set_word(e: String) -> void:
 	$Word.set_word(e)
+
+	var new_color_name: String
+	if ExprValidator.get_char_type_as_str(e) in ["VAR", "CONST"]:
+		new_color_name = "light"
+	else:
+		new_color_name = "lightest"
+	ImageLib.update_animation(
+		$CardBaseSprite, 1, 3, 1, "res://objects/card_base/card_base.png",
+		ImageLib.get_palette_color_by_info("blue", "light"),
+		ImageLib.get_palette_color_by_name(new_color_name)
+	)
 	
-	var card_type := "card-%s" % ExprValidator.get_char_type_as_str(e).to_lower()
-	if ImageLib.PALETTE.has(card_type):
-		ImageLib.update_animation($CardBaseSprite, 1, 1, 1, "res://objects/card_base/card_base%d.png", 
-								  ImageLib.PALETTE["lightblue"], ImageLib.PALETTE[card_type])
+	$DisabledSprite.texture = ImageLib.replace_palette_colors_in_image($DisabledSprite.texture)
 	
 
 ## 获取字符。
@@ -129,5 +137,5 @@ func _on_mouse_exited():
 		available_stat = DEFAULT
 
 
-func _on_cards_child_exiting_tree(node: Node) -> void:
+func _on_cards_child_exiting_tree(_node: Node) -> void:
 	set_card_count(self.card_count + 1)

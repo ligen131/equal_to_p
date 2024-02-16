@@ -83,7 +83,7 @@ func shake(is_letter_red: bool, amount: float, duration: float) -> void:
 	self.is_shaking = true
 	
 	if is_letter_red:
-		$Word.set_color(ImageLib.PALETTE["red"])
+		$Word.set_color(ImageLib.get_palette_color_by_name("red"))
 	else:
 		$HighlightSprite.visible = false
 		
@@ -102,12 +102,17 @@ func set_victory(v: bool):
 ## 设置字符为 [param value]，同时更新卡背颜色。
 func set_word(value: String) -> void:
 	$Word.set_word(value) 
-	var card_type := "card-%s" % ExprValidator.get_char_type_as_str(get_word()).to_lower()  # 根据单词类型获取卡牌类型
-	if ImageLib.PALETTE.has(card_type):  # 如果配色盘中包含该卡牌类型对应颜色，则更新卡背颜色
-		ImageLib.update_animation(
-			$CardBackSprite, 1, 3, 1, "res://objects/card/card%d.png", 
-			ImageLib.PALETTE["lightblue"], ImageLib.PALETTE[card_type] 
-		)
+	var new_color_name: String
+	if ExprValidator.get_char_type_as_str(get_word()) in ["VAR", "CONST"]:
+		new_color_name = "light"
+	else:
+		new_color_name = "lightest"
+	
+	ImageLib.update_animation(
+		$CardBackSprite, 1, 3, 1, "res://objects/card/card%d.png",
+		ImageLib.get_palette_color_by_info("blue", "light"),
+		ImageLib.get_palette_color_by_name(new_color_name)
+	)
 
 
 ## 获取字符。
@@ -166,4 +171,4 @@ func _on_tree_exiting():
 
 func _on_shake_timer_timeout():
 	self.is_shaking = false
-	$Word.set_color(ImageLib.PALETTE["default"])
+	$Word.set_color(ImageLib.get_palette_color_by_name("black"))

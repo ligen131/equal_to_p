@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://d35prv6j48a2y"]
 
 [ext_resource type="Script" path="res://objects/card_base/card_base.gd" id="1_k5qn1"]
+[ext_resource type="Texture2D" uid="uid://bf6r7pnuuk5kr" path="res://objects/card_base/card_base.png" id="2_jovan"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="2_jvsp3"]
 [ext_resource type="FontFile" uid="uid://1000owdyvwfg" path="res://fonts/unifont-15.1.04.otf" id="3_0qykx"]
-[ext_resource type="Texture2D" uid="uid://b5d2rfms7vyfi" path="res://objects/card_base/card_base1.png" id="3_h7i1h"]
 [ext_resource type="Texture2D" uid="uid://bkjbrw1ppac5q" path="res://objects/card_base/card_base_disabled.png" id="4_0unxr"]
 [ext_resource type="Texture2D" uid="uid://bkuwo3g8pyuyi" path="res://objects/card_base/card_base_highlight_border.png" id="5_r41oe"]
 [ext_resource type="AudioStream" uid="uid://0sefo32v1jne" path="res://objects/card_base/pick_up.wav" id="7_0c7kt"]
@@ -15,7 +15,7 @@ size = Vector2(28, 26)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_h7i1h")
+"texture": ExtResource("2_jovan")
 }],
 "loop": true,
 "name": &"default",
@@ -42,6 +42,8 @@ sprite_frames = SubResource("SpriteFrames_bhb3x")
 
 [node name="Word" parent="." instance=ExtResource("2_jvsp3")]
 frame_progress = 0.953211
+text_id = null
+color = null
 
 [node name="HighlightSprite" type="Sprite2D" parent="."]
 visible = false

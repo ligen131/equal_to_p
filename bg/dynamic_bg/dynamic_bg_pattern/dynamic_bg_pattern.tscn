@@ -4,11 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="2_7jm3n"]
 
 [node name="DynamicBgPattern" type="Node2D"]
-modulate = Color(1, 1, 1, 0.12549)
 script = ExtResource("1_hrrmh")
 
 [node name="Word1" parent="." instance=ExtResource("2_7jm3n")]
 position = Vector2(-6, 0)
+text_id = null
+color = null
 
 [node name="Word2" parent="." instance=ExtResource("2_7jm3n")]
 position = Vector2(6, 0)
+text_id = null
+color = null

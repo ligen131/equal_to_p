@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://7kd53bu4qorc"]
+[gd_scene load_steps=6 format=3 uid="uid://7kd53bu4qorc"]
 
 [ext_resource type="Texture2D" uid="uid://1gcwvbyjejey" path="res://objects/table_cloth/table_cloth.png" id="1_8qui1"]
 [ext_resource type="Texture2D" uid="uid://cb5gytqlvjj2v" path="res://objects/table_cloth/golden_cloth.png" id="2_3edv5"]
+[ext_resource type="Script" path="res://objects/table_cloth/table_cloth.gd" id="2_wo6il"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_js8qc"]
 texture = ExtResource("1_8qui1")
@@ -23,6 +24,7 @@ offset_right = 109.0
 offset_bottom = 40.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_js8qc")
+script = ExtResource("2_wo6il")
 
 [node name="GoldenCloth" type="Panel" parent="."]
 visible = false
