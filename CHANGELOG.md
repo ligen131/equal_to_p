@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.2.0](https://github.com/ligen131/equal_to_p/compare/v1.1.0...v1.2.0) (2024-02-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **main:** $Bg 节点删除，原 $Bg/DynamicBg 节点移至 $DynamicBg。
+* **dynamic_bg:** DynamicBg 现改为 ColorRect 类型。
+* **image_lib.gd:** 原 PALETTE 废用，update_animation 函数更改。
+
+### Features
+
+* **dynamic_bg:** 添加背景色和更改配色功能 ([7951dd6](https://github.com/ligen131/equal_to_p/commit/7951dd601ce0d19c2cc5f0e513dfd1c3d49dd0c8))
+* **golden_cloth.png:** 去除棕黄色内框 ([af326e3](https://github.com/ligen131/equal_to_p/commit/af326e382d83762bcb3e1a91fde00f90c244d3f8))
+* **image_lib.gd:** 添加主题、配色版和相关函数 ([c1575a9](https://github.com/ligen131/equal_to_p/commit/c1575a9a8b9b85e0f728d4bdcb32f811242d9118))
+* **styled_button:** 添加 disabled 和更改颜色功能 ([ecfddb6](https://github.com/ligen131/equal_to_p/commit/ecfddb64263078d1a49e6a86fe1dbd1662b47c8f))
+* 添加根据主题更改配色功能 ([7a1fc70](https://github.com/ligen131/equal_to_p/commit/7a1fc70d2dbebb2d6bf32a393072d7ee279965ac))
+
+
+### Bug Fixes
+
+* **card_base.tscn:** 修复 Sprite 路径错误问题 ([7fd6d3e](https://github.com/ligen131/equal_to_p/commit/7fd6d3efb64afc41306073ba68fe0f8bcf114d54))
+
+
+### Miscellaneous Chores
+
+* release 1.2.0 ([1a5589e](https://github.com/ligen131/equal_to_p/commit/1a5589e2a5deb3f2bc42b673d5081fa91f661c70))
+
+
+### Code Refactoring
+
+* **main:** 将 $Bg/DynamicBg 移到根节点下 ([ed1327a](https://github.com/ligen131/equal_to_p/commit/ed1327a03556b81ad57d9d813a23e2112c0b360a))
+
 ## [1.1.0](https://github.com/ligen131/equal_to_p/compare/v1.0.0...v1.1.0) (2024-02-15)
 
 
