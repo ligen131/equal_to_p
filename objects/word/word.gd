@@ -41,7 +41,7 @@ func set_text_id(value: int) -> void:
 
 ## 根据当前的 [member text_id] 更新动画。
 func update_animation() -> void:
-	ImageLib.update_animation(self, text_id + 1, 3, STEP, "res://objects/word/sprites/sprite%d.png", Color.BLACK, color)
+	ImageLib.update_animation(self, text_id + 1, 3, STEP, "res://objects/word/sprites/sprite%d.png", Color.BLACK, self.color)
 	
 	
 
@@ -75,9 +75,9 @@ func set_color(value: Color) -> void:
 func set_victory(v: bool) -> void:
 	push_warning("void set_victory(v: bool) is deprecated.")
 	if v:
-		set_color(ImageLib.PALETTE["golden"])
+		set_color(ImageLib.get_palette_color_by_name("golden"))
 	else:
-		set_color(ImageLib.PALETTE["default"])
+		set_color(ImageLib.get_palette_color_by_name("black"))
 
 
 
