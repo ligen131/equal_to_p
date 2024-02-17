@@ -77,7 +77,7 @@ static func get_char_type(ch: String) -> CharType:
 		return CharType.VAR
 	else:
 		push_error("get_char_type(%s) is undefined" % ch)
-		return -1
+		return CharType.CONST
 	
 
 ## 获取值等于 [param value] 的 [enum CharType] 名称。
