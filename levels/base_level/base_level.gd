@@ -14,11 +14,10 @@ var BaseLevelScn = load("res://levels/base_level/base_level.tscn")
 
 const HEIGHT := 1080 / 4
 const WIDTH := 1920 / 4
-const SEP := 28
+const PADDING := 5
+const MARGIN := 12
 const CARDS_SEP := 34
 
-
-const I_NUMBER = ["I","II","III","VI","V"]
 
 
 var expr := ""
@@ -46,8 +45,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	var choices = count(LevelData.LEVEL_DATA[chap_id][lvl_id]["choices"].replace(" ", "").replace("X", "*"))
 	
 	
-	$HUDs/Title.set_text("%s-%d  %s" % [I_NUMBER[chap_id], lvl_id + 1, lvl_name])
-	
+	$HUDs/Title.set_text("%d-%d  %s" % [chap_id + 1, lvl_id + 1, lvl_name])
 	
 	
 	question = question.replace("[]", ".")
@@ -55,22 +53,22 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 		
 	
 	var table_cloth = TableClothScn.instantiate()
-	var sep := SEP
+	var padding: int
 	
 	if len(question) >= 16:
-		sep = SEP
+		padding = 0
 	else:
-		sep = int((1 - len(question) / 16.0) * SEP * 0.3) + SEP
+		padding = int((1 - len(question) / 16.0) * 6 + 0.5) / 2 * 2
 	
-	table_cloth.size.x = sep * len(question) + 16 + 4
+	table_cloth.size.x = MARGIN * 2 + 28 * len(question) + padding * (len(question) - 1)
 	table_cloth.size.y = 48
-	table_cloth.get_child(0).size.x = sep * len(question) + 16 + 4
+	table_cloth.get_child(0).size.x = MARGIN * 2 + 28 * len(question) + padding * (len(question) - 1)
 	table_cloth.get_child(0).size.y = 48
-	table_cloth.position.x = WIDTH / 2 - sep * len(question) / 2 - 7
-	table_cloth.position.y = HEIGHT / 2 - 24
+	table_cloth.position.x = WIDTH / 2 - table_cloth.size.x / 2
+	table_cloth.position.y = HEIGHT / 2 - table_cloth.size.y / 2
 	$HUDs.add_child(table_cloth)
 		
-	var pos := WIDTH / 2 - sep * len(question) / 2 + 12 + 7
+	var pos: int = table_cloth.position.x + MARGIN + 28 / 2
 	for i in range(len(question)):
 		var ch: String = question[i]
 		
@@ -88,7 +86,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 			else:
 				new_block.set_is_golden_frame(false)
 		new_block.set_position(Vector2(pos, HEIGHT / 2))
-		pos += sep
+		pos += 28 + padding
 		
 		$Blocks.add_child(new_block)
 
@@ -97,8 +95,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	expr = question
 	# print(expr)
 	
-	
-	pos = WIDTH / 2 - CARDS_SEP * len(choices) / 2 + 16
+	pos = WIDTH / 2 - CARDS_SEP * (len(choices) - 1) / 2
 	for ch in choices:
 		var new_card_base: CardBase = CardBaseScn.instantiate()
 

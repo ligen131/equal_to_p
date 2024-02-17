@@ -34,6 +34,6 @@ wait_time = 0.3
 one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3"]
-position = Vector2(20, 21)
+position = Vector2(17, 17)
 sprite_frames = SubResource("SpriteFrames_r0kjg")
 autoplay = "default"
