@@ -57,7 +57,7 @@ script = ExtResource("1_diojb")
 [node name="BackButton" parent="HUDs" instance=ExtResource("2_0egdl")]
 
 [node name="icon" type="AnimatedSprite2D" parent="HUDs/BackButton"]
-position = Vector2(8, 8)
+position = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_yulkh")
 animation = &"return"
 centered = false
@@ -72,11 +72,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ReplayButton" parent="HUDs" instance=ExtResource("2_0egdl")]
-offset_left = 440.0
+offset_left = 446.0
 offset_right = 480.0
 
 [node name="icon" type="AnimatedSprite2D" parent="HUDs/ReplayButton"]
-position = Vector2(6, 6)
+position = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_5hm0m")
 animation = &"replay"
 centered = false

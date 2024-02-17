@@ -30,7 +30,7 @@ script = ExtResource("1_sd65g")
 [node name="BackButton" parent="." instance=ExtResource("2_saprs")]
 
 [node name="icon" type="AnimatedSprite2D" parent="BackButton"]
-position = Vector2(8, 8)
+position = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_waq31")
 animation = &"return"
 centered = false
