@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cother2aiigge"]
+[gd_scene load_steps=16 format=3 uid="uid://cother2aiigge"]
 
 [ext_resource type="Script" path="res://levels/base_level/base_level.gd" id="1_diojb"]
 [ext_resource type="PackedScene" uid="uid://bepyyenjtc0p3" path="res://levels/chapter_menu/level_menu/level_button/level_button.tscn" id="2_0egdl"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cuyseoi8y3567" path="res://objects/styled_button/replay1.png" id="7_xfna7"]
 [ext_resource type="Texture2D" uid="uid://dhjiokm51casd" path="res://objects/styled_button/replay2.png" id="8_60asn"]
 [ext_resource type="Texture2D" uid="uid://btyxqeveaeh6h" path="res://objects/styled_button/replay3.png" id="9_gpaci"]
+[ext_resource type="PackedScene" uid="uid://csl5lwjicxroy" path="res://levels/base_level/scroll_area/scroll_area.tscn" id="11_jgqxp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yulkh"]
 animations = [{
@@ -80,6 +81,13 @@ position = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_5hm0m")
 animation = &"replay"
 centered = false
+
+[node name="ScrollLeftArea" parent="HUDs" instance=ExtResource("11_jgqxp")]
+position = Vector2(32, 135)
+
+[node name="ScrollRightArea" parent="HUDs" instance=ExtResource("11_jgqxp")]
+position = Vector2(448, 135)
+is_on_left = false
 
 [node name="Cards" type="Node" parent="."]
 
