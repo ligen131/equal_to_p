@@ -5,11 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="3_js2i2"]
 
 [node name="LevelButton" instance=ExtResource("1_4bgxw")]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 34.0
+offset_bottom = 34.0
 script = ExtResource("1_wwqfn")
 
 [node name="Word" parent="." index="0" instance=ExtResource("3_js2i2")]
-position = Vector2(19, 19)
-scale = Vector2(1.5, 1.5)
-text_id = 0
+position = Vector2(17, 17)
+
+[node name="Word1" parent="." index="2" instance=ExtResource("3_js2i2")]
+visible = false
+position = Vector2(11, 17)
+
+[node name="Word2" parent="." index="3" instance=ExtResource("3_js2i2")]
+visible = false
+position = Vector2(23, 17)

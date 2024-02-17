@@ -10,8 +10,19 @@ var button_type = 0 # type = 0 表示为选择章节的按钮， type = 1 表示
 
 
 func set_word(value: String) -> void:
-	$Word.set_word(value)
-	
+	if value.length() == 1:
+		$Word.set_word(value)
+		$Word.visible = true
+		$Word1.visible = false
+		$Word2.visible = false
+	elif value.length() == 2:
+		$Word1.set_word(value[0])
+		$Word2.set_word(value[1])
+		$Word.visible = false
+		$Word1.visible = true
+		$Word2.visible = true
+	else:
+		push_error("level button set_word error: ", value)
 
 func init(chapter_id: int, level_id : int, pos : Vector2, type : int) -> void :
 	chap_id = chapter_id
@@ -19,7 +30,7 @@ func init(chapter_id: int, level_id : int, pos : Vector2, type : int) -> void :
 
 	var txt
 	if type == 0:
-		txt = "I" + str(chapter_id + 1)
+		txt = str(chapter_id + 1)
 	else:
 		txt = str(level_id + 1)
 	set_word(txt)
