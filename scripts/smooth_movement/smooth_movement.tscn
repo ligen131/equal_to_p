@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://fxcs5dmb21q2"]
+
+[ext_resource type="Script" path="res://scripts/smooth_movement/smooth_movement.gd" id="1_88rjn"]
+
+[node name="SmoothMovement" type="Timer"]
+one_shot = true
+script = ExtResource("1_88rjn")
