@@ -181,18 +181,18 @@ func _exit_tree():
 
 func _on_back_button_pressed():
 	var level_menu = LevelMenuScn.instantiate()
-	level_menu.init(chap_id, -1)
 	get_tree().root.add_child(level_menu)
+	level_menu.init(chap_id)
 	queue_free()
 
 func _on_next_level_button_pressed():
 	if self.lvl_id == LevelData.get_chapter_level_count(self.chap_id) - 1:
 		var level_menu = LevelMenuScn.instantiate()
-		level_menu.init(chap_id + 1, -1)
 		get_tree().root.add_child(level_menu)
+		level_menu.init(chap_id)
 	else:
 		var base_level = BaseLevelScn.instantiate()
-		base_level.init(chap_id, lvl_id + 1)
+		base_level.init(chap_id, lvl_id)
 		get_tree().root.add_child(base_level)
 	queue_free()
 	
