@@ -8,36 +8,30 @@ const LevelButtonScn := preload("res://levels/chapter_menu/level_menu/level_butt
 const BaseLevelScn := preload("res://levels/base_level/base_level.tscn")
 const CreditsScn := preload("res://objects/credits/credits.tscn")
 
-@export var chapter_id : int = 0
+const WIDTH := 1920 / 4
+
+var chapter_id : int = 0
 const button_width : int = 50
 const button_heigth : int = 50
 
-func init(chap_id : int, lvl_num : int) -> void:
-	if chap_id == LevelData.get_chapter_count():
-		add_child(CreditsScn.instantiate())
-		$Title.set_text("")
-		return
-		
-	
-	if lvl_num == -1:
-		lvl_num = LevelData.get_chapter_level_count(chap_id)
-	
-	$Title.set_text(LevelData.CHAP_NAMES[chap_id]["name-en"])
-	
-	chapter_id = chap_id
-	for level_id in range(0, lvl_num):
-		#print(level_id)
-		var button = LevelButtonScn.instantiate();
-		var x : int = button_width * (level_id % 7) + 60
-		var y : int = button_heigth * (level_id / 7) + 100
-		button.init(chapter_id, level_id, Vector2(x, y), 1)
-		button.enter_level.connect(_on_button_enter_level)
-		add_child(button)
+func init(chap_id: int) -> void:
+	self.chapter_id = chap_id
+	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]
+	$LevelMenuCamera.init_position(Vector2(WIDTH * chap_id, 0))
 
 func _ready():
-	$BackButton/icon.play("return")
-	pass
+	for cid in range(LevelData.get_chapter_count()): 
+		for lid in range(LevelData.get_chapter_level_count(cid)):
+			var button = LevelButtonScn.instantiate();
+			var x := WIDTH * cid + button_width * (lid % 7) + 60
+			var y := button_heigth * (lid / 7) + 100
+			button.init(cid, lid, Vector2(x, y), 1)
+			button.enter_level.connect(_on_button_enter_level)
+			$LevelButtons.add_child(button)
 
+	$UI/PreviousChapterButton.set_disabled(chapter_id == 0)
+	$UI/NextChapterButton.set_disabled(chapter_id == LevelData.get_chapter_count() - 1)
+	
 
 func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:
 	var base_level := BaseLevelScn.instantiate()
@@ -46,15 +40,20 @@ func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:
 	get_tree().root.add_child(base_level)
 	queue_free()
 
-func _input(event: InputEvent):
-	if event is InputEventKey:
-		if event.keycode == KEY_ESCAPE and event.pressed:
-			_on_back_button_pressed()
 
-func _on_back_button_pressed():
-	var ChapterMenuScn = load("res://levels/chapter_menu/chapter_menu.tscn")
-	var chapter_menu = ChapterMenuScn.instantiate()
-	
-	chapter_menu.init()
-	get_tree().root.add_child(chapter_menu)
-	queue_free()
+func _on_previous_chapter_button_pressed():
+	self.chapter_id -= 1
+	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]
+	$UI/PreviousChapterButton.set_disabled(true)
+	$UI/NextChapterButton.set_disabled(true)
+
+
+func _on_next_chapter_button_pressed():
+	self.chapter_id += 1
+	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]
+	$UI/PreviousChapterButton.set_disabled(true)
+	$UI/NextChapterButton.set_disabled(true)
+
+func _on_smooth_movement_timeout():
+	$UI/PreviousChapterButton.set_disabled(chapter_id == 0)
+	$UI/NextChapterButton.set_disabled(chapter_id == LevelData.get_chapter_count() - 1)

@@ -30,8 +30,8 @@ texture_margin_bottom = 6.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tfhr0"]
 
 [node name="StyledButton" type="Button"]
-offset_right = 100.0
-offset_bottom = 100.0
+offset_right = 34.0
+offset_bottom = 34.0
 theme_override_styles/normal = SubResource("StyleBoxTexture_c0uot")
 theme_override_styles/hover = SubResource("StyleBoxTexture_eifmj")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_eifmj")
