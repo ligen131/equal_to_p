@@ -1,41 +1,36 @@
-[gd_scene load_steps=8 format=3 uid="uid://doirpa1bwbjhr"]
+[gd_scene load_steps=6 format=3 uid="uid://doirpa1bwbjhr"]
 
 [ext_resource type="Script" path="res://levels/chapter_menu/level_menu/level_menu.gd" id="1_sd65g"]
-[ext_resource type="PackedScene" uid="uid://bepyyenjtc0p3" path="res://levels/chapter_menu/level_menu/level_button/level_button.tscn" id="2_saprs"]
-[ext_resource type="Texture2D" uid="uid://bxda1ilvqwc6f" path="res://objects/styled_button/return1.png" id="3_6x831"]
+[ext_resource type="Script" path="res://levels/chapter_menu/level_menu/level_menu_camera.gd" id="2_4o5wo"]
+[ext_resource type="PackedScene" uid="uid://drl1xe103umpi" path="res://objects/styled_button/styled_button.tscn" id="2_66j1c"]
+[ext_resource type="PackedScene" uid="uid://fxcs5dmb21q2" path="res://scripts/smooth_movement/smooth_movement.tscn" id="3_1jj52"]
 [ext_resource type="FontFile" uid="uid://1000owdyvwfg" path="res://fonts/unifont-15.1.04.otf" id="3_jlnpm"]
-[ext_resource type="Texture2D" uid="uid://cyl7cqhs4xnux" path="res://objects/styled_button/return2.png" id="4_wd0qw"]
-[ext_resource type="Texture2D" uid="uid://b48fn2ikxq33d" path="res://objects/styled_button/return3.png" id="5_eexmd"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_waq31"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_6x831")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_wd0qw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_eexmd")
-}],
-"loop": true,
-"name": &"return",
-"speed": 5.0
-}]
 
 [node name="LevelMenu" type="Node2D"]
 script = ExtResource("1_sd65g")
 
-[node name="BackButton" parent="." instance=ExtResource("2_saprs")]
+[node name="LevelMenuCamera" type="Camera2D" parent="."]
+anchor_mode = 0
+script = ExtResource("2_4o5wo")
 
-[node name="icon" type="AnimatedSprite2D" parent="BackButton"]
-position = Vector2(5, 5)
-sprite_frames = SubResource("SpriteFrames_waq31")
-animation = &"return"
-centered = false
+[node name="SmoothMovement" parent="LevelMenuCamera" instance=ExtResource("3_1jj52")]
+smooth_type = 1
 
-[node name="Title" type="Label" parent="."]
+[node name="LevelButtons" type="Node" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PreviousChapterButton" parent="UI" instance=ExtResource("2_66j1c")]
+offset_top = 118.0
+offset_bottom = 152.0
+
+[node name="NextChapterButton" parent="UI" instance=ExtResource("2_66j1c")]
+offset_left = 446.0
+offset_top = 118.0
+offset_right = 480.0
+offset_bottom = 152.0
+
+[node name="Title" type="Label" parent="UI"]
 offset_top = 8.0
 offset_right = 480.0
 offset_bottom = 31.0
@@ -44,4 +39,8 @@ text = "Title"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="timeout" from="LevelMenuCamera/SmoothMovement" to="." method="_on_smooth_movement_timeout"]
+[connection signal="pressed" from="UI/PreviousChapterButton" to="." method="_on_previous_chapter_button_pressed"]
+[connection signal="pressed" from="UI/PreviousChapterButton" to="LevelMenuCamera" method="_on_previous_chapter_button_pressed"]
+[connection signal="pressed" from="UI/NextChapterButton" to="." method="_on_next_chapter_button_pressed"]
+[connection signal="pressed" from="UI/NextChapterButton" to="LevelMenuCamera" method="_on_next_chapter_button_pressed"]
