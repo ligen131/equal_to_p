@@ -16,8 +16,11 @@ const button_heigth : int = 50
 
 func init(chap_id: int) -> void:
 	self.chapter_id = chap_id
-	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]
+	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]["name-en"]
 	$LevelMenuCamera.init_position(Vector2(WIDTH * chap_id, 0))
+
+	$UI/PreviousChapterButton.set_disabled(chapter_id == 0)
+	$UI/NextChapterButton.set_disabled(chapter_id == LevelData.get_chapter_count() - 1)
 
 func _ready():
 	for cid in range(LevelData.get_chapter_count()): 
@@ -28,9 +31,6 @@ func _ready():
 			button.init(cid, lid, Vector2(x, y), 1)
 			button.enter_level.connect(_on_button_enter_level)
 			$LevelButtons.add_child(button)
-
-	$UI/PreviousChapterButton.set_disabled(chapter_id == 0)
-	$UI/NextChapterButton.set_disabled(chapter_id == LevelData.get_chapter_count() - 1)
 	
 
 func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:
@@ -43,14 +43,14 @@ func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:
 
 func _on_previous_chapter_button_pressed():
 	self.chapter_id -= 1
-	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]
+	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]["name-en"]
 	$UI/PreviousChapterButton.set_disabled(true)
 	$UI/NextChapterButton.set_disabled(true)
 
 
 func _on_next_chapter_button_pressed():
 	self.chapter_id += 1
-	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]
+	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]["name-en"]
 	$UI/PreviousChapterButton.set_disabled(true)
 	$UI/NextChapterButton.set_disabled(true)
 

@@ -1,4 +1,4 @@
-extends Camera2D
+class_name LevelMenuCamera extends Camera2D
 
 
 const WIDTH := 1920 / 4
