@@ -1,5 +1,41 @@
 # Changelog
 
+## [1.3.0](https://github.com/ligen131/equal_to_p/compare/v1.2.0...v1.3.0) (2024-02-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **chapter_menu:** 删除章节菜单
+* **level_menu:** LevelMenu 的场景结构发生变化。
+* **level_button:** 修改了 LevelButton 的大小，删除设置罗马数字功能。
+
+### Features
+
+* **level_button:** 修改按钮大小并添加两位数显示 ([1d741ea](https://github.com/ligen131/equal_to_p/commit/1d741ea9c6cc9ff63cb3938f8978978924ad7f36))
+* **level_menu:** 修改场景结构，添加选择章节功能 ([b026348](https://github.com/ligen131/equal_to_p/commit/b02634880b0e317e531001b48ff6159c77fc3ee4))
+* **scroll_area, base_level:** 添加 scroll_area ([718306c](https://github.com/ligen131/equal_to_p/commit/718306c8a0cac0eae7b03631781e55b4a43b489d))
+* **smooth_movement:** 添加 smooth_movement 类 ([277dd06](https://github.com/ligen131/equal_to_p/commit/277dd0692f7c493dce3aec12eb3c94737219743c))
+
+
+### Bug Fixes
+
+* **base_level.gd:** 废除罗马数字；修正元素位置 ([9d42479](https://github.com/ligen131/equal_to_p/commit/9d4247918d2e478789adde326d92e63320f05f6a))
+* **expr_validator.gd:** 修复乘法相邻规则 ([170d74c](https://github.com/ligen131/equal_to_p/commit/170d74c44a3d37f060e30b63e244159e3e985d77))
+* **expr_validator.gd:** 修正错误时返回值不合法 ([8e0e901](https://github.com/ligen131/equal_to_p/commit/8e0e90156c3461922cc8bce854003dd302bc8e8b))
+* **level_menu.gd:** 修复 CHAP_NAMES 和按钮初始化 ([3a1f52c](https://github.com/ligen131/equal_to_p/commit/3a1f52c336fb476ff7cd0e6b6a222297ee5a7da2))
+* **main_menu.gd:** 删除未使用的 ChapterMenu ([18dddba](https://github.com/ligen131/equal_to_p/commit/18dddbadb0aea58499237de3de44996dbcfb3643))
+* **next_level_button.tscn:** 修复箭头字符位置 ([672b1fc](https://github.com/ligen131/equal_to_p/commit/672b1fc5711a259425442db702c502d02464a8ec))
+
+
+### Miscellaneous Chores
+
+* release 1.3.0 ([708f3f3](https://github.com/ligen131/equal_to_p/commit/708f3f3d6e6b1f9e148417eb3625369b8851c0cb))
+
+
+### Code Refactoring
+
+* **chapter_menu:** 删除章节菜单 ([41de333](https://github.com/ligen131/equal_to_p/commit/41de333be68a85f96829678cdb22d0cc906a3e8b))
+
 ## [1.2.0](https://github.com/ligen131/equal_to_p/compare/v1.1.0...v1.2.0) (2024-02-16)
 
 
