@@ -71,10 +71,8 @@ func set_word(e: String) -> void:
 	ImageLib.update_animation(
 		$CardBaseSprite, 1, 3, 1, "res://objects/card_base/card_base.png",
 		ImageLib.get_palette_color_by_info("blue", "light"),
-		ImageLib.get_palette_color_by_name(new_color_name)
+		ImageLib.get_palette_color_by_info("blue", new_color_name)
 	)
-	
-	$DisabledSprite.texture = ImageLib.replace_palette_colors_in_image($DisabledSprite.texture)
 	
 
 ## 获取字符。

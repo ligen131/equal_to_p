@@ -11,8 +11,8 @@ func _ready():
 	else:
 		$Word1.set_word("qd<"[randi_range(0, 2)])
 		$Word2.set_word("=*"[randi_range(0, 1)])
-	$Word1.set_color(ImageLib.get_palette_color_by_name("mid"))
-	$Word2.set_color(ImageLib.get_palette_color_by_name("mid"))
+	$Word1.set_color(ImageLib.get_palette_color_by_info("blue", "mid"))
+	$Word2.set_color(ImageLib.get_palette_color_by_info("blue", "mid"))
 
 func _process(delta):
 	position += velocity * delta
@@ -21,9 +21,9 @@ func _process(delta):
 
 func _on_victory_change(v: bool):
 	if v:
-		$Word1.set_color(ImageLib.get_palette_color_by_name("light"))
-		$Word2.set_color(ImageLib.get_palette_color_by_name("light"))
+		$Word1.set_color(ImageLib.get_palette_color_by_info("blue", "light"))
+		$Word2.set_color(ImageLib.get_palette_color_by_info("blue", "light"))
 	else:
-		$Word1.set_color(ImageLib.get_palette_color_by_name("mid"))
-		$Word2.set_color(ImageLib.get_palette_color_by_name("mid"))
+		$Word1.set_color(ImageLib.get_palette_color_by_info("blue", "mid"))
+		$Word2.set_color(ImageLib.get_palette_color_by_info("blue", "mid"))
 

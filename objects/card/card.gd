@@ -111,7 +111,7 @@ func set_word(value: String) -> void:
 	ImageLib.update_animation(
 		$CardBackSprite, 1, 3, 1, "res://objects/card/card%d.png",
 		ImageLib.get_palette_color_by_info("blue", "light"),
-		ImageLib.get_palette_color_by_name(new_color_name)
+		ImageLib.get_palette_color_by_info("blue", new_color_name)
 	)
 
 
