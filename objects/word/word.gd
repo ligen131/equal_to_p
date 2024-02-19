@@ -41,7 +41,7 @@ func set_text_id(value: int) -> void:
 
 ## 根据当前的 [member text_id] 更新动画。
 func update_animation() -> void:
-	ImageLib.update_animation(self, text_id + 1, 3, STEP, "res://objects/word/sprites/sprite%d.png", Color.BLACK, self.color)
+	ImageLib.update_animation(self, text_id + 1, 3, STEP, "res://objects/word/sprites/sprite%d.png")
 	
 	
 
@@ -63,8 +63,8 @@ func get_word() -> String:
 
 ## 设置字符颜色为 [param value] 并更新动画。
 func set_color(value: Color) -> void:
-	color = value
-	update_animation()
+	self.color = value
+	self.material.set_shader_parameter("color", value)
 
 
 ## 设置是否为关卡通过状态。
@@ -83,3 +83,4 @@ func set_victory(v: bool) -> void:
 
 func _ready():
 	update_animation()
+	set_color(self.color)
