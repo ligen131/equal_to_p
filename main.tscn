@@ -1,27 +1,41 @@
-[gd_scene load_steps=6 format=3 uid="uid://c17fbsiogbgo1"]
+[gd_scene load_steps=8 format=3 uid="uid://c17fbsiogbgo1"]
 
 [ext_resource type="PackedScene" uid="uid://c07co5p46apu7" path="res://objects/main_menu/main_menu.tscn" id="1_fk6j6"]
 [ext_resource type="Script" path="res://main.gd" id="1_nb6uf"]
 [ext_resource type="PackedScene" uid="uid://d3geq38s5fjc6" path="res://bg/dynamic_bg/dynamic_bg.tscn" id="2_8k4il"]
+[ext_resource type="PackedScene" uid="uid://budvuitfjtjcd" path="res://scripts/image_lib/image_lib.tscn" id="2_771gm"]
 [ext_resource type="AudioStream" uid="uid://cr3nkhf0fejm5" path="res://levels/base_level/bgm.wav" id="3_n81it"]
 [ext_resource type="PackedScene" uid="uid://prht3u5pnjls" path="res://scripts/cursor_manager/cursor_manager.tscn" id="5_pqych"]
+[ext_resource type="Material" uid="uid://rywrg5id25dr" path="res://shaders/main_shader.tres" id="6_tvi4r"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_nb6uf")
 
-[node name="DynamicBg" parent="." instance=ExtResource("2_8k4il")]
-offset_right = 0.0
-offset_bottom = 0.0
+[node name="ImageLib" parent="." instance=ExtResource("2_771gm")]
 
 [node name="MainMenu" parent="." instance=ExtResource("1_fk6j6")]
 
-[node name="BGMPlayer" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(234, 150)
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_n81it")
 volume_db = -4.685
-attenuation = 0.0001
 
 [node name="CursorManager" parent="." instance=ExtResource("5_pqych")]
 
-[connection signal="enter_level" from="MainMenu" to="." method="_on_main_menu_enter_level"]
-[connection signal="finished" from="BGMPlayer" to="." method="_on_bgm_player_finished"]
+[node name="UI" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="DynamicBg" parent="UI" instance=ExtResource("2_8k4il")]
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="ScreenShader" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="ShaderRect" type="ColorRect" parent="ScreenShader"]
+material = ExtResource("6_tvi4r")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

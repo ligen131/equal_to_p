@@ -1,4 +1,4 @@
-class_name ImageLib
+class_name ImageLib extends Node
 
 
 ## 不同主题下的配色模板。
@@ -26,18 +26,61 @@ const PALETTE = {
 		"golden": Color("#f5df4d"),
 		"black": Color.BLACK,
 		"red": Color("#dd4132"),
-	}
+	},
+	"yellow": {
+		"lightest": Color("#ffb938"),
+		"light": Color("#e69b22"),
+		"mid": Color("#ad6a45"),
+		"darkest": Color("#7a5e37"),
+
+		"golden": Color("#f5df4d"),
+		"black": Color.BLACK,
+		"red": Color("#dd4132"),
+	},
+	"purple": {
+		"lightest": Color("#e29bfa"),
+		"light": Color("#ca7ef2"),
+		"mid": Color("#773bbf"),
+		"darkest": Color("#4e278c"),
+
+		"golden": Color("#f5df4d"),
+		"black": Color.BLACK,
+		"red": Color("#dd4132"),
+	},
 }
 
-
-const COLOR_THEMES := ["blue", "green"] ## 可选的配色主题 [code]theme[/code] 取值。
+const COLOR_THEMES := ["blue", "green", "yellow", "purple"] ## 可选的配色主题 [code]theme[/code] 取值。
 
 const COLOR_NAMES := ["lightest", "light", "mid", "darkest", "golden", "black", "red"] ## 可选的颜色代号 [code]name[/code] 取值。
 
 
 
-static var theme := "blue" ## 当前主题。
+const MainShader := preload("res://shaders/main_shader.tres")
 
+
+
+static var theme_from := "blue"
+static var theme_to := "blue"
+static var wait_time := 0.0
+static var timer := 0.0
+
+
+
+static func init():
+	MainShader.set_shader_parameter("blue_lightest", PALETTE["blue"]["lightest"])
+	MainShader.set_shader_parameter("blue_light", PALETTE["blue"]["light"])
+	MainShader.set_shader_parameter("blue_mid", PALETTE["blue"]["mid"])
+	MainShader.set_shader_parameter("blue_darkest", PALETTE["blue"]["darkest"])
+	MainShader.set_shader_parameter("theme_lightest", PALETTE["blue"]["lightest"])
+	MainShader.set_shader_parameter("theme_light", PALETTE["blue"]["light"])
+	MainShader.set_shader_parameter("theme_mid", PALETTE["blue"]["mid"])
+	MainShader.set_shader_parameter("theme_darkest", PALETTE["blue"]["darkest"])
+
+static func change_theme(new_theme: String, duration: float) -> void:
+	theme_from = theme_to
+	theme_to = new_theme
+	timer = 0.0
+	wait_time = duration
 
 
 ## 获取 [param color] 的主题色 [code]theme[/code] 和代号 [code]name[/code]。
@@ -47,9 +90,9 @@ static var theme := "blue" ## 当前主题。
 ## 否则返回 [code][theme, name][/code]。
 static func get_color_info(color: Color) -> Variant:
 	for col_theme in PALETTE.keys():
-		for name in PALETTE[col_theme].keys():
-			if color == PALETTE[col_theme][name]:
-				return [col_theme, name]
+		for col_name in PALETTE[col_theme].keys():
+			if color == PALETTE[col_theme][col_name]:
+				return [col_theme, col_name]
 	return null
 
 
@@ -65,14 +108,14 @@ static func replace_color(image: Texture2D, old_color: Color, new_color: Color) 
 
 
 ## 将 [param image] 中，在 [member PALETTE] 出现过的 [Color] 替换为当前配色主题下相同代号的 [Color]。
-static func replace_palette_colors_in_image(image: Texture2D) -> Texture2D:
-	var new_texture = image.get_image()
-	for x in range(new_texture.get_width()):
-		for y in range(new_texture.get_height()):
-			var info = get_color_info(new_texture.get_pixel(x, y))
-			if info != null:
-				new_texture.set_pixel(x, y, PALETTE[theme][info[1]])
-	return ImageTexture.create_from_image(new_texture)
+# static func replace_palette_colors_in_image(image: Texture2D) -> Texture2D:
+# 	var new_texture = image.get_image()
+# 	for x in range(new_texture.get_width()):
+# 		for y in range(new_texture.get_height()):
+# 			var info = get_color_info(new_texture.get_pixel(x, y))
+# 			if info != null:
+# 				new_texture.set_pixel(x, y, PALETTE[theme][info[1]])
+# 	return ImageTexture.create_from_image(new_texture)
 
 
 ## 为 [AnimatedSprite2D] [param sprite] 生成动画并播放。
@@ -98,7 +141,7 @@ static func update_animation(
 	old_color: Color = Color.BLACK,
 	new_color: Color = Color.BLACK
 ) -> void:
-	var animation_id = "%d_%d_%d_%s_%s_%s" % [start, n, step, path_pattern, theme, new_color.to_html()]
+	var animation_id = "%d_%d_%d_%s_%s" % [start, n, step, path_pattern, new_color.to_html()]
 	if not sprite.sprite_frames.has_animation(animation_id):
 		sprite.sprite_frames.add_animation(animation_id)
 		for i in range(n):
@@ -109,21 +152,37 @@ static func update_animation(
 				image = load(path_pattern)
 			if old_color != new_color:
 				image = ImageLib.replace_color(image, old_color, new_color)
-			image = ImageLib.replace_palette_colors_in_image(image)
 			sprite.sprite_frames.add_frame(animation_id, image)
 	sprite.play(animation_id)
 
 
-## 获取当前主题下，代号为 [param name] 的颜色值。
+## 获取当前主题下，代号为 [param col_name] 的颜色值。
 ## [br][br]
-## [param name] 的取值参见 [member COLOR_NAMES]。
-static func get_palette_color_by_name(name: String) -> Color:
-	return PALETTE[theme][name]	
+## [param col_name] 的取值参见 [member COLOR_NAMES]。
+static func get_palette_color_by_name(col_name: String) -> Color:
+	if timer >= wait_time:
+		return PALETTE[theme_to][col_name]
+	else:
+		return PALETTE[theme_from][col_name].lerp(PALETTE[theme_to][col_name], timer / wait_time)
 
 
 
-## 获取主题 [param col_theme] 下，代号为 [param name] 的颜色值。
+## 获取主题 [param col_theme] 下，代号为 [param col_name] 的颜色值。
 ## [br][br]
-## [param col_theme] 和 [param name] 的取值参见 [member COLOR_THEMES] 和 [member COLOR_NAMES]。
-static func get_palette_color_by_info(col_theme: String, name: String) -> Color:
-	return PALETTE[col_theme][name]	
+## [param col_theme] 和 [param col_name] 的取值参见 [member COLOR_THEMES] 和 [member COLOR_NAMES]。
+static func get_palette_color_by_info(col_theme: String, col_name: String) -> Color:
+	return PALETTE[col_theme][col_name]	
+
+
+func _process(delta: float):
+	prints(timer, wait_time)
+	if timer < wait_time:
+		timer += delta
+		MainShader.set_shader_parameter("theme_lightest", ImageLib.get_palette_color_by_name("lightest"))
+		MainShader.set_shader_parameter("theme_light", ImageLib.get_palette_color_by_name("light"))
+		MainShader.set_shader_parameter("theme_mid", ImageLib.get_palette_color_by_name("mid"))
+		MainShader.set_shader_parameter("theme_darkest", ImageLib.get_palette_color_by_name("darkest"))
+		if timer >= wait_time:
+			timer = 0.0
+			wait_time = -1.0
+			ImageLib.theme_from = ImageLib.theme_to			

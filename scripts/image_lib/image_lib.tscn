@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://budvuitfjtjcd"]
+
+[ext_resource type="Script" path="res://scripts/image_lib/image_lib.gd" id="1_ye06g"]
+
+[node name="ImageLib" type="Node"]
+script = ExtResource("1_ye06g")
