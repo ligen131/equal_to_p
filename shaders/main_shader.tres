@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://rywrg5id25dr"]
+
+[ext_resource type="Shader" path="res://shaders/main_shader.gdshader" id="1_y6u4q"]
+
+[resource]
+shader = ExtResource("1_y6u4q")
+shader_parameter/blue_lightest = Vector4(-1, -1, -1, -1)
+shader_parameter/blue_light = Vector4(-1, -1, -1, -1)
+shader_parameter/blue_mid = Vector4(-1, -1, -1, -1)
+shader_parameter/blue_darkest = Vector4(-1, -1, -1, -1)
+shader_parameter/theme_lightest = Vector4(-1, -1, -1, -1)
+shader_parameter/theme_light = Vector4(-1, -1, -1, -1)
+shader_parameter/theme_mid = Vector4(-1, -1, -1, -1)
+shader_parameter/theme_darkest = Vector4(-1, -1, -1, -1)

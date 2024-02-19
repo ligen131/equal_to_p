@@ -2,7 +2,6 @@ extends Node2D
 
 class_name LevelMenu
 
-# const I_NUMBER = ["I","II","III","VI","V"]
 
 const LevelButtonScn := preload("res://levels/chapter_menu/level_menu/level_button/level_button.tscn")
 const BaseLevelScn := preload("res://levels/base_level/base_level.tscn")
@@ -44,12 +43,14 @@ func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:
 func _on_previous_chapter_button_pressed():
 	self.chapter_id -= 1
 	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]["name-en"]
+	ImageLib.change_theme(ImageLib.COLOR_THEMES[ImageLib.COLOR_THEMES.find(ImageLib.theme_to) - 1], LevelMenuCamera.MOVE_TIME)
 	$UI/PreviousChapterButton.set_disabled(true)
 	$UI/NextChapterButton.set_disabled(true)
 
 
 func _on_next_chapter_button_pressed():
 	self.chapter_id += 1
+	ImageLib.change_theme(ImageLib.COLOR_THEMES[ImageLib.COLOR_THEMES.find(ImageLib.theme_to) + 1], LevelMenuCamera.MOVE_TIME)
 	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]["name-en"]
 	$UI/PreviousChapterButton.set_disabled(true)
 	$UI/NextChapterButton.set_disabled(true)
