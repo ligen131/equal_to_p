@@ -38,7 +38,7 @@ func set_victory(v: bool):
 func _ready():
 	var x_offset = 0
 	var y_offset = 0
-	self.color = ImageLib.get_palette_color_by_name("darkest")
+	self.color = ImageLib.get_palette_color_by_info("blue", "darkest")
 	
 	while HEIGHT + y_offset + (WIDTH / W_STEP) * H_STEP > -50:
 		spawn(x_offset, y_offset)
