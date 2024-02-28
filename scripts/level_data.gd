@@ -21,6 +21,9 @@ const CHAP_NAMES := [
 	},
 	{
 		"name-en": "Ch. 5  <>",
+	},
+	{
+		"name-en": "Ch. EX Challenge Levels",
 	}
 ]
 
@@ -77,7 +80,7 @@ const LEVEL_DATA := [
 		{
 			"name-en": "1+1=1",
 			"question": "[] [] {} {} 1",
-			"choices": "= + d 1"
+			"choices": "= + 1 d"
 		},
 		{
 			"name-en": "Swap",
@@ -90,6 +93,11 @@ const LEVEL_DATA := [
 			"choices": "1++PPdd"
 		},
 		{
+			"name-en": "Paper Tiger",
+			"question": "1 [] [] [] {} [] [] [] {} [] {} [] []",
+			"choices": "== ++++++ 11 P q b R"
+		},
+		{
 			"name-en": "Make Me Laugh",
 			"question": "1 {} {} = []",
 			"choices": "XDD"
@@ -97,7 +105,7 @@ const LEVEL_DATA := [
 		{
 			"name-en": "Reset",
 			"question": "0 [] [] {} []",
-			"choices": "XD=0"
+			"choices": "XP=0"
 		},
 		{
 			"name-en": "Not Necessary",
@@ -105,15 +113,15 @@ const LEVEL_DATA := [
 			"choices": "QQQQQQ DDXX="
 		},
 		{
-			"name-en": "[EX] Not Really Challenging",
-			"question": "1 [] [] [] {} [] [] [] {} [] {} [] []",
-			"choices": "== ++++++ 11 P q b R"
+			"name-en": "True Reset",
+			"question": "[] + [] [] [] [] {} = {} [] [] [] [] [] []",
+			"choices": "0 0 1 d d q P P b R R Q +"
 		},
 		{
-			"name-en": "[EX] Golden Experience",
-			"question": "{} {} {} {} {} {} {} {} {} {}",
-			"choices": "PP DD qq dd question XXX ="
-		}
+			"name-en": "Gold Experience",
+			"question": "{} {} {}   {} {} {}   {} {} {} {}   {} {} {}   {} {} {}",
+			"choices": "PP DD bb   qq dd   XXXXX ="
+		},
 	],
 
 	[
@@ -132,14 +140,14 @@ const LEVEL_DATA := [
 			"question": "P ([] [] []) = {} [] [] [] []",
 			"choices": "PP QQ RR ++"
 		},
-		{
-			"name-en": "[EX] Really Challenging",
-			"question": "[] [] [] [] [] {} {} [] [] [] [] {} {} + [] []",
-			"choices": "PPP QQ DD (()) ++ = X"
-		}
 	],
 
 	[
+		{
+			"name-en": "Missing Equation",
+			"question": "[] + [] {} {}",
+			"choices": "P P P 1 X",
+		},
 		{
 			"name-en": "Why?",
 			"question": "[] [] {} = {} [] {} = []",
@@ -174,7 +182,19 @@ const LEVEL_DATA := [
 			"question": "0 {} P [] [] []",
 			"choices": "<>=P"
 		}
-	]
+	],
+	[
+		{
+			"name-en": "[EX]Erase Which?",
+			"question": "[] {} {}   [] [] []   [] {} {}   {} {} {}  [] [] []  [] [] []",
+			"choices": "0 X D + P + P d = P X P + 0 d + P d",
+		},
+		{
+			"name-en": "[EX] Really Challenging",
+			"question": "[] [] [] [] [] {} {} [] [] [] [] {} {} + [] []",
+			"choices": "PPP QQ DD (()) ++ = X"
+		},
+	],
 ]
 
 
