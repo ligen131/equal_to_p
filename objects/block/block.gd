@@ -43,6 +43,9 @@ func set_card(card: Card) -> void:
 	assert(not self.is_fixed, "void Block::set_card(card: Card) should only be called when is_fixed is false.")
 	if self.occupied_card != card:
 		self.occupied_card = card
+		if card != null:
+			card.position = self.position
+			card.current_block = self
 		occupied_card_changed.emit(self)
 	
 
