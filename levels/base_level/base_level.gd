@@ -192,8 +192,8 @@ func _on_next_level_button_pressed():
 		level_menu.init(chap_id)
 	else:
 		var base_level = BaseLevelScn.instantiate()
-		base_level.init(chap_id, lvl_id)
 		get_tree().root.add_child(base_level)
+		base_level.init(chap_id, lvl_id + 1)
 	queue_free()
 	
 func _on_replay_button_pressed():

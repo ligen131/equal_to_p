@@ -55,17 +55,16 @@ func put_down():
 
 		if old_card != null: # 若原来占有的卡非空，则进行交换
 			if self.last_block != null: # 若当前 Card 之前占用了 Block，则将该 Block 占用的 Card 放置在原先的位置上
-				old_card.position = self.last_block.position
 				self.last_block.set_card(old_card)
 			else: # 若当前 Card 是由 CardBase 生成的，则将该 Block 占用的 Card 释放
 				old_card.queue_free()
 
-		self.current_block = entered_block
-		self.position = entered_block.position
 		self.is_dragging = false  
+
 		self.last_block = null
 
 		$SFXPutDown.play() 
+
 		
 	else:
 		queue_free()	
