@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.0](https://github.com/ligen131/equal_to_p/compare/v1.3.0...v1.4.0) (2024-02-28)
+
+
+### Features
+
+* **image_lib.gd:** 添加新主题 ([7891fef](https://github.com/ligen131/equal_to_p/commit/7891feface1b2e5695baf79f6d3f36793055c47c))
+* **level_data:** 添加新关卡和设计说明 ([e77d2ee](https://github.com/ligen131/equal_to_p/commit/e77d2ee4256be8419973a03d8983562c942d5323))
+
+
+### Bug Fixes
+
+* **base_level.gd:** 修复无法前往下一关的问题 ([e4cdf63](https://github.com/ligen131/equal_to_p/commit/e4cdf6394778b7d8bd97697d7ac73b9c01def9a7))
+* **dynamic_bg.gd:** 修复初始配色不为 blue 的问题 ([ce83c1e](https://github.com/ligen131/equal_to_p/commit/ce83c1e692486a0ca868125a8b138e2eb2994e38))
+* 修复卡牌交换时位置可能重合的 bug ([732f587](https://github.com/ligen131/equal_to_p/commit/732f587b3a2552c847afb782e65fca425d838096))
+
 ## [1.3.0](https://github.com/ligen131/equal_to_p/compare/v1.2.0...v1.3.0) (2024-02-19)
 
 
