@@ -17,11 +17,21 @@ const PALETTE = {
 		"black": Color.BLACK,
 		"red": Color("#dd4132"),
 	},
+	"cyan": {
+		"lightest": Color("#a0ebe4"),
+		"light": Color("#5cb8b8"),
+		"mid": Color("#3d98a1"),
+		"darkest": Color("#2d6b80"),
+
+		"golden": Color("#f5df4d"),
+		"black": Color.BLACK,
+		"red": Color("#dd4132"),
+	},
 	"green": {
-		"lightest": Color("#94bf30"),
-		"light": Color("#55b33b"),
-		"mid": Color("#068051"),
-		"darkest": Color("#116061"),
+		"lightest": Color("#a0eba8"),
+		"light": Color("#5cb888"),
+		"mid": Color("#3da17e"),
+		"darkest": Color("#20806c"),
 
 		"golden": Color("#f5df4d"),
 		"black": Color.BLACK,
@@ -47,9 +57,19 @@ const PALETTE = {
 		"black": Color.BLACK,
 		"red": Color("#dd4132"),
 	},
+	"gray": {
+		"lightest": Color("#ebebeb"),
+		"light": Color("#c9c9c9"),
+		"mid": Color("#a1a1a1"),
+		"darkest": Color("#808080"),
+
+		"golden": Color("#f5df4d"),
+		"black": Color.BLACK,
+		"red": Color("#dd4132"),
+	},
 }
 
-const COLOR_THEMES := ["blue", "green", "yellow", "purple"] ## 可选的配色主题 [code]theme[/code] 取值。
+const COLOR_THEMES := ["blue", "cyan", "green", "yellow", "purple", "gray"] ## 可选的配色主题 [code]theme[/code] 取值。
 
 const COLOR_NAMES := ["lightest", "light", "mid", "darkest", "golden", "black", "red"] ## 可选的颜色代号 [code]name[/code] 取值。
 
@@ -59,8 +79,8 @@ const MainShader := preload("res://shaders/main_shader.tres")
 
 
 
-static var theme_from := "blue"
-static var theme_to := "blue"
+static var theme_from := COLOR_THEMES[0]
+static var theme_to := COLOR_THEMES[0]
 static var wait_time := 0.0
 static var timer := 0.0
 
@@ -71,10 +91,10 @@ static func init():
 	MainShader.set_shader_parameter("blue_light", PALETTE["blue"]["light"])
 	MainShader.set_shader_parameter("blue_mid", PALETTE["blue"]["mid"])
 	MainShader.set_shader_parameter("blue_darkest", PALETTE["blue"]["darkest"])
-	MainShader.set_shader_parameter("theme_lightest", PALETTE["blue"]["lightest"])
-	MainShader.set_shader_parameter("theme_light", PALETTE["blue"]["light"])
-	MainShader.set_shader_parameter("theme_mid", PALETTE["blue"]["mid"])
-	MainShader.set_shader_parameter("theme_darkest", PALETTE["blue"]["darkest"])
+	MainShader.set_shader_parameter("theme_lightest", PALETTE[theme_to]["lightest"])
+	MainShader.set_shader_parameter("theme_light", PALETTE[theme_to]["light"])
+	MainShader.set_shader_parameter("theme_mid", PALETTE[theme_to]["mid"])
+	MainShader.set_shader_parameter("theme_darkest", PALETTE[theme_to]["darkest"])
 
 static func change_theme(new_theme: String, duration: float) -> void:
 	theme_from = theme_to
@@ -175,7 +195,6 @@ static func get_palette_color_by_info(col_theme: String, col_name: String) -> Co
 
 
 func _process(delta: float):
-	prints(timer, wait_time)
 	if timer < wait_time:
 		timer += delta
 		MainShader.set_shader_parameter("theme_lightest", ImageLib.get_palette_color_by_name("lightest"))
