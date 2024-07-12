@@ -2,3 +2,5 @@
 .godot/
 *.tmp
 build
+
+.vscode
