@@ -5,7 +5,7 @@ on:
       - "v*"
 
 env:
-  GODOT_VERSION: 4.2.1
+  GODOT_VERSION: 4.3
   EXPORT_NAME: equal_to_p
   PROJECT_PATH: equal_to_p
 
@@ -14,7 +14,7 @@ jobs:
     name: Windows Export
     runs-on: ubuntu-22.04
     container:
-      image: barichello/godot-ci:4.2.1
+      image: barichello/godot-ci:4.3
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -29,7 +29,7 @@ jobs:
           mkdir -v -p build/windows
           godot --headless --verbose --export-release "Windows Desktop" build/windows/$EXPORT_NAME.exe
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: windows
           path: build/windows
@@ -38,7 +38,7 @@ jobs:
     name: Linux Export
     runs-on: ubuntu-22.04
     container:
-      image: barichello/godot-ci:4.2.1
+      image: barichello/godot-ci:4.3
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -53,54 +53,16 @@ jobs:
           mkdir -v -p build/linux
           godot --headless --verbose --export-release "Linux/X11" build/linux/$EXPORT_NAME.x86_64
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: linux
           path: build/linux
-
-  export-web:
-    name: Web Export
-    runs-on: ubuntu-22.04
-    container:
-      image: barichello/godot-ci:4.2.1
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          lfs: true
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-      - name: Web Build
-        run: |
-          mkdir -v -p build/web
-          godot --headless --verbose --export-release "Web" build/web/index.html
-      - name: Install rsync 📚
-        run: |
-          apt-get update && apt-get install -y rsync curl
-      - name: Patch for Cross Origin Isolation and SharedArrayBuffer
-        run: |
-          cd build/web/
-          curl https://raw.githubusercontent.com/josephrocca/clip-image-sorter/92b108dc670d0b56bd6b72963b0e86c4c862412e/enable-threads.js --output enable-threads.js
-          sed -i 's|headers.set("Cross-Origin-Embedder-Policy", "credentialless")|headers.set("Cross-Origin-Embedder-Policy", "require-corp")|g'  enable-threads.js
-          sed -i 's|<script src="index.js"></script>|<script src="enable-threads.js"></script><script src="index.js"></script>|g' index.html
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: web
-          path: build/web
-      - name: Deploy to GitHub Pages 🚀
-        uses: JamesIves/github-pages-deploy-action@releases/v4
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: build/web # The folder the action should deploy.
 
   export-mac:
     name: Mac Export
     runs-on: ubuntu-22.04
     container:
-      image: barichello/godot-ci:4.2.1
+      image: barichello/godot-ci:4.3
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -115,7 +77,7 @@ jobs:
           mkdir -v -p build/mac
           godot --headless --verbose --export-release "mac" build/mac/$EXPORT_NAME.zip
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: mac
           path: build/mac
