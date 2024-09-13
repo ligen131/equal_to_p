@@ -6,8 +6,8 @@ const DynamicBgPattern = preload("res://bg/dynamic_bg/dynamic_bg_pattern/dynamic
 
 var is_victory = false
 
-const WIDTH = 1920 / 4
-const HEIGHT = 1080 / 4
+const WIDTH = 1920 / 3
+const HEIGHT = 1080 / 3
 
 const W_STEP := 60
 const H_STEP := 6

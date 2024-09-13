@@ -12,8 +12,8 @@ var TableClothScn = load("res://objects/table_cloth/table_cloth.tscn")
 var BaseLevelScn = load("res://levels/base_level/base_level.tscn")
 
 
-const HEIGHT := 1080 / 4
-const WIDTH := 1920 / 4
+const HEIGHT := 1080 / 3
+const WIDTH := 1920 / 3
 const PADDING := 5
 const MARGIN := 12
 const CARDS_SEP := 34

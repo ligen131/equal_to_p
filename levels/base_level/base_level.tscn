@@ -1,18 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://cother2aiigge"]
+[gd_scene load_steps=15 format=3 uid="uid://cother2aiigge"]
 
 [ext_resource type="Script" path="res://levels/base_level/base_level.gd" id="1_diojb"]
 [ext_resource type="PackedScene" uid="uid://bepyyenjtc0p3" path="res://levels/chapter_menu/level_menu/level_button/level_button.tscn" id="2_0egdl"]
 [ext_resource type="PackedScene" uid="uid://d1mp3ld6wsrwo" path="res://levels/base_level/next_level_button/next_level_button.tscn" id="2_0363i"]
 [ext_resource type="Texture2D" uid="uid://bxda1ilvqwc6f" path="res://objects/styled_button/return1.png" id="3_4xtpo"]
 [ext_resource type="AudioStream" uid="uid://cjhl2qr4mau8g" path="res://levels/base_level/level_clear.wav" id="3_ou3kh"]
-[ext_resource type="FontFile" uid="uid://1000owdyvwfg" path="res://fonts/unifont-15.1.04.otf" id="3_q0kqv"]
 [ext_resource type="Texture2D" uid="uid://cyl7cqhs4xnux" path="res://objects/styled_button/return2.png" id="4_sctgt"]
 [ext_resource type="AudioStream" uid="uid://c6rflw11edxrt" path="res://levels/base_level/wrong_answer.wav" id="4_yxsxp"]
 [ext_resource type="Texture2D" uid="uid://b48fn2ikxq33d" path="res://objects/styled_button/return3.png" id="5_u8ht0"]
+[ext_resource type="Theme" uid="uid://dw7iarpemcvv6" path="res://themes/default_theme_big.tres" id="7_eghqb"]
 [ext_resource type="Texture2D" uid="uid://cuyseoi8y3567" path="res://objects/styled_button/replay1.png" id="7_xfna7"]
 [ext_resource type="Texture2D" uid="uid://dhjiokm51casd" path="res://objects/styled_button/replay2.png" id="8_60asn"]
 [ext_resource type="Texture2D" uid="uid://btyxqeveaeh6h" path="res://objects/styled_button/replay3.png" id="9_gpaci"]
-[ext_resource type="PackedScene" uid="uid://csl5lwjicxroy" path="res://levels/base_level/scroll_area/scroll_area.tscn" id="11_jgqxp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yulkh"]
 animations = [{
@@ -54,40 +53,44 @@ script = ExtResource("1_diojb")
 [node name="HUDs" type="Node" parent="."]
 
 [node name="NextLevelButton" parent="HUDs" instance=ExtResource("2_0363i")]
+offset_left = 310.0
+offset_top = 369.0
+offset_right = 344.0
+offset_bottom = 403.0
 
 [node name="BackButton" parent="HUDs" instance=ExtResource("2_0egdl")]
+offset_right = 38.0
+offset_bottom = 38.0
 
 [node name="icon" type="AnimatedSprite2D" parent="HUDs/BackButton"]
-position = Vector2(5, 5)
+position = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_yulkh")
 animation = &"return"
 centered = false
 
 [node name="Title" type="Label" parent="HUDs"]
-offset_top = 8.0
-offset_right = 480.0
-offset_bottom = 31.0
-theme_override_fonts/font = ExtResource("3_q0kqv")
+offset_left = 76.0
+offset_top = 6.0
+offset_right = 579.0
+offset_bottom = 48.0
+theme = ExtResource("7_eghqb")
 text = "Title"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ReplayButton" parent="HUDs" instance=ExtResource("2_0egdl")]
-offset_left = 446.0
-offset_right = 480.0
+offset_left = 602.0
+offset_right = 640.0
+offset_bottom = 38.0
+metadata/_edit_group_ = true
 
 [node name="icon" type="AnimatedSprite2D" parent="HUDs/ReplayButton"]
-position = Vector2(3, 3)
+position = Vector2(6, 5)
 sprite_frames = SubResource("SpriteFrames_5hm0m")
 animation = &"replay"
 centered = false
 
-[node name="ScrollLeftArea" parent="HUDs" instance=ExtResource("11_jgqxp")]
-position = Vector2(32, 135)
-
-[node name="ScrollRightArea" parent="HUDs" instance=ExtResource("11_jgqxp")]
-position = Vector2(448, 135)
-is_on_left = false
+[node name="VSplitContainer" type="VSplitContainer" parent="HUDs"]
 
 [node name="Cards" type="Node" parent="."]
 

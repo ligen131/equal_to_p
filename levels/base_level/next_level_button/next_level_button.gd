@@ -1,8 +1,8 @@
 extends Button
 
 
-const WIDTH := 1920 / 4
-const HEIGHT := 1080 / 4
+const WIDTH := 1920 / 3
+const HEIGHT := 1080 / 3
 
 
 var fade_flag := false

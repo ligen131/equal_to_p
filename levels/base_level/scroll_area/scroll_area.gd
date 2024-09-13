@@ -1,7 +1,7 @@
 extends Area2D
 
 
-const WIDTH := 1920 / 4
+const WIDTH := 1920 / 3
 const PADDING := 32
 const SPEED := 300
 

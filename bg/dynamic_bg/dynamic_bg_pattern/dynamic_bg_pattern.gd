@@ -16,7 +16,7 @@ func _ready():
 
 func _process(delta):
 	position += velocity * delta
-	if position.x > 1920 / 4 + 70 or position.y < -70:
+	if position.x > 1920 / 3 + 70 or position.y < -70:
 		queue_free()
 
 func _on_victory_change(v: bool):

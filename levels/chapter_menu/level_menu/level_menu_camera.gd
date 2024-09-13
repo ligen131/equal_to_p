@@ -1,8 +1,8 @@
 class_name LevelMenuCamera extends Camera2D
 
 
-const WIDTH := 1920 / 4
-const HEIGHT := 1080 / 4
+const WIDTH := 1920 / 3
+const HEIGHT := 1080 / 3
 const MOVE_TIME := 0.3
 
 
