@@ -12,7 +12,7 @@ config_version=5
 
 config/name="=P"
 run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://=P3.png"
 
 [debug]
@@ -21,13 +21,16 @@ gdscript/warnings/integer_division=0
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/size/resizable=false
+window/size/viewport_width=640
+window/size/viewport_height=360
 window/stretch/mode="viewport"
-window/stretch/scale=4.0
 window/stretch/scale_mode="integer"
 mouse_cursor/custom_image="res://bg/cursor/cursor_arrow.png"
+
+[gui]
+
+theme/custom="res://themes/default_theme.tres"
+theme/custom_font="res://fonts/Silver.ttf"
 
 [rendering]
 

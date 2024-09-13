@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b223s12rqgt4h"]
+[gd_scene load_steps=12 format=3 uid="uid://b223s12rqgt4h"]
 
 [ext_resource type="Script" path="res://objects/card/card.gd" id="1_0bviv"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="1_ns36n"]
 [ext_resource type="Texture2D" uid="uid://mmtuv34pq4t2" path="res://objects/card/card1.png" id="2_m034v"]
 [ext_resource type="Texture2D" uid="uid://ct5w4n7kylfuc" path="res://objects/card/card2.png" id="3_2vd1f"]
 [ext_resource type="Texture2D" uid="uid://c6f6j4aln0qvp" path="res://objects/card/card3.png" id="4_wleyv"]
+[ext_resource type="Shader" path="res://objects/word/word.gdshader" id="7_4vbp5"]
 [ext_resource type="Texture2D" uid="uid://pmapbo480in1" path="res://objects/card/card_highlight_border.png" id="7_kix4t"]
 [ext_resource type="AudioStream" uid="uid://cj4v8ehypq3sk" path="res://objects/card/put_down.wav" id="7_u4ylf"]
 
@@ -25,6 +26,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7hcku"]
+resource_local_to_scene = true
+shader = ExtResource("7_4vbp5")
+shader_parameter/color = null
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu6l6"]
 size = Vector2(24, 24)
 
@@ -39,6 +45,7 @@ sprite_frames = SubResource("SpriteFrames_fo0r0")
 texture = ExtResource("7_kix4t")
 
 [node name="Word" parent="." instance=ExtResource("1_ns36n")]
+material = SubResource("ShaderMaterial_7hcku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 15

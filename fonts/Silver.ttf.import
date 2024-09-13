@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://1000owdyvwfg"
-path="res://.godot/imported/unifont-15.1.04.otf-4298c95684bf879dc8f193b0b0354484.fontdata"
+uid="uid://c3mb5rkpwir3c"
+path="res://.godot/imported/Silver.ttf-e86112895925d94211f102ce0cc558b8.fontdata"
 
 [deps]
 
-source_file="res://fonts/unifont-15.1.04.otf"
-dest_files=["res://.godot/imported/unifont-15.1.04.otf-4298c95684bf879dc8f193b0b0354484.fontdata"]
+source_file="res://fonts/Silver.ttf"
+dest_files=["res://.godot/imported/Silver.ttf-e86112895925d94211f102ce0cc558b8.fontdata"]
 
 [params]
 

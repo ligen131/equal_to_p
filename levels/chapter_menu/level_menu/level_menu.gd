@@ -7,7 +7,7 @@ const LevelButtonScn := preload("res://levels/chapter_menu/level_menu/level_butt
 const BaseLevelScn := preload("res://levels/base_level/base_level.tscn")
 const CreditsScn := preload("res://objects/credits/credits.tscn")
 
-const WIDTH := 1920 / 4
+const WIDTH := 1920 / 3
 
 var chapter_id : int = 0
 const button_width : int = 50

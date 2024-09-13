@@ -1,17 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkm7ljv01kwma"]
+[gd_scene load_steps=6 format=3 uid="uid://dkm7ljv01kwma"]
 
 [ext_resource type="Script" path="res://bg/dynamic_bg/dynamic_bg_pattern/dynamic_bg_pattern.gd" id="1_hrrmh"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="2_7jm3n"]
+[ext_resource type="Shader" path="res://objects/word/word.gdshader" id="3_7jr21"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5xk1w"]
+resource_local_to_scene = true
+shader = ExtResource("3_7jr21")
+shader_parameter/color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gxyor"]
+resource_local_to_scene = true
+shader = ExtResource("3_7jr21")
+shader_parameter/color = null
 
 [node name="DynamicBgPattern" type="Node2D"]
 script = ExtResource("1_hrrmh")
 
 [node name="Word1" parent="." instance=ExtResource("2_7jm3n")]
+material = SubResource("ShaderMaterial_5xk1w")
 position = Vector2(-6, 0)
 text_id = null
 color = null
 
 [node name="Word2" parent="." instance=ExtResource("2_7jm3n")]
+material = SubResource("ShaderMaterial_gxyor")
 position = Vector2(6, 0)
 text_id = null
 color = null

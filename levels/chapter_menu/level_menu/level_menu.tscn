@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://levels/chapter_menu/level_menu/level_menu_camera.gd" id="2_4o5wo"]
 [ext_resource type="PackedScene" uid="uid://drl1xe103umpi" path="res://objects/styled_button/styled_button.tscn" id="2_66j1c"]
 [ext_resource type="PackedScene" uid="uid://fxcs5dmb21q2" path="res://scripts/smooth_movement/smooth_movement.tscn" id="3_1jj52"]
-[ext_resource type="FontFile" uid="uid://1000owdyvwfg" path="res://fonts/unifont-15.1.04.otf" id="3_jlnpm"]
+[ext_resource type="Theme" uid="uid://dw7iarpemcvv6" path="res://themes/default_theme_big.tres" id="5_y07je"]
 
 [node name="LevelMenu" type="Node2D"]
 script = ExtResource("1_sd65g")
@@ -21,20 +21,20 @@ smooth_type = 1
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="PreviousChapterButton" parent="UI" instance=ExtResource("2_66j1c")]
-offset_top = 118.0
-offset_bottom = 152.0
+offset_top = 180.0
+offset_bottom = 214.0
 
 [node name="NextChapterButton" parent="UI" instance=ExtResource("2_66j1c")]
-offset_left = 446.0
-offset_top = 118.0
-offset_right = 480.0
-offset_bottom = 152.0
+offset_left = 606.0
+offset_top = 180.0
+offset_right = 640.0
+offset_bottom = 214.0
 
 [node name="Title" type="Label" parent="UI"]
-offset_top = 8.0
-offset_right = 480.0
-offset_bottom = 31.0
-theme_override_fonts/font = ExtResource("3_jlnpm")
+offset_top = 9.0
+offset_right = 640.0
+offset_bottom = 51.0
+theme = ExtResource("5_y07je")
 text = "Title"
 horizontal_alignment = 1
 vertical_alignment = 1
