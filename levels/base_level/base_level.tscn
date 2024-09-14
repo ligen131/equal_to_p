@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cyl7cqhs4xnux" path="res://objects/styled_button/return2.png" id="4_sctgt"]
 [ext_resource type="AudioStream" uid="uid://c6rflw11edxrt" path="res://levels/base_level/wrong_answer.wav" id="4_yxsxp"]
 [ext_resource type="Texture2D" uid="uid://b48fn2ikxq33d" path="res://objects/styled_button/return3.png" id="5_u8ht0"]
-[ext_resource type="Theme" uid="uid://dw7iarpemcvv6" path="res://themes/default_theme_big.tres" id="7_eghqb"]
+[ext_resource type="FontFile" uid="uid://dkcus8d34pbhm" path="res://fonts/fusion-pixel-10px-proportional-zh_hans.otf" id="7_bplkw"]
 [ext_resource type="Texture2D" uid="uid://cuyseoi8y3567" path="res://objects/styled_button/replay1.png" id="7_xfna7"]
 [ext_resource type="Texture2D" uid="uid://dhjiokm51casd" path="res://objects/styled_button/replay2.png" id="8_60asn"]
 [ext_resource type="Texture2D" uid="uid://btyxqeveaeh6h" path="res://objects/styled_button/replay3.png" id="9_gpaci"]
@@ -69,11 +69,11 @@ animation = &"return"
 centered = false
 
 [node name="Title" type="Label" parent="HUDs"]
-offset_left = 76.0
-offset_top = 6.0
-offset_right = 579.0
-offset_bottom = 48.0
-theme = ExtResource("7_eghqb")
+offset_top = 10.0
+offset_right = 640.0
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("7_bplkw")
+theme_override_font_sizes/font_size = 20
 text = "Title"
 horizontal_alignment = 1
 vertical_alignment = 1
