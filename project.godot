@@ -40,6 +40,10 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
 theme/custom="res://themes/default_theme.tres"
 theme/custom_font="res://fonts/Silver.ttf"
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://lang/translations.en.translation", "res://lang/translations.ja.translation", "res://lang/translations.zh.translation")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

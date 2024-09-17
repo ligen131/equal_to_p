@@ -1,0 +1,42 @@
+keys,en,zh,ja
+CHAPTER_PATTERN,"Ch. %d  %s","第 %d 章  %s",""
+CHAPTER_NAME_0,"=P","=P","=P"
+CHAPTER_NAME_1,"Add and Multiply","加法和乘法",""
+CHAPTER_NAME_2,"()","()",""
+CHAPTER_NAME_3,"Equal?","相等？",""
+CHAPTER_NAME_4,"<>","<>",""
+CHAPTER_NAME_5,"Extra Challenges","额外挑战",""
+
+LEVEL_NAME_0_0,"P=P","P=P","P=P"
+LEVEL_NAME_0_1,"=P","=P","=P"
+LEVEL_NAME_0_2,"Another Smile","Another Smile","Another Smile"
+LEVEL_NAME_0_3,"Reverse","Reverse","Reverse"
+LEVEL_NAME_0_4,"Reverse Again","Reverse Again","Reverse Again"
+LEVEL_NAME_0_5,"Snake","Snake","Snake"
+
+LEVEL_NAME_1_0,"0+0=0, 0+1=1","0+0=0, 0+1=1","0+0=0, 0+1=1"
+LEVEL_NAME_1_1,"1+1=1","1+1=1","1+1=1"
+LEVEL_NAME_1_2,"Swap","交换","Swap"
+LEVEL_NAME_1_3,"Always True","Always True","Always True"
+LEVEL_NAME_1_4,"Paper Tiger","纸老虎","Paper Tiger"
+LEVEL_NAME_1_5,"Make Me Laugh","Make Me Laugh","Make Me Laugh"
+LEVEL_NAME_1_6,"Reset","重置","Reset"
+LEVEL_NAME_1_7,"Not Necessary","并非必要","Not Necessary"
+LEVEL_NAME_1_8,"True Reset","真正的重置","True Reset"
+LEVEL_NAME_1_9,"Gold Experience","黄金体验","Gold Experience"
+
+LEVEL_NAME_2_0,"He Goes First","He Goes First","He Goes First"
+LEVEL_NAME_2_1,"Still, He Goes First","Still, He Goes First","Still, He Goes First"
+LEVEL_NAME_2_2,"It's My Turn","It's My Turn","It's My Turn"
+
+LEVEL_NAME_3_0,"Missing Equation","缺失的等式","Missing Equation"
+LEVEL_NAME_3_1,"Why?","Why?","Why?"
+LEVEL_NAME_3_2,"Where is the Equation?","Where is the Equation?","Where is the Equation?"
+LEVEL_NAME_3_3,"Untitled","Untitled","Untitled"
+
+LEVEL_NAME_4_0,"<","<","<"
+LEVEL_NAME_4_1,"<=","<=","<="
+LEVEL_NAME_4_2,"<>","<>","<>"
+
+LEVEL_NAME_5_0,"[EX] Erase Which?","[EX] Erase Which?","[EX]Erase Which?"
+LEVEL_NAME_5_1,"[EX] Really Challenging","[EX] Really Challenging","[EX] Really Challenging"
