@@ -42,12 +42,12 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 	chap_id = _chap_id
 	lvl_id = _lvl_id
 	
-	var lvl_name = LevelData.LEVEL_DATA[chap_id][lvl_id]["name-en"]
+	var lvl_name = "LEVEL_NAME_%d_%d" % [chap_id, lvl_id]
 	var question = LevelData.LEVEL_DATA[chap_id][lvl_id]["question"].replace(" ", "").replace("X", "*")
 	var choices = count(LevelData.LEVEL_DATA[chap_id][lvl_id]["choices"].replace(" ", "").replace("X", "*"))
 	
 	
-	$HUDs/Title.set_text("%d-%d  %s" % [chap_id + 1, lvl_id + 1, lvl_name])
+	$HUDs/Title.set_text("%d-%d  %s" % [chap_id + 1, lvl_id + 1, tr(lvl_name)])
 	
 	
 	question = question.replace("[]", ".")

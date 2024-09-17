@@ -15,7 +15,7 @@ const button_heigth : int = 50
 
 func init(chap_id: int) -> void:
 	self.chapter_id = chap_id
-	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]["name-en"]
+	$UI/Title.text = tr("CHAPTER_PATTERN") % [chap_id + 1, tr("CHAPTER_NAME_%d" % chap_id)]
 	$LevelMenuCamera.init_position(Vector2(WIDTH * chap_id, 0))
 
 	$UI/PreviousChapterButton.set_disabled(chapter_id == 0)
@@ -42,7 +42,7 @@ func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:
 
 func _on_previous_chapter_button_pressed():
 	self.chapter_id -= 1
-	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]["name-en"]
+	$UI/Title.text = tr("CHAPTER_PATTERN") % [self.chapter_id + 1, tr("CHAPTER_NAME_%d" % self.chapter_id)]
 	ImageLib.change_theme(ImageLib.COLOR_THEMES[ImageLib.COLOR_THEMES.find(ImageLib.theme_to) - 1], LevelMenuCamera.MOVE_TIME)
 	$UI/PreviousChapterButton.set_disabled(true)
 	$UI/NextChapterButton.set_disabled(true)
@@ -51,7 +51,7 @@ func _on_previous_chapter_button_pressed():
 func _on_next_chapter_button_pressed():
 	self.chapter_id += 1
 	ImageLib.change_theme(ImageLib.COLOR_THEMES[ImageLib.COLOR_THEMES.find(ImageLib.theme_to) + 1], LevelMenuCamera.MOVE_TIME)
-	$UI/Title.text = LevelData.CHAP_NAMES[chapter_id]["name-en"]
+	$UI/Title.text = tr("CHAPTER_PATTERN") % [self.chapter_id + 1, tr("CHAPTER_NAME_%d" % self.chapter_id)]
 	$UI/PreviousChapterButton.set_disabled(true)
 	$UI/NextChapterButton.set_disabled(true)
 
