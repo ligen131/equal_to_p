@@ -49,6 +49,9 @@ animations = [{
 
 [node name="BaseLevel" type="Node"]
 script = ExtResource("1_diojb")
+sfx_level_clear = ExtResource("3_ou3kh")
+sfx_level_clear_db = -7.0
+sfx_wrong_answer = ExtResource("4_yxsxp")
 
 [node name="HUDs" type="Node" parent="."]
 

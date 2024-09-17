@@ -37,6 +37,8 @@ size = Vector2(24, 24)
 [node name="Card" type="Area2D"]
 z_index = 50
 script = ExtResource("1_0bviv")
+sfx_put_down = ExtResource("7_u4ylf")
+sfx_put_down_db = 4.0
 
 [node name="CardBackSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fo0r0")

@@ -41,7 +41,7 @@ func init(chapter_id: int, level_id : int, pos : Vector2, type : int) -> void :
 func _on_pressed():
 	# print("choose: ",chap_id,"-",lvl_id)
 	# print("! ")
-	$SFXButtonDown.play()
+	SoundManager.play_sfx(self.sfx_button_down)
 	if button_type == 1:
 		enter_level.emit(chap_id, lvl_id)
 	else:

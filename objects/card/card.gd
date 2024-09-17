@@ -2,6 +2,10 @@
 class_name Card extends Area2D  
 
 
+@export var sfx_put_down : AudioStream  ## 放下卡牌时的音效
+@export var sfx_put_down_db : float = 0.0  ## 放下卡牌时的音效音量
+
+
 
 var current_block: Block = null ## 当前所占用的 Block 对象。
 
@@ -63,7 +67,7 @@ func put_down():
 
 		self.last_block = null
 
-		$SFXPutDown.play() 
+		SoundManager.play_sfx(sfx_put_down, sfx_put_down_db)
 
 		
 	else:

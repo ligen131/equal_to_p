@@ -15,6 +15,10 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://=P3.png"
 
+[autoload]
+
+SoundManager="*res://singletons/sound_manager/sound_manager.gd"
+
 [debug]
 
 gdscript/warnings/integer_division=0
@@ -26,6 +30,10 @@ window/size/viewport_height=360
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 mouse_cursor/custom_image="res://bg/cursor/cursor_arrow.png"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg")
 
 [gui]
 

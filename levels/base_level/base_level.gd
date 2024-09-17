@@ -1,7 +1,11 @@
-extends Node
+class_name BaseLevel extends Node
 
 
-class_name BaseLevel
+@export var sfx_level_clear: AudioStream
+@export var sfx_level_clear_db: float = 0.0
+@export var sfx_wrong_answer: AudioStream
+@export var sfx_wrong_answer_db: float = 0.0
+
 
 # FIXME
 # 由于 Godot preload 容易出错，此处改为 load
@@ -19,12 +23,10 @@ const MARGIN := 12
 const CARDS_SEP := 34
 
 
-
 var expr := ""
 var req_pos := [] # Array[int]，金色框的位置列表
-var chap_id : int ## 当前章节编号
-var lvl_id : int ## 当前关卡编号
-
+var chap_id: int ## 当前章节编号
+var lvl_id: int ## 当前关卡编号
 
 
 func count(choices: String) -> Dictionary:
@@ -117,7 +119,7 @@ func _process(_delta):
 
 
 func stage_clear() -> void:
-	$SFXs/LevelClear.play()
+	SoundManager.play_sfx(sfx_level_clear, sfx_level_clear_db)
 	for card_base: CardBase in $CardBases.get_children():
 		card_base.set_victory()
 		
@@ -127,7 +129,7 @@ func stage_clear() -> void:
 
 func _on_block_occupied_card_changed(_node) -> void:
 	var block_array = []
-	for block : Block in $Blocks.get_children():
+	for block: Block in $Blocks.get_children():
 		if block.is_empty():
 			#print(block.quest_pos, " is not occupied")
 			return
@@ -142,7 +144,7 @@ func _on_block_occupied_card_changed(_node) -> void:
 		# prints("info:", info)
 		
 		if info[0] != "OK":
-			$SFXs/WrongAnswer.play()
+			SoundManager.play_sfx(sfx_wrong_answer, sfx_wrong_answer_db)
 		
 		if info[0] == "INVALID":
 			for block: Block in $Blocks.get_children():
@@ -162,9 +164,9 @@ func _on_block_occupied_card_changed(_node) -> void:
 			# print(block_array)
 			for i in range(len(block_array)):
 				if i != 0:
-					if ExprValidator.is_smile(expr[i-1]+expr[i]):
+					if ExprValidator.is_smile(expr[i - 1] + expr[i]):
 						# print(expr[i-1]+expr[i])
-						block_array[i-1].set_color(ImageLib.get_palette_color_by_name("golden"))
+						block_array[i - 1].set_color(ImageLib.get_palette_color_by_name("golden"))
 						block_array[i].set_color(ImageLib.get_palette_color_by_name("golden"))
 
 func _input(event: InputEvent):
