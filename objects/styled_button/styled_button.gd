@@ -1,7 +1,7 @@
-extends Button
+class_name StyledButton extends Button
 
-class_name StyledButton
+@export var sfx_button_down : AudioStream
 
 
 func _on_pressed():
-	$SFXButtonDown.play()
+	SoundManager.play_sfx(self.sfx_button_down)
