@@ -8,9 +8,9 @@ static func is_eye(ch: String) -> bool: ## 判断字符 [param ch] 是否为眼�
 	return ch == "*" or ch == "="
 static func is_left_mouth(ch: String) -> bool: ## 判断字符 [param ch] 是否为左边的嘴巴。
 	return ch == "q" or ch == "d" or ch == "<"
-static func is_right_mouth(ch: String) -> bool:  ## 判断字符 [param ch] 是否为右边的嘴巴。
+static func is_right_mouth(ch: String) -> bool: ## 判断字符 [param ch] 是否为右边的嘴巴。
 	return ch == "P" or ch == "b" or ch == "D" or ch == ">"
-static func is_smile(string: String) -> bool:  ## 判断长度为 2 的字符串 [param string] 是否为笑脸。
+static func is_smile(string: String) -> bool: ## 判断长度为 2 的字符串 [param string] 是否为笑脸。
 	return (is_left_mouth(string[0]) and is_eye(string[1])) or (is_eye(string[0]) and is_right_mouth(string[1]))
 
 """
@@ -22,7 +22,7 @@ val: Q/0/1
 
 左/右	*	<	(	)	Q	0
 *		0	0	1	0	1	1
-<		0	1	1	0	1	1
+<		0	*	1	0	1	1
 (		0	0	1	0	1	1
 )		1	1	1	1	1	1
 Q		1	1	1	1	1	1
@@ -42,24 +42,26 @@ Q/0		0	0	1	0	1
 ## [br][br]
 ## [code]IS_PAIR_VALID[x][y][/code] 表示若表达式中 [enum CharType] 为 [code]x[/code] 的字符，右边相邻的字符 [enum CharType] 为 [code]y[/code] 的情况下是否合法。
 const IS_PAIR_VALID := [
-	[0, 0, 1, 0, 1, 1], 
-	[0, 1, 1, 0, 1, 1], 
-	[0, 0, 1, 0, 1, 1], 
-	[1, 1, 1, 1, 1, 1], 
-	[1, 1, 1, 1, 1, 1], 
+	[0, 0, 1, 0, 1, 1],
+	[0, 0, 1, 0, 1, 1],
+	[0, 0, 1, 0, 1, 1],
+	[1, 1, 1, 1, 1, 1],
+	[1, 1, 1, 1, 1, 1],
 	[1, 1, 1, 1, 1, 1]
-] 
+]
 
 ## 字符类型。
 enum CharType {
 	OP, ## 算术运算符，包括 [code]*[/code] 和 [code]+[/code]。
-	COMP, ## 比较运算符，包括 [code]<[/code]，[code]=[/code] 和 [code]>[/code]。 
+	COMP, ## 比较运算符，包括 [code]<[/code]，[code]=[/code] 和 [code]>[/code]。
 	BRACL, ## 左括号。
 	BRACR, ## 右括号。
 	VAR, ## 变量，即字母。
 	CONST ## 常量，0 或 1。
 }
 
+static func is_pair_valid(ch1: String, ch2: String) -> bool: ## 判断相邻字符 [param ch1] 和 [param ch2] 是否合法。
+	return (ch1 + ch2) in ["<=", ">=", "<>"] or IS_PAIR_VALID[get_char_type(ch1)][get_char_type(ch2)] 
 
 ## 获取 [param ch] 的 [enum CharType]。
 static func get_char_type(ch: String) -> CharType:
@@ -137,7 +139,6 @@ static func get_priority(ch: String) -> int:
 		return -1
 
 
-
 ## 将中缀表达式 [param expr] 转为后缀表达式并返回（不判断 [param expr] 的合法性）。
 static func infix_to_suffix(expr: String) -> String:
 	var opt_stack: Array = []
@@ -151,7 +152,6 @@ static func infix_to_suffix(expr: String) -> String:
 					res += opt_stack.back()
 					opt_stack.pop_back()
 			opt_stack.push_back("*")
-			
 			
 			
 		#print("ch=", ch, " stk=", opt_stack, " res=", res)
@@ -233,7 +233,7 @@ static func check_valid(expr: String) -> Array:
 	if get_char_type(expr[len(expr) - 1]) != CharType.BRACR and get_char_type(expr[len(expr) - 1]) not in [CharType.VAR, CharType.CONST]:
 		return [len(expr) - 1]
 	for i in range(len(expr) - 1):
-		if not IS_PAIR_VALID[get_char_type(expr[i])][get_char_type(expr[i + 1])]:
+		if not is_pair_valid(expr[i], expr[i + 1]):
 			return [i, i + 1]
 	
 	var brac_sum := 0
