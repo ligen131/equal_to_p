@@ -76,7 +76,7 @@ func init(_chap_id: int, _lvl_id: int) -> void:
 		
 		var new_block: Block = BlockScn.instantiate()
 
-		new_block.quest_pos = i
+		new_block.ind_in_question = i
 		if ch != "." and ch != "_":
 			new_block.set_is_fixed(true)
 			new_block.set_word(ch)
@@ -128,46 +128,71 @@ func stage_clear() -> void:
 
 
 func _on_block_occupied_card_changed(_node) -> void:
-	var block_array = []
-	for block: Block in $Blocks.get_children():
+	var block_array : Array[Block]
+	block_array.assign($Blocks.get_children())
+
+	var sfx_wa_flag := false
+
+	# 获取 expr
+	for block in block_array:
 		if block.is_empty():
-			#print(block.quest_pos, " is not occupied")
-			return
-		expr[block.quest_pos] = block.get_word()
-		block_array.append(block)
-		
-	# prints("# expr: ", expr)
-	
-	if expr.count("_") == 0:
-		var info = ExprValidator.check(expr, req_pos)
-		# prints("expr:", expr)
-		# prints("info:", info)
-		
-		if info[0] != "OK":
-			SoundManager.play_sfx(sfx_wrong_answer, sfx_wrong_answer_db)
-		
-		if info[0] == "INVALID":
-			for block: Block in $Blocks.get_children():
-				if block.quest_pos in info[1]:
-					block.shake(false)
-		elif info[0] == "SMILE_UNSATISFIED":
-			for block: Block in $Blocks.get_children():
-				if block.quest_pos in info[1]:
-					block.shake(true)
-		elif info[0] == "NOT_ALWAYS_TRUE":
-			for block: Block in $Blocks.get_children():
-				block.shake(false)
+			expr[block.ind_in_question] = "_"
 		else:
-			# victory
-			get_tree().current_scene.set_victory(true)
-			stage_clear()
-			# print(block_array)
-			for i in range(len(block_array)):
-				if i != 0:
-					if ExprValidator.is_smile(expr[i - 1] + expr[i]):
-						# print(expr[i-1]+expr[i])
-						block_array[i - 1].set_color(ImageLib.get_palette_color_by_name("golden"))
-						block_array[i].set_color(ImageLib.get_palette_color_by_name("golden"))
+			expr[block.ind_in_question] = block.get_word()
+		
+	prints()
+	prints("# expr: ", expr)
+
+	# 检查表达式是否合法，并设置 invalid 标志
+	var invalid_inds := ExprValidator.check_invalid(expr)
+	for block in block_array:
+		if block.ind_in_question in invalid_inds:
+			if not block.get_is_invalid():
+				sfx_wa_flag = true
+			block.set_is_invalid(true)
+		else:
+			block.set_is_invalid(false)
+	
+	print("# invalid_inds: ", invalid_inds)
+	
+	# 检查表达式笑脸列表，并设置 is_golden 标志
+	var smile_inds := ExprValidator.get_smile_inds(expr)
+	for block in block_array:
+		block.set_is_golden(block.ind_in_question in smile_inds)
+		
+	print("# smile_inds: ", smile_inds)
+
+	# 若表达式合法，且已填满，则考虑检查是否满足笑脸要求
+	if invalid_inds.size() == 0 and expr.find("_") == -1:
+		var smile_unsatisfied_inds: Array[int]
+		smile_unsatisfied_inds.assign(req_pos.filter(func(ind: int): return ind not in smile_inds))
+
+		# 若不满足，则设置不满足笑脸要求的块为 invalid
+		if smile_unsatisfied_inds.size() > 0:
+			for block in block_array:
+				if block.ind_in_question in smile_unsatisfied_inds:
+					if not block.get_is_invalid():
+						sfx_wa_flag = true
+					block.set_is_invalid(true)
+
+		# 若满足笑脸要求，则检测是否恒等
+		else:
+			
+			print("# check: ", ExprValidator.check_always_true(expr))
+			if not ExprValidator.check_always_true(expr).is_empty():
+				# 若不恒等，设置所有块为 invalid
+				for block in block_array:
+					if not block.get_is_invalid():
+						sfx_wa_flag = true
+					block.set_is_invalid(true)
+
+			else:
+				get_tree().current_scene.set_victory(true)
+				stage_clear()
+
+
+	if sfx_wa_flag:
+		SoundManager.play_sfx(sfx_wrong_answer, sfx_wrong_answer_db)
 
 func _input(event: InputEvent):
 	if event is InputEventKey:
