@@ -5,7 +5,7 @@ class_name LevelMenu
 
 const LevelButtonScn := preload("res://scenes/level_menu/level_button/level_button.tscn")
 const BaseLevelScn := preload("res://scenes/base_level/base_level.tscn")
-const CreditsScn := preload("res://objects/credits/credits.tscn")
+const CreditsScn := preload("res://scenes/credits/credits.tscn")
 
 const WIDTH := 1920 / 3
 
