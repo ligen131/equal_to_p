@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b223s12rqgt4h"]
+[gd_scene load_steps=13 format=3 uid="uid://b223s12rqgt4h"]
 
 [ext_resource type="Script" path="res://objects/card/card.gd" id="1_0bviv"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="1_ns36n"]
 [ext_resource type="Texture2D" uid="uid://mmtuv34pq4t2" path="res://objects/card/card1.png" id="2_m034v"]
 [ext_resource type="Texture2D" uid="uid://ct5w4n7kylfuc" path="res://objects/card/card2.png" id="3_2vd1f"]
 [ext_resource type="Texture2D" uid="uid://c6f6j4aln0qvp" path="res://objects/card/card3.png" id="4_wleyv"]
+[ext_resource type="PackedScene" uid="uid://oxlryy260uym" path="res://components/shake_component/shake_component.tscn" id="6_qmffj"]
 [ext_resource type="Shader" path="res://objects/word/word.gdshader" id="7_4vbp5"]
 [ext_resource type="Texture2D" uid="uid://pmapbo480in1" path="res://objects/card/card_highlight_border.png" id="7_kix4t"]
 [ext_resource type="AudioStream" uid="uid://cj4v8ehypq3sk" path="res://objects/card/put_down.wav" id="7_u4ylf"]
@@ -43,11 +44,17 @@ sfx_put_down_db = 4.0
 [node name="CardBackSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fo0r0")
 
+[node name="ShakeComponent" parent="CardBackSprite" instance=ExtResource("6_qmffj")]
+
 [node name="HighlightSprite" type="Sprite2D" parent="."]
 texture = ExtResource("7_kix4t")
 
+[node name="ShakeComponent" parent="HighlightSprite" instance=ExtResource("6_qmffj")]
+
 [node name="Word" parent="." instance=ExtResource("1_ns36n")]
 material = SubResource("ShaderMaterial_7hcku")
+
+[node name="ShakeComponent" parent="Word" instance=ExtResource("6_qmffj")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 15
@@ -63,4 +70,5 @@ one_shot = true
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]
