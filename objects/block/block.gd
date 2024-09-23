@@ -6,20 +6,24 @@ class_name Block extends Area2D
 ## 当被占用的 [Card] 发生改变后发出。
 ## [br][br]
 ## [param block] 为发出该信号的 [Block] 对象。
-signal occupied_card_changed(block: Block) 
+signal occupied_card_changed(block: Block)
 
 
 
 const SHAKE_AMOUNT := 3.0 ## 振动时的振幅（单位为像素）。
+const SHAKE_DURATION := 0.2 ## 振动时的持续时间（单位为秒）。
 
 
 var is_fixed : bool ## 是否为固定的（即在表达式中已初始化了的）。
 var is_golden_frame : bool ## 是否为金色框。
 var is_shaking := false ## 是否正在振动。
 
+var is_invalid := false ## 是否为非法位置。
+var is_golden := false ## 是否为金色字符。
+
 var occupied_card: Card = null ## 占用的 Card 对象。
 
-var quest_pos := -1 ## 在表达式中对应字符位置的下标。
+var ind_in_question := -1 ## 在表达式中对应字符位置的下标。
 
 
 
@@ -63,6 +67,37 @@ func get_word() -> String:
 		else:
 			return self.occupied_card.get_word()
 
+func get_is_invalid() -> bool:
+	return self.is_invalid
+
+func set_is_invalid(value: bool) -> void:
+	if get_is_invalid() == value:
+		return
+	
+	self.is_invalid = value
+	if self.occupied_card != null:
+		self.occupied_card.set_is_invalid(value)
+
+	if self.is_invalid:
+		$Word.set_color(ImageLib.get_palette_color_by_name("red"))
+
+		$Word/ShakeComponent.shake(SHAKE_AMOUNT, SHAKE_DURATION)
+		$GoalFrameSprite/ShakeComponent.shake(SHAKE_AMOUNT, SHAKE_DURATION)
+		$PitSprite/ShakeComponent.shake(SHAKE_AMOUNT, SHAKE_DURATION)
+
+	else:
+		$Word.set_color(ImageLib.get_palette_color_by_name("black"))
+
+func set_is_golden(value: bool) -> void:
+	if self.is_golden == value:
+		return
+	
+	self.is_golden = value
+	if self.occupied_card != null:
+		self.occupied_card.set_is_golden(value)
+	
+	if not self.is_invalid:
+		$Word.set_color(ImageLib.get_palette_color_by_name("golden" if self.is_golden else "black"))
 
 ## 设置 [member is_fixed] 为 [param value]。
 func set_is_fixed(value: bool) -> void:
@@ -90,38 +125,3 @@ func set_color(value: Color) -> void:
 	else:
 		if self.occupied_card != null:
 			self.occupied_card.set_color(value)
-	
-
-
-## 开启震动。若 [param is_frame_red] 为 [code]true[/code]，则将框改为红色。
-func shake(is_frame_red: bool) -> void: 
-	# 开启震动
-	$ShakeTimer.start()
-	self.is_shaking = true
-	
-	# 使附着的卡牌也震动
-	if self.occupied_card != null:
-		self.occupied_card.shake(not is_frame_red, SHAKE_AMOUNT, $ShakeTimer.wait_time) # 若框不红，则里面的字要红
-	elif not is_frame_red:
-		$Word.set_color(ImageLib.get_palette_color_by_name("red"))
-	
-	if is_frame_red:
-		$GoalFrameSprite.animation = "red"
-
-
-func _process(_delta):
-	var offset := 0
-	if is_shaking:
-		var progress = (1 - $ShakeTimer.time_left / $ShakeTimer.wait_time) * 2 * PI
-		offset = int(sin(progress) * SHAKE_AMOUNT)
-	$GoalFrameSprite.position.x = offset
-	$PitSprite.position.x = offset 
-	$Word.position.x = offset 
-
-
-	
-func _on_shake_timer_timeout() -> void:
-	self.is_shaking = false
-	$GoalFrameSprite.animation = "default"
-	$Word.set_color(ImageLib.get_palette_color_by_name("black"))
-	

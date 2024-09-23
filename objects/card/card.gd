@@ -6,6 +6,10 @@ class_name Card extends Area2D
 @export var sfx_put_down_db : float = 0.0  ## 放下卡牌时的音效音量
 
 
+const SHAKE_AMOUNT := Block.SHAKE_AMOUNT
+const SHAKE_DURATION := Block.SHAKE_DURATION
+
+
 
 var current_block: Block = null ## 当前所占用的 Block 对象。
 
@@ -16,6 +20,10 @@ var last_block: Block = null
 
 var is_dragging := false  ## 是否正在被鼠标拖拽。
 var is_shaking := false  ## 是否正在震动。
+
+var is_invalid := false  ## 是否为非法字符。
+var is_golden := false  ## 是否为金色字符。
+
 var is_victory := false  ## 是否已通关。
 var shake_amount : float  ## 震动幅度（单位为像素）。
 
@@ -74,26 +82,29 @@ func put_down():
 		queue_free()	
 
 
-## 使 [Card] 开始震动。 [param amount] 和 [param duration] 为震动幅度和震动持续时间。
-## [br][br]
-## 若 [param is_letter_red] 为 [code]true[/code]，则将字符颜色改为红色。
-func shake(is_letter_red: bool, amount: float, duration: float) -> void:
-	$ShakeTimer.wait_time = duration
-	self.shake_amount = amount
-	
-	# 开启震动
-	$ShakeTimer.start()
-	self.is_shaking = true
-	
-	if is_letter_red:
-		$Word.set_color(ImageLib.get_palette_color_by_name("red"))
-	else:
-		$HighlightSprite.visible = false
+## 使 [Card] 开始震动。
+func shake() -> void:
+	$HighlightSprite/ShakeComponent.shake(SHAKE_AMOUNT, SHAKE_DURATION)
+	$CardBackSprite/ShakeComponent.shake(SHAKE_AMOUNT, SHAKE_DURATION)
+	$Word/ShakeComponent.shake(SHAKE_AMOUNT, SHAKE_DURATION)
+	$Word.set_color(ImageLib.get_palette_color_by_name("red"))
 		
 
 ## 设置字符颜色为 [param value]。
 func set_color(value: Color) -> void: 
 	$Word.set_color(value)  # 设置文字颜色
+
+## 设置非法标志为 [param value]。
+func set_is_invalid(value: bool) -> void:
+	self.is_invalid = value
+	if self.is_invalid:
+		self.shake()
+	self.set_color(self.get_color())
+
+## 设置金色标志为 [param value]。
+func set_is_golden(value: bool) -> void:
+	self.is_golden = value
+	self.set_color(self.get_color())
 
 
 ## 若 [param v] 为 [code]true[/code]，则进行通关时的处理。
@@ -122,6 +133,13 @@ func set_word(value: String) -> void:
 func get_word() -> String:
 	return $Word.get_word()
 
+func get_color() -> Color:
+	if self.is_invalid:
+		return ImageLib.get_palette_color_by_name("red")
+	elif self.is_golden:
+		return ImageLib.get_palette_color_by_name("golden")
+	else:
+		return ImageLib.get_palette_color_by_name("black")
 
 
 func _ready():  
@@ -131,19 +149,6 @@ func _ready():
 func _process(_delta: float) -> void:
 	if self.is_dragging:  # 如果正在拖拽
 		self.global_position = get_global_mouse_position().round()  # 将卡牌位置设置为鼠标位置的全局位置，四舍五入取整
-		
-	var offset := 0
-	if self.is_shaking:  
-		# 如果正在震动，则设置震动偏移量为 sin(progress) * self.shake_amount
-		# 其中 progress in [0, 2 * PI] 是震动进度，随着时间的推移逐渐增加
-		# self.shake_amount 是震动幅度
-		var progress = (1 - $ShakeTimer.time_left / $ShakeTimer.wait_time) * 2 * PI
-		offset = int(sin(progress) * self.shake_amount)
-
-	# 设置 Sprite 的震动偏移量
-	$CardBackSprite.position.x = offset  
-	$HighlightSprite.position.x = offset  
-	$Word.position.x = offset 
 
 
 func _input_event(_viewport: Object, event: InputEvent, _shape_idx: int) -> void:
@@ -168,10 +173,5 @@ func _on_mouse_exited():
 
 
 func _on_tree_exiting():
-	if self.current_block != null:
+	if self.current_block != null and self.current_block.occupied_card == self:
 		self.current_block.set_card(null)
-
-
-func _on_shake_timer_timeout():
-	self.is_shaking = false
-	$Word.set_color(ImageLib.get_palette_color_by_name("black"))

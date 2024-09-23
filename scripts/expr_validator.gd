@@ -61,7 +61,7 @@ enum CharType {
 }
 
 static func is_pair_valid(ch1: String, ch2: String) -> bool: ## 判断相邻字符 [param ch1] 和 [param ch2] 是否合法。
-	return (ch1 + ch2) in ["<=", ">=", "<>"] or IS_PAIR_VALID[get_char_type(ch1)][get_char_type(ch2)] 
+	return (ch1 + ch2) in ["<=", ">=", "<>"] or IS_PAIR_VALID[get_char_type(ch1)][get_char_type(ch2)]
 
 ## 获取 [param ch] 的 [enum CharType]。
 static func get_char_type(ch: String) -> CharType:
@@ -226,36 +226,47 @@ static func calculate_value(expr: String, var_values: Dictionary) -> bool:
 
 ## 判断表达式 [param expr] 是否合法。
 ## [br][br]
-## 合法返回空数组 [code][][/code]，否则返回不合法的下标列表。
-static func check_valid(expr: String) -> Array:
-	if get_char_type(expr[0]) != CharType.BRACL and get_char_type(expr[0]) not in [CharType.VAR, CharType.CONST]:
-		return [0]
-	if get_char_type(expr[len(expr) - 1]) != CharType.BRACR and get_char_type(expr[len(expr) - 1]) not in [CharType.VAR, CharType.CONST]:
-		return [len(expr) - 1]
+## 返回不合法的下标列表。
+static func check_invalid(expr: String) -> Array:
+	var result: Array[int] = []
+
+	# 特判开头及尾部是否合法
+	if expr[0] != '_' and expr[0] != '(' and get_char_type(expr[0]) not in [CharType.VAR, CharType.CONST]:
+		result.append(0)
+	if expr[len(expr) - 1] != '_' and expr[len(expr) - 1] != ')' and get_char_type(expr[len(expr) - 1]) not in [CharType.VAR, CharType.CONST]:
+		result.append(len(expr) - 1)
+
+	# 测试相邻字符是否合法
 	for i in range(len(expr) - 1):
-		if not is_pair_valid(expr[i], expr[i + 1]):
-			return [i, i + 1]
+		if expr[i] != '_' and expr[i + 1] != '_' and not is_pair_valid(expr[i], expr[i + 1]):
+			result.append(i)
+			result.append(i + 1)
 	
+	# 测试括号匹配
 	var brac_sum := 0
 	for i in range(len(expr)):
-		if expr[i] == "(":
+		if expr[i] == '(':
 			brac_sum += 1
-		elif expr[i] == ")":
+		elif expr[i] == ')':
 			if brac_sum == 0:
-				return [i]
+				result.append(i)
 			brac_sum -= 1
 	if brac_sum > 0:
 		for i in range(len(expr) - 1, -1, -1):
-			if expr[i] == "(":
-				return [i]
-	return []
+			if expr[i] == '(' and brac_sum > 0:
+				brac_sum -= 1
+				result.append(i)
+
+	result.sort()
+	print(result)
+	return Utils.array_unique(result)
 	
 	
 ## 判断表达式 [param expr] 是否满足笑脸要求。
 ## [br][br]
-## 合法返回空数组 [code][][/code]，否则返回不为笑脸的字符下标列表。
+## 返回不为笑脸的字符下标列表。
 static func check_smile(expr: String, req_pos: Array) -> Array:
-	var res := []
+	var res: Array[int] = []
 	for i in req_pos:
 		if (i == 0 or not is_smile(expr.substr(i - 1, 2))) and (i == len(expr) - 1 or not is_smile(expr.substr(i, 2))):
 			res.append(i)
@@ -297,12 +308,15 @@ static func check_always_true(expr: String) -> Dictionary:
 ## 若表达式不恒为正，返回 [code]["NOT_ALWAYS_TRUE", var_values][/code]，其中 [code]var_values: Dictionary[String, bool][/code] 是一种使得表达式为假的变量取值。
 ## [br][br]
 ## 否则符合要求，返回 [code]["OK", 200][/code]。
+##
+## @deprecated: 由于需要同时获得多种不合法相关的信息，故在 BaseLevel 中不再使用。使用该函数反而会增加代码复杂度（需要大量关于 "SMILE_UNSATISFIED" 这样的魔术字符串的判断），所以建议直接使用 check_xxx 代替。
 static func check(expr: String, req_pos: Array) -> Array:
+	push_warning("ExprValidator.check is deprecated.")
 	var tmp
 
 	
 	# 判断合法性
-	tmp = check_valid(expr)
+	tmp = check_invalid(expr)
 	if tmp != []:
 		return ["INVALID", tmp]
 	
@@ -318,6 +332,16 @@ static func check(expr: String, req_pos: Array) -> Array:
 	
 	return ["OK", 200]
 
+
+## 返回表达式字符串 [param expr] 中笑脸的下标列表。
+static func get_smile_inds(expr: String) -> Array[int]:
+	var res: Array[int] = []
+	for i in range(len(expr) - 1):
+		if expr[i] != '_' and expr[i + 1] != '_' and is_smile(expr.substr(i, 2)):
+			if i not in res:
+				res.append(i)
+			res.append(i + 1)
+	return res
 
 # static func test():
 	#check("q*Pq*bd*b=D", [])

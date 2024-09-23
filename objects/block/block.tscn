@@ -1,10 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://ckjmjwywh78fe"]
+[gd_scene load_steps=11 format=3 uid="uid://ckjmjwywh78fe"]
 
 [ext_resource type="Script" path="res://objects/block/block.gd" id="1_11h57"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="2_pjs40"]
+[ext_resource type="Shader" path="res://objects/word/word.gdshader" id="3_gn6mn"]
 [ext_resource type="Texture2D" uid="uid://dvj7bjepxeks0" path="res://objects/block/pit.png" id="3_ye3hk"]
+[ext_resource type="PackedScene" uid="uid://oxlryy260uym" path="res://components/shake_component/shake_component.tscn" id="4_vdwdr"]
 [ext_resource type="Texture2D" uid="uid://cb71r50jw2a3i" path="res://objects/block/goal_frame.png" id="4_yvtjk"]
 [ext_resource type="Texture2D" uid="uid://cvv532ui6p5gg" path="res://objects/block/goal_frame_red.png" id="5_et5vw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_55t0h"]
+resource_local_to_scene = true
+shader = ExtResource("3_gn6mn")
+shader_parameter/color = null
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3if4e"]
 size = Vector2(22, 22)
@@ -32,6 +39,9 @@ animations = [{
 script = ExtResource("1_11h57")
 
 [node name="Word" parent="." instance=ExtResource("2_pjs40")]
+material = SubResource("ShaderMaterial_55t0h")
+
+[node name="ShakeComponent" parent="Word" instance=ExtResource("4_vdwdr")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 50
@@ -42,11 +52,15 @@ debug_color = Color(0.968627, 0, 0.470588, 0.419608)
 z_index = -1
 texture = ExtResource("3_ye3hk")
 
+[node name="ShakeComponent" parent="PitSprite" instance=ExtResource("4_vdwdr")]
+
 [node name="ShakeTimer" type="Timer" parent="."]
 wait_time = 0.2
 
 [node name="GoalFrameSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3dme2")
+
+[node name="ShakeComponent" parent="GoalFrameSprite" instance=ExtResource("4_vdwdr")]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]
