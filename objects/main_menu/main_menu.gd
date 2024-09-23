@@ -2,7 +2,7 @@ extends Node2D
 
 class_name MainMenu
 
-const BaseLevelScn := preload("res://levels/base_level/base_level.tscn")
+const BaseLevelScn := preload("res://scenes/base_level/base_level.tscn")
 
 signal enter_level()
 

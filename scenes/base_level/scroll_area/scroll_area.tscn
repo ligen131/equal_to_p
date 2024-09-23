@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://csl5lwjicxroy"]
+
+[ext_resource type="Script" path="res://scenes/base_level/scroll_area/scroll_area.gd" id="1_j4m6q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dbovb"]
+size = Vector2(64, 200)
+
+[node name="ScrollArea" type="Area2D"]
+script = ExtResource("1_j4m6q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dbovb")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
