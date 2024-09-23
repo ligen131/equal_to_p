@@ -245,9 +245,9 @@ static func check_invalid(expr: String) -> Array:
 	# 测试括号匹配
 	var brac_sum := 0
 	for i in range(len(expr)):
-		if expr[i] == "(":
+		if expr[i] == '(':
 			brac_sum += 1
-		elif expr[i] == ")":
+		elif expr[i] == ')':
 			if brac_sum == 0:
 				result.append(i)
 			brac_sum -= 1
