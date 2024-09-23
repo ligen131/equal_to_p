@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://32v6a26ihjb2"]
+
+[ext_resource type="Script" path="res://components/smooth_movement_component/smooth_movement_component.gd" id="1_b3kgb"]
+
+[node name="SmoothMovementComponent" type="Node"]
+script = ExtResource("1_b3kgb")
