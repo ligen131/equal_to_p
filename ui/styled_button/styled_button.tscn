@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3 uid="uid://drl1xe103umpi"]
+
+[ext_resource type="Texture2D" uid="uid://y5v6eoqttfkv" path="res://ui/styled_button/button.png" id="1_64thl"]
+[ext_resource type="Texture2D" uid="uid://dqoba5dcyefbj" path="res://ui/styled_button/button_highlighted.png" id="2_8xse4"]
+[ext_resource type="Texture2D" uid="uid://hld6oeivwkrn" path="res://ui/styled_button/button_disabled.png" id="3_840jk"]
+[ext_resource type="Script" path="res://ui/styled_button/styled_button.gd" id="3_rtcig"]
+[ext_resource type="AudioStream" uid="uid://dpwscp4bw7pay" path="res://ui/styled_button/button_down.wav" id="4_no3m1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tfhr0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_filad"]
+texture = ExtResource("3_840jk")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eifmj"]
+texture = ExtResource("2_8xse4")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c0uot"]
+texture = ExtResource("1_64thl")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+
+[node name="StyledButton" type="Button"]
+offset_right = 34.0
+offset_bottom = 34.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tfhr0")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_filad")
+theme_override_styles/hover = SubResource("StyleBoxTexture_eifmj")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_eifmj")
+theme_override_styles/normal = SubResource("StyleBoxTexture_c0uot")
+script = ExtResource("3_rtcig")
+sfx_button_down = ExtResource("4_no3m1")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

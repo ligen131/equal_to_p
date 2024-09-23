@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://main.gd" id="1_nb6uf"]
 [ext_resource type="PackedScene" uid="uid://d3geq38s5fjc6" path="res://ui/dynamic_bg/dynamic_bg.tscn" id="2_8k4il"]
 [ext_resource type="PackedScene" uid="uid://budvuitfjtjcd" path="res://scripts/image_lib/image_lib.tscn" id="2_771gm"]
-[ext_resource type="AudioStream" uid="uid://cr3nkhf0fejm5" path="res://levels/base_level/bgm.wav" id="3_n81it"]
+[ext_resource type="AudioStream" uid="uid://cr3nkhf0fejm5" path="res://scenes/base_level/bgm.wav" id="3_n81it"]
 [ext_resource type="PackedScene" uid="uid://prht3u5pnjls" path="res://scripts/cursor_manager/cursor_manager.tscn" id="5_pqych"]
 [ext_resource type="Material" uid="uid://rywrg5id25dr" path="res://shaders/main_shader.tres" id="6_tvi4r"]
 
