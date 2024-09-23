@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://bepyyenjtc0p3"]
+
+[ext_resource type="PackedScene" uid="uid://drl1xe103umpi" path="res://ui/styled_button/styled_button.tscn" id="1_4bgxw"]
+[ext_resource type="Script" path="res://scenes/level_menu/level_button/level_button.gd" id="1_wwqfn"]
+[ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="3_js2i2"]
+[ext_resource type="Shader" path="res://objects/word/word.gdshader" id="4_6ctfu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c4861"]
+resource_local_to_scene = true
+shader = ExtResource("4_6ctfu")
+shader_parameter/color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a2kcy"]
+resource_local_to_scene = true
+shader = ExtResource("4_6ctfu")
+shader_parameter/color = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y3jd6"]
+resource_local_to_scene = true
+shader = ExtResource("4_6ctfu")
+shader_parameter/color = null
+
+[node name="LevelButton" instance=ExtResource("1_4bgxw")]
+script = ExtResource("1_wwqfn")
+
+[node name="Word" parent="." index="0" instance=ExtResource("3_js2i2")]
+material = SubResource("ShaderMaterial_c4861")
+position = Vector2(17, 17)
+
+[node name="Word1" parent="." index="1" instance=ExtResource("3_js2i2")]
+visible = false
+material = SubResource("ShaderMaterial_a2kcy")
+position = Vector2(11, 17)
+
+[node name="Word2" parent="." index="2" instance=ExtResource("3_js2i2")]
+visible = false
+material = SubResource("ShaderMaterial_y3jd6")
+position = Vector2(23, 17)

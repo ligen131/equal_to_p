@@ -16,11 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://c4xg1rhvx6trg" path="res://objects/main_menu/background/main_menu_nobg14.png" id="14_0p4kr"]
 [ext_resource type="Script" path="res://objects/main_menu/main_menu.gd" id="14_npy3s"]
 [ext_resource type="Texture2D" uid="uid://bs3g6c351s8or" path="res://objects/main_menu/background/main_menu_nobg15.png" id="15_bwyyk"]
-[ext_resource type="Texture2D" uid="uid://83p3glm3htsp" path="res://objects/styled_button/start1.png" id="16_skwdr"]
+[ext_resource type="Texture2D" uid="uid://83p3glm3htsp" path="res://ui/styled_button/start1.png" id="16_skwdr"]
 [ext_resource type="Texture2D" uid="uid://ksc3hj3vyr8" path="res://objects/main_menu/background/backgroud.png" id="17_hvarn"]
-[ext_resource type="Texture2D" uid="uid://64ivn20qcjoy" path="res://objects/styled_button/start2.png" id="17_mrqss"]
-[ext_resource type="PackedScene" uid="uid://drl1xe103umpi" path="res://objects/styled_button/styled_button.tscn" id="18_443al"]
-[ext_resource type="Texture2D" uid="uid://cbwkjh7uudgr5" path="res://objects/styled_button/start3.png" id="18_qh4cp"]
+[ext_resource type="Texture2D" uid="uid://64ivn20qcjoy" path="res://ui/styled_button/start2.png" id="17_mrqss"]
+[ext_resource type="PackedScene" uid="uid://drl1xe103umpi" path="res://ui/styled_button/styled_button.tscn" id="18_443al"]
+[ext_resource type="Texture2D" uid="uid://cbwkjh7uudgr5" path="res://ui/styled_button/start3.png" id="18_qh4cp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b4517"]
 animations = [{
