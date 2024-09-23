@@ -1,3 +1,6 @@
+## 可用于平滑移动的伪类。
+## @deprecated 请使用 components/smooth_movement_component.tscn 代替。
+
 class_name SmoothMovement extends Timer
 
 var last_position := Vector2.ZERO
