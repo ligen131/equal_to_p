@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dkm7ljv01kwma"]
 
-[ext_resource type="Script" path="res://bg/dynamic_bg/dynamic_bg_pattern/dynamic_bg_pattern.gd" id="1_hrrmh"]
+[ext_resource type="Script" path="res://ui/dynamic_bg/dynamic_bg_pattern/dynamic_bg_pattern.gd" id="1_hrrmh"]
 [ext_resource type="PackedScene" uid="uid://cvx7wowcbfo0r" path="res://objects/word/word.tscn" id="2_7jm3n"]
 [ext_resource type="Shader" path="res://objects/word/word.gdshader" id="3_7jr21"]
 

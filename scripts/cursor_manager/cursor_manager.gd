@@ -2,9 +2,9 @@
 class_name CursorManager extends Area2D
 
 
-const CURSOR_ARROW := preload("res://bg/cursor/cursor_arrow.png") ## 鼠标光标为指针时的素材。
-const CURSOR_POINTING_HAND := preload("res://bg/cursor/cursor_pointing_hand.png") ## 鼠标光标为指向时的素材。
-const CURSOR_DRAG := preload("res://bg/cursor/cursor_drag.png") ## 鼠标光标为拖拽时的素材。
+const CURSOR_ARROW := preload("res://ui/cursor/cursor_arrow.png") ## 鼠标光标为指针时的素材。
+const CURSOR_POINTING_HAND := preload("res://ui/cursor/cursor_pointing_hand.png") ## 鼠标光标为指向时的素材。
+const CURSOR_DRAG := preload("res://ui/cursor/cursor_drag.png") ## 鼠标光标为拖拽时的素材。
 
 
 func _ready():

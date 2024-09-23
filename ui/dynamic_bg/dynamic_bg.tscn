@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d3geq38s5fjc6"]
 
-[ext_resource type="Script" path="res://bg/dynamic_bg/dynamic_bg.gd" id="1_g3cph"]
+[ext_resource type="Script" path="res://ui/dynamic_bg/dynamic_bg.gd" id="1_g3cph"]
 
 [node name="DynamicBg" type="ColorRect"]
 z_index = -50

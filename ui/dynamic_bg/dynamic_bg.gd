@@ -2,7 +2,7 @@ extends ColorRect
 
 signal victory_change(v: bool)
 
-const DynamicBgPattern = preload("res://bg/dynamic_bg/dynamic_bg_pattern/dynamic_bg_pattern.tscn")
+const DynamicBgPattern = preload("res://ui/dynamic_bg/dynamic_bg_pattern/dynamic_bg_pattern.tscn")
 
 var is_victory = false
 
