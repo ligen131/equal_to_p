@@ -19,7 +19,7 @@ func init(chap_id: int) -> void:
 	$LevelMenuCamera.init_position(Vector2(WIDTH * chap_id, 0))
 
 	$UI/PreviousChapterButton.set_disabled(chapter_id == 0)
-	$UI/NextChapterButton.set_disabled(chapter_id == LevelData.get_chapter_count() - 1)
+	$UI/NextChapterButton.set_disabled(chapter_id == LevelData.get_chapter_count() - 1 or not LevelData.is_chapter_unlocked(chapter_id + 1))
 
 func _ready():
 	for cid in range(LevelData.get_chapter_count()):
