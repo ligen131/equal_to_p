@@ -9,6 +9,7 @@ static func _set_prop(section: String, key: String, value: bool) -> void:
     if _save_config_file == null:
         _load()
     _save_config_file.set_value(section, key, value)
+    _save()
 
 static func _get_prop(section: String, key: String, default_value: Variant) -> Variant:
     if _save_config_file == null:
