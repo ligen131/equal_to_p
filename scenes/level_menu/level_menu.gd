@@ -9,9 +9,9 @@ const CreditsScn := preload("res://scenes/credits/credits.tscn")
 
 const WIDTH := 1920 / 3
 
-var chapter_id : int = 0
-const button_width : int = 50
-const button_heigth : int = 50
+var chapter_id: int = 0
+const button_width: int = 50
+const button_heigth: int = 50
 
 func init(chap_id: int) -> void:
 	self.chapter_id = chap_id
@@ -22,14 +22,16 @@ func init(chap_id: int) -> void:
 	$UI/NextChapterButton.set_disabled(chapter_id == LevelData.get_chapter_count() - 1)
 
 func _ready():
-	for cid in range(LevelData.get_chapter_count()): 
+	for cid in range(LevelData.get_chapter_count()):
 		for lid in range(LevelData.get_chapter_level_count(cid)):
-			var button = LevelButtonScn.instantiate();
+			var button: Button = LevelButtonScn.instantiate()
+			$LevelButtons.add_child(button)
+
 			var x := WIDTH * cid + button_width * (lid % 7) + 60
 			var y := button_heigth * (lid / 7) + 100
 			button.init(cid, lid, Vector2(x, y), 1)
 			button.enter_level.connect(_on_button_enter_level)
-			$LevelButtons.add_child(button)
+			button.set_disabled(lid >= 1 and not SaveLib.is_level_cleared(cid, lid - 1))
 	
 
 func _on_button_enter_level(chap_id: int, lvl_id: int) -> void:

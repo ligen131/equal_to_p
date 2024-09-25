@@ -23,7 +23,7 @@ const CARDS_SEP := 34
 
 
 var expr := ""
-var req_pos := [] # Array[int]，金色框的位置列表
+var req_pos := [] ## 金色框的位置列表
 var chap_id: int ## 当前章节编号
 var lvl_id: int ## 当前关卡编号
 
@@ -124,6 +124,8 @@ func stage_clear() -> void:
 		
 	$HUDs/TableCloth/GoldenCloth.set_visible(true)
 	$HUDs/NextLevelButton.start_fade()
+
+	SaveLib.set_level_cleared(self.chap_id, self.lvl_id, true)
 
 
 func _on_block_occupied_card_changed(_node) -> void:
