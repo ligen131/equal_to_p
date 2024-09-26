@@ -152,6 +152,17 @@ const LEVEL_DATA := [
 			"level_code": 24,
 		}
 	],
+
+	# Matrix
+	[
+		{
+			"question": "M {} {} [] [] []",
+			"choices": "MMMM MMMM   1 0 + < =",
+			"level_code": 29,
+		}
+	],
+
+	# Extra
 	[
 		{
 			"question": "[] {} {}   [] [] []   [] {} {}   {} {} {}  [] [] []  [] [] []",
@@ -177,10 +188,10 @@ const LEVEL_DATA := [
 ]
 
 ## 章节的唯一标识符。
-const CHAPTER_CODE := [0, 1, 2, 3, 4, 5]
+const CHAPTER_CODE := [0, 1, 2, 3, 4, 5, 6]
 
 ## 章节解锁所需要前一个章节通关的关卡数量。
-const CHAPTER_UNLOCK_REQUIRE := [-1, 5, 3, 3, 3, 3] 
+const CHAPTER_UNLOCK_REQUIRE := [-1, 1, 1, 1, 1, 1, 1] 
 # [][][][] {}{}{} []
 
 # pp   qqq   <>=

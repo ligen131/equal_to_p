@@ -57,6 +57,16 @@ const PALETTE = {
 		"black": Color.BLACK,
 		"red": Color("#dd4132"),
 	},
+	"matrix": {
+		"lightest": Color("#00ff00"),
+		"light": Color("#00d400"),
+		"mid": Color("#007c00"),
+		"darkest": Color("#000000"),
+
+		"golden": Color("#f5df4d"),
+		"black": Color.BLACK,
+		"red": Color("#dd4132"),
+	},
 	"gray": {
 		"lightest": Color("#ebebeb"),
 		"light": Color("#c9c9c9"),
@@ -69,7 +79,7 @@ const PALETTE = {
 	},
 }
 
-const COLOR_THEMES := ["blue", "cyan", "green", "yellow", "purple", "gray"] ## 可选的配色主题 [code]theme[/code] 取值。
+const COLOR_THEMES := ["blue", "cyan", "green", "yellow", "purple", "matrix", "gray"] ## 可选的配色主题 [code]theme[/code] 取值。
 
 const COLOR_NAMES := ["lightest", "light", "mid", "darkest", "golden", "black", "red"] ## 可选的颜色代号 [code]name[/code] 取值。
 
