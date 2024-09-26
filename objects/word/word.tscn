@@ -24,3 +24,5 @@ animations = [{
 material = SubResource("ShaderMaterial_bx5kk")
 sprite_frames = SubResource("SpriteFrames_3n85j")
 script = ExtResource("1_lkxlh")
+text_id = null
+color = null
