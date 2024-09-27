@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvx7wowcbfo0r"]
 
-[ext_resource type="Texture2D" uid="uid://cyyu6tsje4x72" path="res://objects/word/sprites/sprite3.png" id="1_ariam"]
+[ext_resource type="Texture2D" uid="uid://6uf3tetvtdkm" path="res://objects/word/assets/exports/sprite3.png" id="1_ariam"]
 [ext_resource type="Script" path="res://objects/word/word.gd" id="1_lkxlh"]
 [ext_resource type="Shader" path="res://objects/word/word.gdshader" id="1_n15m3"]
 
@@ -24,3 +24,5 @@ animations = [{
 material = SubResource("ShaderMaterial_bx5kk")
 sprite_frames = SubResource("SpriteFrames_3n85j")
 script = ExtResource("1_lkxlh")
+text_id = null
+color = null

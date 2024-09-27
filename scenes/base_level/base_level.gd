@@ -180,7 +180,7 @@ func _on_block_occupied_card_changed(_node) -> void:
 		else:
 			
 			print("# check: ", ExprValidator.check_always_true(expr))
-			if not ExprValidator.check_always_true(expr).is_empty():
+			if not ExprValidator.check_always_true(expr)[0]:
 				# 若不恒等，设置所有块为 invalid
 				for block in block_array:
 					if not block.get_is_invalid():

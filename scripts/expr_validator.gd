@@ -50,6 +50,10 @@ const IS_PAIR_VALID := [
 	[1, 1, 1, 1, 1, 1]
 ]
 
+const CODE_LEQ := "\u2264"
+const CODE_GEQ := "\u2265"
+const CODE_NEQ := "\u2260"
+
 ## 字符类型。
 enum CharType {
 	OP, ## 算术运算符，包括 [code]*[/code] 和 [code]+[/code]。
@@ -67,7 +71,7 @@ static func is_pair_valid(ch1: String, ch2: String) -> bool: ## 判断相邻字�
 static func get_char_type(ch: String) -> CharType:
 	if ch == "*" or ch == "+":
 		return CharType.OP
-	elif ch == "<" or ch == "=" or ch == ">":
+	elif ch == "<" or ch == "=" or ch == ">" or ch == CODE_LEQ or ch == CODE_GEQ or ch == CODE_NEQ:
 		return CharType.COMP
 	elif ch == "(":
 		return CharType.BRACL
@@ -170,56 +174,103 @@ static func infix_to_suffix(expr: String) -> String:
 					res += opt_stack.back()
 					opt_stack.pop_back()
 			opt_stack.push_back(ch)
-		if not res.is_empty() and get_char_type(res[len(res) - 1]) == CharType.COMP:
-			res += "@"
+
+		if len(res) >= 2 and get_char_type(res[len(res) - 1]) == CharType.COMP and get_char_type(res[len(res) - 2]) == CharType.COMP:
+			match res.substr(len(res) - 2, 2):
+				"=<":
+					res = res.substr(0, len(res) - 2) + CODE_LEQ
+				"<>":
+					res = res.substr(0, len(res) - 2) + CODE_NEQ
+				"=>":
+					res = res.substr(0, len(res) - 2) + CODE_GEQ
+				_:
+					push_error("infix_to_suffix error when res=" + res)
 		pre_ch = ch
 			
 	while not opt_stack.is_empty():
 		res += opt_stack.back()
-		opt_stack.pop_back()
+		
+		if len(res) >= 2 and get_char_type(res[len(res) - 1]) == CharType.COMP and get_char_type(res[len(res) - 2]) == CharType.COMP:
+			match res.substr(len(res) - 2, 2):
+				"=<":
+					res = res.substr(0, len(res) - 2) + CODE_LEQ
+				"<>":
+					res = res.substr(0, len(res) - 2) + CODE_NEQ
+				"=>":
+					res = res.substr(0, len(res) - 2) + CODE_GEQ
+				_:
+					push_error("infix_to_suffix error when res=" + res)
 
-	if get_char_type(res[len(res) - 1]) == CharType.COMP:
-		res += "@"
+		opt_stack.pop_back()
 	#prints(expr, res)
 	
 	return res
 	
 
+## 计算 [param opt]([param a], [param b]) 的值。
+static func calc_bool(a: bool, opt: String, b: bool) -> bool:
+	match opt:
+		'+':
+			return a or b
+		'*':
+			return a and b
+		'<':
+			return not a and b
+		'=':
+			return a == b
+		'>':
+			return a and not b
+		CODE_LEQ:
+			return not a or b
+		CODE_GEQ:
+			return a or not b
+		CODE_NEQ:
+			return a != b
+		_:
+			push_error("calc_bool error when opt=" + opt)
+			return false
+
+## 计算  [param opt]([param a], [param b]) 的值。
+static func calc(a: Variant, opt: String, b: Variant) -> Variant:
+	var res: Array[bool] = []
+	if a is bool and b is bool:
+		return calc_bool(a, opt, b)
+	else:
+		if a is bool:
+			res = [calc_bool(a, opt, false), calc_bool(a, opt, true)]
+		elif b is bool:
+			res = [calc_bool(false, opt, b), calc_bool(true, opt, b)]
+		else:
+			res = [
+				calc_bool(false, opt, false), calc_bool(false, opt, true), 
+				calc_bool(true, opt, false), calc_bool(true, opt, true)
+			]
+		
+		if res.all(func (x): return x == true):
+			return true
+		elif res.all(func (x): return x == false):
+			return false
+		else:
+			return 'M'
+
+
 ## 计算后缀表达式 [param expr] 的值，其中变量的值给定，放在字典 [param var_values] 中（不判断 [param expr] 的合法性）。
-static func calculate_value(expr: String, var_values: Dictionary) -> bool:
-	var stack: Array = []
-	var val := false
+static func calculate_value(expr: String, var_values: Dictionary) -> Variant:
+	var stack: Array[Variant] = []
 
 	for ch in expr:
-		if ch == "@":
-			stack.pop_back()
-			stack.pop_back()
-			stack.push_back(val)
-			val = false
-		
-		
-		elif get_char_type(ch) in [CharType.VAR, CharType.CONST]:
-			if is_alpha(ch):
+		if get_char_type(ch) in [CharType.VAR, CharType.CONST]:
+			if ch == 'M':
+				stack.push_back(ch)
+			elif is_alpha(ch):
 				stack.push_back(var_values[ch])
 			else:
 				stack.push_back(ch == "1")
-		elif get_char_type(ch) == CharType.COMP:
-			if ch == "<":
-				val = val or (stack[len(stack) - 2] < stack[len(stack) - 1])
-			elif ch == "=":
-				val = val or (stack[len(stack) - 2] == stack[len(stack) - 1])
-			elif ch == ">":
-				val = val or (stack[len(stack) - 2] > stack[len(stack) - 1])
 		else:
-			if ch == "+":
-				val = stack[len(stack) - 2] or stack[len(stack) - 1]
-			elif ch == "*":
-				val = stack[len(stack) - 2] and stack[len(stack) - 1]
+			var val = calc(stack[len(stack) - 2], ch, stack[len(stack) - 1])
 			stack.pop_back()
 			stack.pop_back()
 			stack.push_back(val)
-			val = false
-		
 	assert(stack.size() == 1, "suffix expr is invalid.")
 	return stack[0]
 	
@@ -258,7 +309,7 @@ static func check_invalid(expr: String) -> Array:
 				result.append(i)
 
 	result.sort()
-	print(result)
+	# print(result)
 	return Utils.array_unique(result)
 	
 	
@@ -275,8 +326,8 @@ static func check_smile(expr: String, req_pos: Array) -> Array:
 	
 ## 判断表达式 expr 是否恒为真（不检查是否合法）。
 ## [br][br]
-## 合法返回空字典 [code]{}[/code]，否则返回一种使得表达式为假的变量取值。
-static func check_always_true(expr: String) -> Dictionary:
+## 合法返回 [code][true, {}][/code]，否则返回 [code][false, args][/code]，其中 [code]args[/code] 是一种使得表达式不为真的变量取值。
+static func check_always_true(expr: String) -> Array:
 	var var_values: Dictionary = {} # var_values[var] 获取 var 的值。类型：Dictionary[String, bool]
 	var var_names := [] # 变量名称列表
 	
@@ -285,52 +336,18 @@ static func check_always_true(expr: String) -> Dictionary:
 	#print(expr)
 	
 	for ch in expr:
-		if is_alpha(ch) and not var_names.has(ch):
+		if is_alpha(ch) and ch != 'M' and not var_names.has(ch):
 			var_names.push_back(ch)
 	
 	
 	for s in range(0, 1 << len(var_names)):
 		for i in range(len(var_names)):
 			var_values[var_names[i]] = bool(s >> i & 1)
-		if not calculate_value(expr, var_values):
-			return var_values
+		if calculate_value(expr, var_values) not in [true]:
+			return [false, var_values]
 	
-	return {}
+	return [true, {}]
 
-## 测试表达式 [param expr] 是否符合通关要求，并返回相关信息。
-## [br][br]
-## [param req_pos: Array[int]] 为要求是笑脸的表达式下标列表。
-## [br][br]
-## 若表达式不合法，返回 [code]["INVALID", pos][/code]，其中 [code]pos: Array[/code] 是出错的位置。
-## [br][br]
-## 若不满足笑脸要求，返回 [code]["SMILE_UNSATISFIED", pos][/code]，其中 [code]pos: int[/code] 是没有笑脸的位置。
-## [br][br]
-## 若表达式不恒为正，返回 [code]["NOT_ALWAYS_TRUE", var_values][/code]，其中 [code]var_values: Dictionary[String, bool][/code] 是一种使得表达式为假的变量取值。
-## [br][br]
-## 否则符合要求，返回 [code]["OK", 200][/code]。
-##
-## @deprecated: 由于需要同时获得多种不合法相关的信息，故在 BaseLevel 中不再使用。使用该函数反而会增加代码复杂度（需要大量关于 "SMILE_UNSATISFIED" 这样的魔术字符串的判断），所以建议直接使用 check_xxx 代替。
-static func check(expr: String, req_pos: Array) -> Array:
-	push_warning("ExprValidator.check is deprecated.")
-	var tmp
-
-	
-	# 判断合法性
-	tmp = check_invalid(expr)
-	if tmp != []:
-		return ["INVALID", tmp]
-	
-	# 判断笑脸要求
-	tmp = check_smile(expr, req_pos)
-	if tmp != []:
-		return ["SMILE_UNSATISFIED", tmp]
-	
-	# 判断是否恒为正
-	var tmp_dict := check_always_true(expr)
-	if not tmp_dict.is_empty():
-		return ["NOT_ALWAYS_TRUE", tmp_dict]
-	
-	return ["OK", 200]
 
 
 ## 返回表达式字符串 [param expr] 中笑脸的下标列表。
