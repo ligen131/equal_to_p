@@ -2,8 +2,6 @@
 
 # Equal to P (=P)
 
-**Try our online demo at <https://ligen131.github.io/equal_to_p/> now!**
-
 A game made by Team 玩一个四字音游导致的 during [Global Game Jam](https://globalgamejam.org/) 2024. Participated [onsite](https://www.huodongxing.com/event/2732777803400?td=6303464850639) at [ChillyRoom](https://www.chillyroom.com/), Shenzhen, China.
 
 - Code: [@cutekibry](https://github.com/cutekibry), [@ligen131](https://github.com/ligen131), [@Bunnycxk](https://github.com/Bunnycxk)
@@ -19,21 +17,19 @@ Players solve the game by filling in different elements in the arithmetic expres
 
 由{布尔运算式}启发的解谜游戏 =P 玩家通过在算数式中填入不同的元素 ;-) 让表达式恒为真的同时 :-> 式子中的某个部分能够构成一个笑脸的颜文字。
 
+<!--
 ## Try Demo
 
 The latest built artifacts can be found at [the latest actions](https://github.com/ligen131/ggj2024-game/actions).
 
 Windows: [Download](https://github.com/ligen131/equal_to_p/actions/runs/7684305585/artifacts/1200398972)
 
-Linux: [Download](https://github.com/ligen131/equal_to_p/actions/runs/7684305585/artifacts/1200398969)
-
 MacOS: [Download](https://github.com/ligen131/equal_to_p/actions/runs/7684305585/artifacts/1200398970)
 
-**You can also try our online demo at <https://ligen131.github.io/ggj2024-game/>.** Due to the rendering process requiring time to load, the webpage may take a while to load.
 
 ## TODO
 
-<!-- - [x] 右键 card 返回 card_base
+- [x] 右键 card 返回 card_base
 - [x] card_base：
   - 数字 ok
   - 灰色（剩下为 0 时变灰）toggle_color
@@ -59,9 +55,9 @@ MacOS: [Download](https://github.com/ligen131/equal_to_p/actions/runs/7684305585
 - [x] 关卡高亮动画 // 这是啥？
 - [x] 章节标题
 - [x] 卡牌文字偏移
-- [x] 瞎几把拖 card 有 bug -->
-<!-- - [x] 卡牌被放置后继续动画会露馅 -->
-<!-- - [x] 主页笑脸乱飞动画 -->
+- [x] 瞎几把拖 card 有 bug
+- [x] 卡牌被放置后继续动画会露馅
+- [x] 主页笑脸乱飞动画
 ### UI
 - [ ] 场景切换的过场动画
 - [ ] 配色问题？
@@ -93,10 +89,10 @@ $ curl https://raw.githubusercontent.com/josephrocca/clip-image-sorter/92b108dc6
 $ sed -i 's|headers.set("Cross-Origin-Embedder-Policy", "credentialless")|headers.set("Cross-Origin-Embedder-Policy", "require-corp")|g'  enable-threads.js
 $ sed -i 's|<script src="index.js"></script>|<script src="enable-threads.js"></script><script src="index.js"></script>|g' index.html
 ```
-
+-->
 ## Engine
 
-[Godot 4.2](https://github.com/godotengine/godot)
+[Godot 4.3](https://github.com/godotengine/godot)
 
 ## LICENSE
 
