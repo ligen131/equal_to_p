@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.5.0](https://github.com/ligen131/equal_to_p/compare/v1.4.0...v1.5.0) (2024-10-19)
+
+
+### Features
+
+* **addons:** 添加 AespriteWizard ([c891353](https://github.com/ligen131/equal_to_p/commit/c89135375a4aba789e3fc192021645ec9bdb6f4f))
+* **expr_validator:** 修改相邻比较符号合法性判断 ([7ad61f1](https://github.com/ligen131/equal_to_p/commit/7ad61f1b3d1c96a99100744b5a09257cfe546c30))
+* **font:** 将字体改为 Fusion Pixel 10px ([d3ed6d2](https://github.com/ligen131/equal_to_p/commit/d3ed6d23620ace84a10a5794795ca34eda8046e4))
+* **i18n:** 新增本地化 ([0456f25](https://github.com/ligen131/equal_to_p/commit/0456f25aad78e59f276b8fcf93293f9568c6998d))
+* **sound_manager:** 添加 Sound Manager 类 ([fd27fa5](https://github.com/ligen131/equal_to_p/commit/fd27fa515b166394e095debf206c98b2128c67b9))
+* 更改分辨率和字体 ([97c200c](https://github.com/ligen131/equal_to_p/commit/97c200c77fb98dc59f9034f3eab1ff7987c895ae))
+* 添加 'M ([#89](https://github.com/ligen131/equal_to_p/issues/89)) ([9bcb3af](https://github.com/ligen131/equal_to_p/commit/9bcb3afa192e92a7e9c97b494545de0a6a49b801))
+* 添加动态改变颜色的功能  ([#84](https://github.com/ligen131/equal_to_p/issues/84)) ([beceb8e](https://github.com/ligen131/equal_to_p/commit/beceb8e588105e90aa69ac92323707352544519d))
+* 添加存档系统和关卡解锁系统 ([#88](https://github.com/ligen131/equal_to_p/issues/88)) ([b1f863d](https://github.com/ligen131/equal_to_p/commit/b1f863dbfb457957afdee7080469b43376f27b60))
+
+
+### Bug Fixes
+
+* 修复下一章节按钮逻辑问题 ([b1f863d](https://github.com/ligen131/equal_to_p/commit/b1f863dbfb457957afdee7080469b43376f27b60))
+
 ## [1.4.0](https://github.com/ligen131/equal_to_p/compare/v1.3.0...v1.4.0) (2024-02-28)
 
 
