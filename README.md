@@ -4,6 +4,8 @@
 
 A game made by Team 玩一个四字音游导致的 during [Global Game Jam](https://globalgamejam.org/) 2024. Participated [onsite](https://www.huodongxing.com/event/2732777803400?td=6303464850639) at [ChillyRoom](https://www.chillyroom.com/), Shenzhen, China.
 
+[**News:** Equal to P (=P / 等于P) 已上线 Steam 商店页面，计划于 2025 年春季正式发售，欢迎加入愿望单！Our game has launched its Steam store page and is scheduled for official release in Spring 2025. Feel free to add it to your wishlist! https://store.steampowered.com/app/3251840/Equal_to_P_P__P/](https://store.steampowered.com/app/3251840/Equal_to_P_P__P/)
+
 - Code: [@cutekibry](https://github.com/cutekibry), [@ligen131](https://github.com/ligen131), [@Bunnycxk](https://github.com/Bunnycxk)
 - Art: [@IsaacTheMouse](https://github.com/IsaacTheMouse), [@Bunnycxk](https://github.com/Bunnycxk)
 - Music: [@cutekibry](https://github.com/cutekibry)
