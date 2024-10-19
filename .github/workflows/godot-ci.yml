@@ -28,7 +28,7 @@ jobs:
           mkdir -v -p build/windows
           godot --headless --verbose --export-debug "Windows Desktop" build/windows/$EXPORT_NAME.exe
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: windows
           path: build/windows
@@ -52,7 +52,7 @@ jobs:
           mkdir -v -p build/linux
           godot --headless --verbose --export-debug "Linux/X11" build/linux/$EXPORT_NAME.x86_64
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: linux
           path: build/linux
@@ -85,7 +85,7 @@ jobs:
           sed -i 's|headers.set("Cross-Origin-Embedder-Policy", "credentialless")|headers.set("Cross-Origin-Embedder-Policy", "require-corp")|g'  enable-threads.js
           sed -i 's|<script src="index.js"></script>|<script src="enable-threads.js"></script><script src="index.js"></script>|g' index.html
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: web
           path: build/web
@@ -109,7 +109,7 @@ jobs:
           mkdir -v -p build/mac
           godot --headless --verbose --export-debug "mac" build/mac/$EXPORT_NAME.zip
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: mac
           path: build/mac
